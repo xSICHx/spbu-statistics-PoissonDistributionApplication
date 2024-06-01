@@ -40,17 +40,7 @@ public:
 
     ~Distribution() = default;
 
-    /*vector<double> compute_th_distr(unsigned int n) {
-        vector<double> thDistr(n + 1);
-        thDistr[0] = exp(-lambda);
-        double p_cum = thDistr[0];
-        for (unsigned int i = 1; i < n; ++i) {
-            thDistr[i] = thDistr[i - 1] * (lambda / i);
-            p_cum += thDistr[i];
-        }
-        thDistr[n] = 1 - p_cum;
-        return thDistr;
-    }*/
+    
 
 
 

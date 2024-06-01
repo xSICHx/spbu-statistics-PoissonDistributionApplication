@@ -26,7 +26,7 @@ public:
         sample_chied_values.clear();
 
         vector<double> th_counter = convert_th_freq_to_counters(d->compute_th_distr(sample->get_N()));
-        data_to_chi2(th_counter, sample->get_sample());
+        data_to_chi2(th_counter, sample->get_sample_freq());
         chi = calculate_chi2(sample_chied_values, th_chied_values);
         df = th_chied_values.size() - 1;
         p = 1 - pChi(chi, df);
@@ -110,8 +110,8 @@ private:
         return res;
     }
     vector<double> convert_th_freq_to_counters(const vector<double> th_freq) {
-        vector<double> res = vector<double>(sample->get_sample().size());
-        for (size_t i = 0; i < sample->get_sample().size(); i++)
+        vector<double> res = vector<double>(sample->get_sample_freq().size());
+        for (size_t i = 0; i < sample->get_sample_freq().size(); i++)
         {
             res[i] = th_freq[i] * sample->get_N();
         }

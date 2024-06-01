@@ -1,51 +1,43 @@
 #include <iostream>
 #include "Distribution.h"
+#include "PoissonSample.h"
 #include "Vector.h"
 #include <vector>
 
 using namespace std;
 
-int main()
-{
-    double lambda = 5;
-    int n = 11;
-
-    vector<double> thDistr(n);
-    thDistr[0] = exp(-lambda);
-    double p_cum = thDistr[0];
-    for (unsigned int i = 1; i < n - 1; ++i) {
-        thDistr[i] = thDistr[i - 1] * (lambda / i);
-        p_cum += thDistr[i];
-    }
-    thDistr[n - 1] = 1 - p_cum;
-
-    for (size_t i = 0; i < n; i++)
-    {
-        cout << thDistr[i] << " ";
-    }
-    cout << endl;
-
-
-    Distribution d(lambda);
-
-    double* th = d.get_th_prob_array(n);
+void print_vec(double* arr, int n) {
 	for (size_t i = 0; i < n; i++)
 	{
-		cout << th[i] << " ";
+		cout << arr[i] << " ";
 	}
 	cout << endl;
+}
 
+int main()
+{
+	int n = 13333;
+	mt19937 mt(100);
 
-    
+	Distribution d;
+	int N;
+	PoissonSampleInverse ps(mt, d, n);
+	ps.generate_sample(d);
+	double* sample_vec = ps.get_sample_freq(N);
+	double* th_vec = d.get_th_prob_array(N);
+	for (size_t i = 0; i < N; i++)
+	{
+		sample_vec[i] /= n;
+	}
+	print_vec(sample_vec, N);
 
-    delete[] th;
+	
+	print_vec(th_vec, N);
 
-    /*Vector v;
-    for (int i = 0; i < 100; ++i) {
-        v.push(i);
-    }
+	cout << "------" << endl;
 
-    v.print_Vector();*/
+	delete[] th_vec;
+	delete[] sample_vec;
 
 }
 
