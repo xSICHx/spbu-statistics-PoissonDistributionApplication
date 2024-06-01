@@ -19,4 +19,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Chi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Distribution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PoissonSample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PROBDIST.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
