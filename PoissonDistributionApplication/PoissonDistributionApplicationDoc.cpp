@@ -11,6 +11,8 @@
 #endif
 
 #include "PoissonDistributionApplicationDoc.h"
+#include "MainFrm.h"
+#include "SettingsDialog.h"
 
 #include <propkey.h>
 
@@ -23,19 +25,27 @@
 IMPLEMENT_DYNCREATE(CPoissonDistributionApplicationDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CPoissonDistributionApplicationDoc, CDocument)
+	ON_COMMAND(ID_SETTINGS, &CPoissonDistributionApplicationDoc::OnSettings)
 END_MESSAGE_MAP()
 
 
 // CPoissonDistributionApplicationDoc construction/destruction
 
-CPoissonDistributionApplicationDoc::CPoissonDistributionApplicationDoc() noexcept
-{
-	// TODO: add one-time construction code here
-
-}
+//CPoissonDistributionApplicationDoc::CPoissonDistributionApplicationDoc() noexcept
+//{
+//	rnd_gen = mt19937(100);
+//	d0 = Distribution(5);
+//	d1 = Distribution(6);
+//	mod_meth = ModelingMethod::inverse;
+//	ps = new PoissonSampleInverse(rnd_gen, d0, 100);
+//	chi = Chi2Histortam(d0, *ps);
+//
+//}
 
 CPoissonDistributionApplicationDoc::~CPoissonDistributionApplicationDoc()
 {
+	delete[] p_array;
+	delete ps;
 }
 
 BOOL CPoissonDistributionApplicationDoc::OnNewDocument()
@@ -43,8 +53,9 @@ BOOL CPoissonDistributionApplicationDoc::OnNewDocument()
 	if (!CDocument::OnNewDocument())
 		return FALSE;
 
-	// TODO: add reinitialization code here
-	// (SDI documents will reuse this document)
+	CMainFrame* p_Frame = (CMainFrame*)AfxGetMainWnd();
+	SetTitle(L"Poisson distribution");
+	p_Frame->SetWindowText(L"Poisson distribution");
 
 	return TRUE;
 }
@@ -136,3 +147,37 @@ void CPoissonDistributionApplicationDoc::Dump(CDumpContext& dc) const
 
 
 // CPoissonDistributionApplicationDoc commands
+
+
+void CPoissonDistributionApplicationDoc::OnSettings()
+{
+	int mod;
+	if (mod_meth == ModelingMethod::inverse)
+		mod = 0;
+	else if (mod_meth == ModelingMethod::random_variables)
+		mod = 1;
+	else
+		mod = 2;
+
+	SettingsDialog d(chi, d0, d1, ps, mod, N_p_values, p_partition);
+	if (d.DoModal() == IDOK) {
+		if (mod != d.m_mod_method) {
+			delete ps;
+			if (d.m_mod_method == (int)ModelingMethod::inverse)
+				ps = new PoissonSampleInverse(rnd_gen, d0, d.m_sample_size);
+			else if (d.m_mod_method == (int)ModelingMethod::random_variables)
+				ps = new PoissonSampleRandomVariables(rnd_gen, d0, d.m_sample_size);
+			else
+				ps = new PoissonSampleInverseTable(rnd_gen, d0, d.m_sample_size);
+		}
+
+
+		d0.set_lambda(d.m_lambda_h0);
+		d1.set_lambda(d.m_lambda_h1);
+		ps->set_N(d.m_sample_size);
+		chi.set_data(d0, *ps);
+		mod_meth = static_cast<ModelingMethod>(d.m_mod_method);
+		p_partition = d.m_p_level_partition;
+		N_p_values = d.m_n_iterations;
+	}
+}

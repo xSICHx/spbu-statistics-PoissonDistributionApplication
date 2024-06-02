@@ -33,7 +33,16 @@ public:
 #endif
 
 protected:
+	enum class DrawState
+	{
+		nothing,
+		sample_distribution,
+		p_distribution,
+		beta_distribution,
+		alpha_lambda_dependance
+	};
 
+	DrawState draw_state = DrawState::nothing;
 // Generated message map functions
 protected:
 	afx_msg void OnFilePrintPreview();

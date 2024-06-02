@@ -190,6 +190,7 @@
     <ClInclude Include="PoissonDistributionApplicationDoc.h" />
     <ClInclude Include="PoissonDistributionApplicationView.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SettingsDialog.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +204,7 @@
     <ClCompile Include="PoissonDistributionApplication.cpp" />
     <ClCompile Include="PoissonDistributionApplicationDoc.cpp" />
     <ClCompile Include="PoissonDistributionApplicationView.cpp" />
+    <ClCompile Include="SettingsDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PoissonDistributionApplication.rc" />
