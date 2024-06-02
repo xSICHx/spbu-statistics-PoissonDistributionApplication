@@ -107,10 +107,14 @@ public:
         return capacity;
     }
 
-    double* getData() {
+    double* getDataCopy() {
         double* tmp = new double[size];
         copy(data, data + size, tmp);
         return tmp;
+    }
+
+    double* getData() {
+        return data;
     }
 
     

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="PoissonDistributionBackend.cpp" />
+    <ClCompile Include="PROBDIST.CPP" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chi.h" />

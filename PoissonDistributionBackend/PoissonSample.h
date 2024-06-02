@@ -13,25 +13,28 @@ class PoissonSample
 protected:
     mt19937& gen;
     uniform_real_distribution<double> uniform_rand = uniform_real_distribution<double>(0.0, 1.0);
-    int N;
+    int N_samples;
 
-    Vector sample;
 
 public:
     PoissonSample() = default;
-    PoissonSample(mt19937& _gen, Distribution& d, int _N_samples = 100) : gen(_gen), N(_N_samples){}
+    PoissonSample(mt19937& _gen, Distribution& d, int _N_samples = 100) : gen(_gen), N_samples(_N_samples){}
     virtual ~PoissonSample() = default;
 
     
     virtual int simulate(Distribution& d) const = 0;
     
-    virtual void generate_sample(Distribution& d) {
-        if (N < 50) {
+
+    virtual double* generate_sample(Distribution& d, int& len_sample ///< Сколько элементов будет в частотах массива >
+    ) {
+        if (N_samples < 50) {
             cerr << "Error: Sample size should be more 50" << endl;
         }
 
+        Vector sample;
+
         double lambda = d.get_lambda();
-        for (int i = 0, curr_elem = 0; i < N; ++i) {
+        for (int i = 0, curr_elem = 0; i < N_samples; ++i) {
             curr_elem = simulate(d);
             if (curr_elem + 1 > sample.getSize()) { // увеличиваем объём массива частот, если не влезает
                 auto prev_end = sample.getSize();
@@ -39,17 +42,15 @@ public:
             }
             ++sample[curr_elem];
         }
+        len_sample = sample.getSize();
+        return sample.getDataCopy();
     }
 
     
    
 
-    double* get_sample_freq(int& n) { 
-        n = sample.getSize(); 
-        return sample.getData();
-    }
-    int get_N() { return N; };
-    void set_N(int _N) { N = _N; }
+    int get_N() { return N_samples; };
+    void set_N(int _N) { N_samples = _N; }
 
 };
 
