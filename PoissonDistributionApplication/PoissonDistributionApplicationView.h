@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "..\PoissonDistributionBackend\Chi.h"
 
 class CPoissonDistributionApplicationView : public CView
 {
@@ -49,6 +49,10 @@ protected:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnGeneratesample();
+	afx_msg void OnP();
+	afx_msg void OnPowerdistribution();
 };
 
 #ifndef _DEBUG  // debug version in PoissonDistributionApplicationView.cpp

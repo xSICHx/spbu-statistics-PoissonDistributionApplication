@@ -1,9 +1,9 @@
 //
 // Copyright (c) 1995 Crescent Division of Progress Software Corporation
 //
-
+#pragma once
 #include <math.h>
-#include "probdist.h"
+#include "PROBDIST.H"
 
 const double Eps = 1e-15;
 
@@ -210,7 +210,7 @@ void CHI( int IFLAG, double N, double &X, double &PROB )
 	}
 }
 
-double pChi(double x, int n)
+double pChiSq(double x, int n)
 {
 	double prob;
 	CHI(1,(double)n,x,prob);

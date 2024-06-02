@@ -68,7 +68,7 @@ protected:
 
 public:
 
-	double* Get_p_array() {
+	double*& Get_p_array() {
 		return p_array;
 	}
 
@@ -86,7 +86,7 @@ public:
 		return d1;
 	}
 
-	PoissonSample* GetPs() {
+	PoissonSample*& GetPs() {
 		return ps;
 	}
 	Chi2Histortam& getChi() {
