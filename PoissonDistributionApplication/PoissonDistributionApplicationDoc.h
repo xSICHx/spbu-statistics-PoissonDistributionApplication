@@ -64,9 +64,28 @@ protected:
 	int N_p_values = 10000;
 	int p_partition = 20;
 	double* p_array;
+	int p_array_size;
+
+
+	//
+	double lambda_min = 1;
+	double lambda_max = 10;
+	double lambda_partition = 20;
+	double alpha = 0.05;
+	int N_p_value_lambda = 1000;
 
 
 public:
+
+	double Get_lambda_min() { return lambda_min; }
+
+	double Get_lambda_max() { return lambda_max; }
+
+	double Get_lambda_partition() { return lambda_partition; }
+
+	double Get_alpha() { return alpha; }
+
+	int Get_N_cycles_by_lambda() { return N_p_value_lambda; }
 
 	double*& Get_p_array() {
 		return p_array;

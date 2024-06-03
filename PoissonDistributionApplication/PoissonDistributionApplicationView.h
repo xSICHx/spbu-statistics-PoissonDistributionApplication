@@ -32,7 +32,7 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:
+public:
 	enum class DrawState
 	{
 		nothing,
@@ -53,6 +53,7 @@ public:
 	afx_msg void OnGeneratesample();
 	afx_msg void OnP();
 	afx_msg void OnPowerdistribution();
+	afx_msg void OnP32775();
 };
 
 #ifndef _DEBUG  // debug version in PoissonDistributionApplicationView.cpp

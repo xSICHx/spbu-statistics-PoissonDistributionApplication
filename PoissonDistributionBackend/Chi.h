@@ -18,7 +18,13 @@ private:
     double df;
 
 
-    void data_to_chi2(double*& th_chied, double*& sample_chied, int& chied_len) {
+    /// <summary>
+    /// Создаёт сгруппированные данные (удовлетворяют условиям Хи-квадрат).
+    /// </summary>
+    /// <param name="th_chied">Пустой массив для теоретических частот, который будет впоследствии заполнен</param>
+    /// <param name="sample_chied">Пустой массив для частот выборки, который будет впоследствии заполнен</param>
+    /// <param name="chied_len">Длина частот, будет впоследствии вычислена</param>
+    void create_chied_values(double*& th_chied, double*& sample_chied, int& chied_len) {
         
         // собираем строки в начале
         double tmp_th = 0, tmp_sample = 0;
@@ -61,7 +67,11 @@ private:
         sample_chied[0] = tmp_sample;
     }
 
-    double calculate_chi2(double* th_chied, double* sample_chied, int chied_len ) {
+    /// <summary>
+    /// Считает хи квадрат по теоретическим и выборочным частотам.
+    /// </summary>
+    /// <returns>Значение Хи квадрат</returns>
+    double get_chi2_value(const double* th_chied, const double* sample_chied, const int chied_len ) {
         double res = 0, diff;
         for (int i = 0; i < chied_len; ++i) {
             diff = sample_chied[i] - th_chied[i];
@@ -91,10 +101,14 @@ public:
         delete[] th_freq;
     };
 
+	/// <summary>
+	/// Создаёт и сохраняет в себе теоретические и выборочные частоты от одного распределения  
+	/// </summary>
+	/// <param name="d"> Распределение </param>
+	/// <param name="sample"> Выборка </param>
 	void set_data(Distribution& d, PoissonSample& sample) {
 		delete[] sample_freq;
 		delete[] th_freq;
-
 
 		sample_freq = sample.generate_sample(d, distr_len);
 
@@ -103,12 +117,18 @@ public:
 			th_freq[i] *= sample.get_N();
 	}
 
-    void set_data(Distribution& d, PoissonSample& sample, Distribution& sample_d) {
+	/// <summary>
+	/// Создаёт и сохраняет в себе теоретические и выборочные частоты от разных распределений.
+	/// </summary>
+	/// <param name="d"> Теоретическое распределение </param>
+	/// <param name="sample"> Выборка </param>
+	/// <param name="d_sample"> Распределение для выборки </param>
+    void set_data(Distribution& d, PoissonSample& sample, Distribution& d_sample) {
         delete[] sample_freq;
         delete[] th_freq;
 
 
-        sample_freq = sample.generate_sample(sample_d, distr_len);
+        sample_freq = sample.generate_sample(d_sample, distr_len);
 
         th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
         for (int i = 0; i < distr_len; ++i)
@@ -116,12 +136,12 @@ public:
     }
 
 
-    void calc_chi() {
+    void calc_chi_parametres() {
         int chied_len;
         double* th_chied = nullptr; double* sample_chied = nullptr;
 
-        data_to_chi2(th_chied, sample_chied, chied_len);
-        chi = calculate_chi2(th_chied, sample_chied, chied_len);
+        create_chied_values(th_chied, sample_chied, chied_len);
+        chi = get_chi2_value(th_chied, sample_chied, chied_len);
         df = chied_len - 1;
         p = 1 - pChiSq(chi, df);
 

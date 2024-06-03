@@ -13,6 +13,7 @@
 #include "PoissonDistributionApplicationDoc.h"
 #include "MainFrm.h"
 #include "SettingsDialog.h"
+#include "PoissonDistributionApplicationView.h"
 
 #include <propkey.h>
 
@@ -179,5 +180,12 @@ void CPoissonDistributionApplicationDoc::OnSettings()
 		mod_meth = static_cast<ModelingMethod>(d.m_mod_method);
 		p_partition = d.m_p_level_partition;
 		N_p_values = d.m_n_iterations;
+
+		POSITION pos = GetFirstViewPosition();
+		if (pos != nullptr) {
+			CPoissonDistributionApplicationView* pView = static_cast<CPoissonDistributionApplicationView*>(GetNextView(pos));
+			pView->draw_state = CPoissonDistributionApplicationView::DrawState::nothing;
+		}
+		UpdateAllViews(nullptr);
 	}
 }

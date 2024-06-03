@@ -41,7 +41,7 @@ int main()
 
 	d.set_lambda(10);
 	Chi2Histortam chi(d, ps);
-	chi.calc_chi();
+	chi.calc_chi_parametres();
 	cout << "p-level = " << chi.get_p() << endl;
 	int distr_len = chi.get_distr_len();
 	double* sample_freq = chi.get_sample_freq();
