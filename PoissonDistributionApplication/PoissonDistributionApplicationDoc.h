@@ -15,8 +15,9 @@ protected: // create from serialization only
 		d1(6),
 		mod_meth(ModelingMethod::inverse),
 		ps(new PoissonSampleInverse(rnd_gen, d0, 100)),
-		chi(d0, *ps),
-		p_array(nullptr)
+		chi(),
+		p_array(nullptr),
+		p_array_size(0)
 	{};
 	DECLARE_DYNCREATE(CPoissonDistributionApplicationDoc)
 
@@ -44,6 +45,21 @@ public:
 #endif
 
 protected:
+	
+	// Случайный генератор для всей программы
+	mt19937 rnd_gen;
+
+	// Основные поля программы
+	Distribution d0;
+	Distribution d1;
+
+	PoissonSample* ps;
+
+	Chi2Histortam chi;
+
+
+	// Поля для диалога
+	// Класс и поле для метода моделирования
 	enum class ModelingMethod
 	{
 		inverse = 0,
@@ -52,36 +68,28 @@ protected:
 	};
 	ModelingMethod mod_meth;
 
-	mt19937 rnd_gen;
-
-	Distribution d0;
-	Distribution d1;
-
-	PoissonSample* ps;
-
-	Chi2Histortam chi;
-
+	// Поля для расрепделений p-levels и power
 	int N_p_values = 10000;
 	int p_partition = 20;
-	double* p_array;
-	int p_array_size;
+	double* p_array = nullptr;
+	int p_array_size = 0;
 
-
-	//
+	// Поля для графика зависимости ошибки первого рода от парамаетра lambda
 	double lambda_min = 1;
 	double lambda_max = 10;
-	double lambda_partition = 20;
+	int lambda_partition = 20;
 	double alpha = 0.05;
 	int N_p_value_lambda = 1000;
 
 
 public:
 
+	// Геттеры
 	double Get_lambda_min() { return lambda_min; }
 
 	double Get_lambda_max() { return lambda_max; }
 
-	double Get_lambda_partition() { return lambda_partition; }
+	int Get_lambda_partition() { return lambda_partition; }
 
 	double Get_alpha() { return alpha; }
 

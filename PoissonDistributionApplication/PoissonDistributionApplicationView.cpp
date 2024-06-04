@@ -183,7 +183,7 @@ void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len
     double full_bar_width = (x_axis_length) / distr_len;
     double bar_width = full_bar_width * 0.8;
     double shift = full_bar_width * 0.2;
-    double left_bottom_prev = 0;
+    int left_bottom_prev = 0;
     for (size_t i = 0; i < distr_len; ++i)
     {
         int bar_height_prev;
@@ -199,7 +199,7 @@ void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len
         pDC->MoveTo(rect.left + 50 + left_bottom_prev, rect.top + y_axis_length + 50 - bar_height_prev);
         pDC->LineTo(rect.left + 50 + static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height);
 
-        left_bottom_prev = static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift);
+        left_bottom_prev = ((int) ((i + 1) * bar_width)) + ((int) (i * shift));
         pDC->SelectObject(pOldPen);
         //CRect bar_rect(rect.left + 50 + static_cast<int>(i * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height,
         //    rect.left + 50 + static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50);
@@ -224,7 +224,7 @@ void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len
 
         pDC->MoveTo(rect.left + 50 + left_bottom_prev, rect.top + y_axis_length + 50 - bar_height_prev);
         pDC->LineTo(rect.left + 50 + static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height);
-        left_bottom_prev = static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift);
+        left_bottom_prev = ((int) ((i + 1) * bar_width)) + ((int) (i * shift));
 
         pDC->SelectObject(pOldPen);
     }
@@ -260,10 +260,8 @@ void DrawSampleHist(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect re
     double* th_freq = chi.get_th_freq();
     double* sample_freq = chi.get_sample_freq();
     double* indexes = new double[distr_len];
-    for (size_t i = 0; i < distr_len; i++)
-    {
+    for (int i = 0; i < distr_len; i++)
         indexes[i] = i;
-    }
     DrawHistogram(pDC, th_freq, sample_freq, indexes, distr_len, rect);
 
     int x_axis_length = rect.Width() - 200; // Длина оси x
@@ -683,7 +681,7 @@ void CPoissonDistributionApplicationView::OnP32775()
     double*& p_array = pDoc->Get_p_array();
     delete[] p_array;
     
-    p_array = new double[pDoc->Get_lambda_partition() + 1];
+    p_array = new double[(int) pDoc->Get_lambda_partition() + 1];
     for (int i = 0; i < pDoc->Get_p_partition(); i++) // инициализация массива частот
     {
         p_array[i] = 0;

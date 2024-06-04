@@ -10,7 +10,9 @@ class SettingsDialog : public CDialog
 public:
 	SettingsDialog(CWnd* pParent = nullptr);   // standard constructor
 	SettingsDialog(Chi2Histortam& chi, Distribution& d0, Distribution& d1, PoissonSample* ps,
-		int mod_meth, int N_p_values, int p_partition, CWnd* pParent = nullptr);
+		int mod_meth, int N_p_values, int p_partition,
+		double lambda_min, double lambda_max, int lambda_partition, double alpha, int N_p_value_lambda,
+		CWnd* pParent = nullptr);
 	virtual ~SettingsDialog();
 
 // Dialog Data
@@ -30,4 +32,9 @@ public:
 	int m_mod_method;
 	int m_n_iterations;
 	int m_p_level_partition;
+	double m_lambda_min;
+	double m_lambda_max;
+	int m_lambda_partition;
+	double m_alpha;
+	int m_N_p_value_lambda;
 };

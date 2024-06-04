@@ -17,7 +17,7 @@ private:
         if (th_prob.getSize() < n) {
             double p_cum = 1 - th_prob[th_prob.getSize() - 1];
             // обновление последнего элемента, так как он равен 1 - сумма всех начальных
-            th_prob[th_prob.getSize() - 1] = th_prob[th_prob.getSize() - 2] * (lambda / (th_prob.getSize() - 1));
+            th_prob[th_prob.getSize() - 1] = th_prob[th_prob.getSize() - 2] * (lambda / ((double) th_prob.getSize() - 1));
             for (int i = th_prob.getSize(); i < n; ++i) { // заполнение оставшихся элементов
                 th_prob.push(th_prob[i - 1] * (lambda / i));
                 p_cum += th_prob[i];

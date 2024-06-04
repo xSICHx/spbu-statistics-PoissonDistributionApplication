@@ -23,7 +23,9 @@ SettingsDialog::SettingsDialog(CWnd* pParent /*= nullptr*/)
 }
 
 SettingsDialog::SettingsDialog(Chi2Histortam& chi, Distribution& d0, Distribution& d1, PoissonSample* ps,
-	int mod_meth, int N_p_values, int p_partition, CWnd* pParent /*= nullptr*/)
+	int mod_meth, int N_p_values, int p_partition,
+	double lambda_min, double lambda_max, int lambda_partition, double alpha, int N_p_value_lambda,
+	CWnd* pParent /*= nullptr*/)
 	: CDialog(IDD_DIALOG1, pParent)
 	, m_sample_size(ps->get_N())
 	, m_lambda_h0(d0.get_lambda())
@@ -31,6 +33,11 @@ SettingsDialog::SettingsDialog(Chi2Histortam& chi, Distribution& d0, Distributio
 	, m_mod_method(mod_meth)
 	, m_p_level_partition(p_partition)
 	, m_n_iterations(N_p_values)
+	, m_lambda_min(lambda_min)
+	, m_lambda_max(lambda_max)
+	, m_lambda_partition(lambda_partition)
+	, m_alpha(alpha)
+	, m_N_p_value_lambda(N_p_value_lambda)
 {
 
 }
@@ -53,6 +60,22 @@ void SettingsDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT3, m_lambda_h1);
 	DDV_MinMaxDouble(pDX, m_lambda_h1, 0, 100);
 	DDX_Radio(pDX, IDC_RADIO1, m_mod_method);
+
+	DDX_Text(pDX, IDC_EDIT6, m_lambda_min);
+	DDV_MinMaxDouble(pDX, m_lambda_min, 1, m_lambda_max-1);
+
+	DDX_Text(pDX, IDC_EDIT7, m_lambda_max);
+	DDV_MinMaxDouble(pDX, m_lambda_max, m_lambda_min+1, 40);
+
+	DDX_Text(pDX, IDC_EDIT8, m_lambda_partition);
+	DDV_MinMaxInt(pDX, m_lambda_partition, 10, 100);
+
+	DDX_Text(pDX, IDC_EDIT9, m_alpha);
+	DDV_MinMaxDouble(pDX, m_alpha, 0, 1);
+
+	DDX_Text(pDX, IDC_EDIT10, m_N_p_value_lambda);
+	DDV_MinMaxInt(pDX, m_N_p_value_lambda, 1000, 100000);
+	
 }
 
 

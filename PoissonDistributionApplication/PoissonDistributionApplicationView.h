@@ -33,6 +33,7 @@ public:
 #endif
 
 public:
+	// Класс и поле для выбора режима рисования
 	enum class DrawState
 	{
 		nothing,
@@ -41,7 +42,6 @@ public:
 		beta_distribution,
 		alpha_lambda_dependance
 	};
-
 	DrawState draw_state = DrawState::nothing;
 // Generated message map functions
 protected:

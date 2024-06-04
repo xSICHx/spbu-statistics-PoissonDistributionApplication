@@ -160,7 +160,9 @@ void CPoissonDistributionApplicationDoc::OnSettings()
 	else
 		mod = 2;
 
-	SettingsDialog d(chi, d0, d1, ps, mod, N_p_values, p_partition);
+	SettingsDialog d(chi, d0, d1, ps, mod,
+		N_p_values, p_partition,
+		lambda_min, lambda_max, lambda_partition, alpha, N_p_value_lambda);
 	if (d.DoModal() == IDOK) {
 		if (mod != d.m_mod_method) {
 			delete ps;
@@ -178,8 +180,15 @@ void CPoissonDistributionApplicationDoc::OnSettings()
 		ps->set_N(d.m_sample_size);
 		chi.set_data(d0, *ps);
 		mod_meth = static_cast<ModelingMethod>(d.m_mod_method);
+
 		p_partition = d.m_p_level_partition;
 		N_p_values = d.m_n_iterations;
+
+		lambda_min = d.m_lambda_min;
+		lambda_max = d.m_lambda_max;
+		lambda_partition = d.m_lambda_partition;
+		alpha = d.m_alpha;
+		N_p_value_lambda = d.m_N_p_value_lambda;
 
 		POSITION pos = GetFirstViewPosition();
 		if (pos != nullptr) {

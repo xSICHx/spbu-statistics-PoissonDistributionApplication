@@ -8,14 +8,14 @@ class Chi2Histortam
 {
 
 private:
-    int distr_len;
-    double* sample_freq;
-    double* th_freq;
+    int distr_len = 0;
+    double* sample_freq = nullptr;
+    double* th_freq = nullptr;
 
 
-    double p;
-    double chi;
-    double df;
+    double p = 0;
+    double chi = 0;
+    int df = 0;
 
 
     /// <summary>
@@ -152,7 +152,7 @@ public:
 
     double get_p() { return p; }
     double get_chi() { return chi; }
-    double get_df() { return df; }
+    int get_df() { return df; }
 
     int get_distr_len() { return distr_len; }
     double*& get_sample_freq() { return sample_freq; }

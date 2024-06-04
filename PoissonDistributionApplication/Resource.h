@@ -38,6 +38,11 @@
 #define IDC_RADIO1                      1006
 #define IDC_RADIO2                      1007
 #define IDC_RADIO3                      1008
+#define IDC_EDIT6                       1009
+#define IDC_EDIT7                       1010
+#define IDC_EDIT8                       1011
+#define IDC_EDIT9                       1012
+#define IDC_EDIT10                      1013
 #define ID_GENERATESAMPLE               32771
 #define ID_P                            32772
 #define ID_POWERDISTRIBUTION            32773
