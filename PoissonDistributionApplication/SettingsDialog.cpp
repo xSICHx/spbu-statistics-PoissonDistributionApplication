@@ -18,6 +18,13 @@ SettingsDialog::SettingsDialog(CWnd* pParent /*= nullptr*/)
 	, m_lambda_h1(6)
 	, m_mod_method(0)
 	, m_p_level_partition(20)
+	, m_n_iterations(10000)
+	, m_lambda_min(1)
+	, m_lambda_max(10)
+	, m_lambda_partition(20)
+	, m_alpha(0.05)
+	, m_N_p_value_lambda(10000)
+
 {
 
 }
@@ -75,7 +82,6 @@ void SettingsDialog::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Text(pDX, IDC_EDIT10, m_N_p_value_lambda);
 	DDV_MinMaxInt(pDX, m_N_p_value_lambda, 1000, 100000);
-	
 }
 
 

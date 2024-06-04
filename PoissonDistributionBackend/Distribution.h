@@ -27,7 +27,7 @@ private:
     }
 
 public:
-    Distribution(double _lambda = 5) : lambda(_lambda), th_prob(){
+    Distribution(double _lambda = 5) : lambda(_lambda), th_prob( max((int) (lambda+2*lambda), 10) ){
         // инициализация начального распределения
         th_prob.push(exp(-lambda));
         double p_cum = th_prob[0];
@@ -67,6 +67,7 @@ public:
         lambda = _lambda;
         th_prob.clear();
         th_prob.push(exp(-lambda));
+        th_prob.reserve( (int) (lambda + lambda*3) );
         double p_cum = th_prob[0];
         for (int i = 1; i < th_prob.getCapacity() - 1; ++i) {
             th_prob.push(th_prob[i - 1] * (lambda / i));

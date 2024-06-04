@@ -25,13 +25,19 @@ public:
     virtual int simulate(Distribution& d) const = 0;
     
 
-    virtual double* generate_sample(Distribution& d, int& len_sample ///< Сколько элементов будет в частотах массива >
+    virtual double* generate_sample(Distribution& d, int& len_sample, ///< Сколько элементов будет в частотах массива >
+        int init_len_sample = -1 // если нужно заранее задать размер, все элементы будут нулевые
     ) {
         if (N_samples < 50) {
             cerr << "Error: Sample size should be more 50" << endl;
         }
 
         Vector sample;
+        if (init_len_sample > 0) {
+            sample.resize(init_len_sample);
+        }
+            
+            
 
         double lambda = d.get_lambda();
         for (int i = 0, curr_elem = 0; i < N_samples; ++i) {
@@ -112,7 +118,7 @@ public:
         double lambda = d.get_lambda();
         int k = 0;
         double p = exp(-lambda), alpha = uniform_rand(gen), q = alpha;
-        while (q >= p) {
+        while (q > p) {
             alpha = uniform_rand(gen);
             q *= alpha;
             ++k;

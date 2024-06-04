@@ -90,7 +90,7 @@ public:
 
 	};
     Chi2Histortam(Distribution& d, PoissonSample& sample, Distribution& sample_d) {
-        sample_freq = sample.generate_sample(sample_d, distr_len);
+        sample_freq = sample.generate_sample(sample_d, distr_len, (int) (d.get_lambda() + d.get_lambda()*2) );
         th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
         for (int i = 0; i < distr_len; ++i)
             th_freq[i] *= sample.get_N();
@@ -128,9 +128,10 @@ public:
         delete[] th_freq;
 
 
-        sample_freq = sample.generate_sample(d_sample, distr_len);
+        sample_freq = sample.generate_sample(d_sample, distr_len, (int)(d.get_lambda() + d.get_lambda() * 2));
 
         th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+
         for (int i = 0; i < distr_len; ++i)
             th_freq[i] *= sample.get_N();
     }
