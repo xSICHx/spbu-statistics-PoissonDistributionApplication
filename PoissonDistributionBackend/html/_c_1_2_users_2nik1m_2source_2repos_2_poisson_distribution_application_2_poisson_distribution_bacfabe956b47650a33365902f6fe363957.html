@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PoissonDistribution: C:/Users/nik1m/source/repos/PoissonDistributionApplication/PoissonDistributionBackend/PoissonDistributionBackend.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PoissonDistribution
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">C:/Users/nik1m/source/repos/PoissonDistributionApplication/PoissonDistributionBackend/PoissonDistributionBackend.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_distribution_8h.html">Distribution.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_poisson_sample_8h.html">PoissonSample.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_vector_8h.html">Vector.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_chi_8h.html">Chi.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>std;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a id="a0" name="a0"></a><a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(<span class="keywordtype">double</span>* arr, <span class="keywordtype">int</span> n) {</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++)</div>
+<div class="line">    {</div>
+<div class="line">        cout &lt;&lt; arr[i] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line">    }</div>
+<div class="line">    cout &lt;&lt; endl;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a id="a1" name="a1"></a><a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>()</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordtype">int</span> n_samples = 13333;</div>
+<div class="line">    mt19937 mt(100);</div>
+<div class="line"> </div>
+<div class="line">    <a id="_a2" name="_a2"></a><a class="code hl_class" href="class_distribution.html">Distribution</a> d;</div>
+<div class="line">    <span class="keywordtype">int</span> N;</div>
+<div class="line">    <a id="_a3" name="_a3"></a><a class="code hl_class" href="class_poisson_sample_inverse.html">PoissonSampleInverse</a> ps(mt, d, n_samples);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">double</span>* sample_vec = ps.generate_sample(d, N);</div>
+<div class="line">    <span class="keywordtype">double</span>* th_vec = d.<a id="a4" name="a4"></a><a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(N);</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; N; i++)</div>
+<div class="line">    {</div>
+<div class="line">        sample_vec[i] /= n_samples;</div>
+<div class="line">    }</div>
+<div class="line">    <a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(sample_vec, N);</div>
+<div class="line"> </div>
+<div class="line">    </div>
+<div class="line">    <a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(th_vec, N);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">delete</span>[] th_vec;</div>
+<div class="line">    <span class="keyword">delete</span>[] sample_vec;</div>
+<div class="line"> </div>
+<div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;------&quot;</span> &lt;&lt; endl;</div>
+<div class="line"> </div>
+<div class="line">    d.<a id="a5" name="a5"></a><a class="code hl_function" href="class_distribution.html#a115a01e72956bdfd28d6731737b01faa">set_lambda</a>(10);</div>
+<div class="line">    <a id="_a6" name="_a6"></a><a class="code hl_class" href="class_chi2_histortam.html">Chi2Histortam</a> chi(d, ps);</div>
+<div class="line">    chi.calc_chi_parametres();</div>
+<div class="line">    cout &lt;&lt; <span class="stringliteral">&quot;p-level = &quot;</span> &lt;&lt; chi.get_p() &lt;&lt; endl;</div>
+<div class="line">    <span class="keywordtype">int</span> distr_len = chi.get_distr_len();</div>
+<div class="line">    <span class="keywordtype">double</span>* sample_freq = chi.get_sample_freq();</div>
+<div class="line">    <span class="keywordtype">double</span>* th_freq = chi.get_th_freq();</div>
+<div class="line">    <a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(sample_freq, distr_len);</div>
+<div class="line">    <a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(th_freq, distr_len);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="a_chi_8h_html"><div class="ttname"><a href="_chi_8h.html">Chi.h</a></div></div>
+<div class="ttc" id="a_distribution_8h_html"><div class="ttname"><a href="_distribution_8h.html">Distribution.h</a></div></div>
+<div class="ttc" id="a_poisson_distribution_backend_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="_poisson_distribution_backend_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> PoissonDistributionBackend.cpp:23</div></div>
+<div class="ttc" id="a_poisson_distribution_backend_8cpp_html_aec8982f42dc7ec005ca4b6d76fc6d9e9"><div class="ttname"><a href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a></div><div class="ttdeci">void print_vec(double *arr, int n)</div><div class="ttdef"><b>Definition</b> PoissonDistributionBackend.cpp:9</div></div>
+<div class="ttc" id="a_poisson_sample_8h_html"><div class="ttname"><a href="_poisson_sample_8h.html">PoissonSample.h</a></div></div>
+<div class="ttc" id="a_vector_8h_html"><div class="ttname"><a href="_vector_8h.html">Vector.h</a></div></div>
+<div class="ttc" id="aclass_chi2_histortam_html"><div class="ttname"><a href="class_chi2_histortam.html">Chi2Histortam</a></div><div class="ttdoc">Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of ...</div><div class="ttdef"><b>Definition</b> Chi.h:10</div></div>
+<div class="ttc" id="aclass_distribution_html"><div class="ttname"><a href="class_distribution.html">Distribution</a></div><div class="ttdoc">Poisson distribution class. Calculates the theoretical distribution and stores it in itself.</div><div class="ttdef"><b>Definition</b> Distribution.h:12</div></div>
+<div class="ttc" id="aclass_distribution_html_a115a01e72956bdfd28d6731737b01faa"><div class="ttname"><a href="class_distribution.html#a115a01e72956bdfd28d6731737b01faa">Distribution::set_lambda</a></div><div class="ttdeci">void set_lambda(double _lambda)</div><div class="ttdoc">Setter lambda. Updates the array of theoretical distribution.</div><div class="ttdef"><b>Definition</b> Distribution.h:97</div></div>
+<div class="ttc" id="aclass_distribution_html_a7bb34d802196525c5603df1a90784c99"><div class="ttname"><a href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">Distribution::get_th_prob_array</a></div><div class="ttdeci">double * get_th_prob_array(int n)</div><div class="ttdoc">Returns double* an array of the first n theoretical values.</div><div class="ttdef"><b>Definition</b> Distribution.h:70</div></div>
+<div class="ttc" id="aclass_poisson_sample_inverse_html"><div class="ttname"><a href="class_poisson_sample_inverse.html">PoissonSampleInverse</a></div><div class="ttdoc">Class of sample generation from Poisson distribution by inverse function method.</div><div class="ttdef"><b>Definition</b> PoissonSample.h:94</div></div>
+</div><!-- fragment --> </div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

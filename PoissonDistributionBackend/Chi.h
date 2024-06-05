@@ -2,14 +2,21 @@
 #include "PoissonSample.h"
 
 
-
-
+/// <summary>
+/// Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of the criterion.
+/// Stores sample and theoretical values as well as criterion values, p-value, degrees of freedom.
+/// </summary>
 class Chi2Histortam
 {
-
 private:
     int distr_len = 0;
+    /// <summary>
+    /// Sample values
+    /// </summary>
     double* sample_freq = nullptr;
+    /// <summary>
+    /// Theoretical values
+    /// </summary>
     double* th_freq = nullptr;
 
 
@@ -19,13 +26,12 @@ private:
 
 
     /// <summary>
-    /// Создаёт сгруппированные данные (удовлетворяют условиям Хи-квадрат).
+    /// Creates grouped data (satisfy chi-square conditions).
     /// </summary>
-    /// <param name="th_chied">Пустой массив для теоретических частот, который будет впоследствии заполнен</param>
-    /// <param name="sample_chied">Пустой массив для частот выборки, который будет впоследствии заполнен</param>
-    /// <param name="chied_len">Длина частот, будет впоследствии вычислена</param>
-    void create_chied_values(double*& th_chied, double*& sample_chied, int& chied_len) {
-        
+    /// <param name="th_chied">Empty array for theoretical frequencies, to be filled in later</param>
+    /// <param name="sample_chied">Empty array for sampling frequencies to be filled in later</param>
+    /// <param name="chied_len">The length of the frequencies, will be subsequently calculated</param>
+    void create_chied_values(double*& th_chied, double*& sample_chied, int& chied_len) const {
         // собираем строки в начале
         double tmp_th = 0, tmp_sample = 0;
         int i = 0;
@@ -46,8 +52,16 @@ private:
             --j;
         }
 
+		if (j == -1) {
+			chied_len = 1;
+			th_chied = new double[chied_len];
+			sample_chied = new double[chied_len];
+			th_chied[0] = tmp_th2;
+			sample_chied[0] = tmp_sample2;
+			return;
+		}
         // выделение памяти под массивы
-        chied_len = (j - i + 1) + (1) + (1);
+        chied_len = (j - i + 1) + (1) + (1); 
         th_chied = new double[chied_len];
         sample_chied = new double[chied_len];
 
@@ -65,13 +79,18 @@ private:
         // добавляем строку в начало
         th_chied[0] = tmp_th;
         sample_chied[0] = tmp_sample;
+
+		for (int i = 0; i < chied_len; ++i) {
+			double sfdaad = th_chied[i];
+			int afsdaf = 0;
+		}
     }
 
     /// <summary>
-    /// Считает хи квадрат по теоретическим и выборочным частотам.
+    /// Counts chi square over theoretical and sample frequencies.
     /// </summary>
-    /// <returns>Значение Хи квадрат</returns>
-    double get_chi2_value(const double* th_chied, const double* sample_chied, const int chied_len ) {
+    /// <returns>Meaning of Chi square</returns>
+    double calc_chi2_value(const double* th_chied, const double* sample_chied, const int chied_len ) const {
         double res = 0, diff;
         for (int i = 0; i < chied_len; ++i) {
             diff = sample_chied[i] - th_chied[i];
@@ -82,6 +101,11 @@ private:
 
 public:
     Chi2Histortam() = default;
+	/// <summary>
+	/// Creates and stores theoretical and sample frequencies from a single distribution  
+	/// </summary>
+	/// <param name="d"> Distribution </param>
+	/// <param name="sample"> Sample </param>
 	Chi2Histortam(Distribution& d, PoissonSample& sample) {
 		sample_freq = sample.generate_sample(d, distr_len);
 		th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
@@ -89,6 +113,12 @@ public:
 			th_freq[i] *= sample.get_N();
 
 	};
+	/// <summary>
+	/// Creates and stores theoretical and sample frequencies from different distributions.
+	/// </summary>
+	/// <param name="d"> Theoretical distribution </param>
+	/// <param name="sample"> Sample </param>
+	/// <param name="d_sample"> Distribution for the sample </param>
     Chi2Histortam(Distribution& d, PoissonSample& sample, Distribution& sample_d) {
         sample_freq = sample.generate_sample(sample_d, distr_len, (int) (d.get_lambda() + d.get_lambda()*2) );
         th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
@@ -102,10 +132,10 @@ public:
     };
 
 	/// <summary>
-	/// Создаёт и сохраняет в себе теоретические и выборочные частоты от одного распределения  
+	/// Creates and stores theoretical and sample frequencies from a single distribution.  
 	/// </summary>
-	/// <param name="d"> Распределение </param>
-	/// <param name="sample"> Выборка </param>
+	/// <param name="d"> Distribution </param>
+	/// <param name="sample"> Sample </param>
 	void set_data(Distribution& d, PoissonSample& sample) {
 		delete[] sample_freq;
 		delete[] th_freq;
@@ -118,11 +148,11 @@ public:
 	}
 
 	/// <summary>
-	/// Создаёт и сохраняет в себе теоретические и выборочные частоты от разных распределений.
+	/// Creates and stores theoretical and sample frequencies from different distributions.
 	/// </summary>
-	/// <param name="d"> Теоретическое распределение </param>
-	/// <param name="sample"> Выборка </param>
-	/// <param name="d_sample"> Распределение для выборки </param>
+	/// <param name="d"> Theoretical distribution </param>
+	/// <param name="sample"> Sample </param>
+	/// <param name="d_sample"> Distribution for the sample </param>
     void set_data(Distribution& d, PoissonSample& sample, Distribution& d_sample) {
         delete[] sample_freq;
         delete[] th_freq;
@@ -136,15 +166,20 @@ public:
             th_freq[i] *= sample.get_N();
     }
 
-
-    void calc_chi_parametres() {
+	/// <summary>
+	/// Calculates the criterion, p-value, and degrees of freedom for the sample
+	/// </summary>
+    void apply_chi_criterion() {
         int chied_len;
         double* th_chied = nullptr; double* sample_chied = nullptr;
 
         create_chied_values(th_chied, sample_chied, chied_len);
-        chi = get_chi2_value(th_chied, sample_chied, chied_len);
+        chi = calc_chi2_value(th_chied, sample_chied, chied_len);
         df = chied_len - 1;
         p = 1 - pChiSq(chi, df);
+
+
+
 
         delete[] th_chied;
         delete[] sample_chied;

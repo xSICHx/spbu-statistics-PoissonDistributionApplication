@@ -5,6 +5,9 @@ using namespace std;
 
 const int initCapacity = 8;
 
+/// <summary>
+/// Auxiliary class similar to the vector<> class
+/// </summary>
 class Vector {
 private:
     double* data;

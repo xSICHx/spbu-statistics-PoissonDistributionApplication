@@ -63,13 +63,13 @@ void SettingsDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT5, m_p_level_partition);
 	DDV_MinMaxInt(pDX, m_p_level_partition, 10, 30);
 	DDX_Text(pDX, IDC_EDIT2, m_lambda_h0);
-	DDV_MinMaxDouble(pDX, m_lambda_h0, 0, 100);
+	DDV_MinMaxDouble(pDX, m_lambda_h0, 0.01, 100);
 	DDX_Text(pDX, IDC_EDIT3, m_lambda_h1);
-	DDV_MinMaxDouble(pDX, m_lambda_h1, 0, 100);
+	DDV_MinMaxDouble(pDX, m_lambda_h1, 0.01, 100);
 	DDX_Radio(pDX, IDC_RADIO1, m_mod_method);
 
 	DDX_Text(pDX, IDC_EDIT6, m_lambda_min);
-	DDV_MinMaxDouble(pDX, m_lambda_min, 1, m_lambda_max-1);
+	DDV_MinMaxDouble(pDX, m_lambda_min, 0.01, m_lambda_max-1);
 
 	DDX_Text(pDX, IDC_EDIT7, m_lambda_max);
 	DDV_MinMaxDouble(pDX, m_lambda_max, m_lambda_min+1, 40);

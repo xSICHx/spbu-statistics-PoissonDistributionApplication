@@ -1,0 +1,542 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PoissonDistribution: Класс Chi2Histortam</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PoissonDistribution
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="class_chi2_histortam-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle"><div class="title">Класс Chi2Histortam</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of the criterion. Stores sample and theoretical values as well as criterion values, p-value, degrees of freedom.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_chi_8h_source.html">Chi.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a494aa91766a9b8fc6e924e4b7d63c7ee" id="r_a494aa91766a9b8fc6e924e4b7d63c7ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a494aa91766a9b8fc6e924e4b7d63c7ee">Chi2Histortam</a> ()=default</td></tr>
+<tr class="separator:a494aa91766a9b8fc6e924e4b7d63c7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad416d4cee23c7e7be7edd685529f3e84" id="r_ad416d4cee23c7e7be7edd685529f3e84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad416d4cee23c7e7be7edd685529f3e84">Chi2Histortam</a> (<a class="el" href="class_distribution.html">Distribution</a> &amp;d, <a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;sample)</td></tr>
+<tr class="memdesc:ad416d4cee23c7e7be7edd685529f3e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and stores theoretical and sample frequencies from a single distribution <br  />
+  <br /></td></tr>
+<tr class="separator:ad416d4cee23c7e7be7edd685529f3e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd56b221c95e8b8cb09ef2fe83ff5c37" id="r_abd56b221c95e8b8cb09ef2fe83ff5c37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd56b221c95e8b8cb09ef2fe83ff5c37">Chi2Histortam</a> (<a class="el" href="class_distribution.html">Distribution</a> &amp;d, <a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;sample, <a class="el" href="class_distribution.html">Distribution</a> &amp;sample_d)</td></tr>
+<tr class="memdesc:abd56b221c95e8b8cb09ef2fe83ff5c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and stores theoretical and sample frequencies from different distributions.  <br /></td></tr>
+<tr class="separator:abd56b221c95e8b8cb09ef2fe83ff5c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbe59151d4610e1e5c222f43d1a5ac40" id="r_abbe59151d4610e1e5c222f43d1a5ac40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbe59151d4610e1e5c222f43d1a5ac40">~Chi2Histortam</a> ()</td></tr>
+<tr class="separator:abbe59151d4610e1e5c222f43d1a5ac40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0db9a5c4d39b96c3faf639e15e406dcc" id="r_a0db9a5c4d39b96c3faf639e15e406dcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0db9a5c4d39b96c3faf639e15e406dcc">set_data</a> (<a class="el" href="class_distribution.html">Distribution</a> &amp;d, <a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;sample)</td></tr>
+<tr class="memdesc:a0db9a5c4d39b96c3faf639e15e406dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and stores theoretical and sample frequencies from a single distribution. <br  />
+  <br /></td></tr>
+<tr class="separator:a0db9a5c4d39b96c3faf639e15e406dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5009892e1ccfaf0546a8a77119120ef4" id="r_a5009892e1ccfaf0546a8a77119120ef4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5009892e1ccfaf0546a8a77119120ef4">set_data</a> (<a class="el" href="class_distribution.html">Distribution</a> &amp;d, <a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;sample, <a class="el" href="class_distribution.html">Distribution</a> &amp;d_sample)</td></tr>
+<tr class="memdesc:a5009892e1ccfaf0546a8a77119120ef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and stores theoretical and sample frequencies from different distributions.  <br /></td></tr>
+<tr class="separator:a5009892e1ccfaf0546a8a77119120ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad13463baabc3adbeef394aa9d18c8528" id="r_ad13463baabc3adbeef394aa9d18c8528"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad13463baabc3adbeef394aa9d18c8528">calc_chi_parametres</a> ()</td></tr>
+<tr class="memdesc:ad13463baabc3adbeef394aa9d18c8528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the criterion, p-value, and degrees of freedom for the sample.  <br /></td></tr>
+<tr class="separator:ad13463baabc3adbeef394aa9d18c8528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b7c48a69d69c3273e65967f69b7f202" id="r_a6b7c48a69d69c3273e65967f69b7f202"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b7c48a69d69c3273e65967f69b7f202">get_p</a> ()</td></tr>
+<tr class="separator:a6b7c48a69d69c3273e65967f69b7f202"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7edc738ec9ac4f60a5ce1d18418d3da" id="r_ae7edc738ec9ac4f60a5ce1d18418d3da"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7edc738ec9ac4f60a5ce1d18418d3da">get_chi</a> ()</td></tr>
+<tr class="separator:ae7edc738ec9ac4f60a5ce1d18418d3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec4e6e53c341ab3981a815dd1b83ffff" id="r_aec4e6e53c341ab3981a815dd1b83ffff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec4e6e53c341ab3981a815dd1b83ffff">get_df</a> ()</td></tr>
+<tr class="separator:aec4e6e53c341ab3981a815dd1b83ffff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e442bdfc869d24b51c5209228823a57" id="r_a1e442bdfc869d24b51c5209228823a57"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e442bdfc869d24b51c5209228823a57">get_distr_len</a> ()</td></tr>
+<tr class="separator:a1e442bdfc869d24b51c5209228823a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fbf4d62ff092526177dfd8d2411b217" id="r_a3fbf4d62ff092526177dfd8d2411b217"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fbf4d62ff092526177dfd8d2411b217">get_sample_freq</a> ()</td></tr>
+<tr class="separator:a3fbf4d62ff092526177dfd8d2411b217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5600971c2ab0b51c7d185336c5eaa6f0" id="r_a5600971c2ab0b51c7d185336c5eaa6f0"><td class="memItemLeft" align="right" valign="top">double *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5600971c2ab0b51c7d185336c5eaa6f0">get_th_freq</a> ()</td></tr>
+<tr class="separator:a5600971c2ab0b51c7d185336c5eaa6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of the criterion. Stores sample and theoretical values as well as criterion values, p-value, degrees of freedom. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="a494aa91766a9b8fc6e924e4b7d63c7ee" name="a494aa91766a9b8fc6e924e4b7d63c7ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a494aa91766a9b8fc6e924e4b7d63c7ee">&#9670;&#160;</a></span>Chi2Histortam() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Chi2Histortam::Chi2Histortam </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad416d4cee23c7e7be7edd685529f3e84" name="ad416d4cee23c7e7be7edd685529f3e84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad416d4cee23c7e7be7edd685529f3e84">&#9670;&#160;</a></span>Chi2Histortam() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Chi2Histortam::Chi2Histortam </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_distribution.html">Distribution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sample</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates and stores theoretical and sample frequencies from a single distribution <br  />
+ </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td><a class="el" href="class_distribution.html" title="Poisson distribution class. Calculates the theoretical distribution and stores it in itself.">Distribution</a> </td></tr>
+    <tr><td class="paramname">sample</td><td>Sample </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abd56b221c95e8b8cb09ef2fe83ff5c37" name="abd56b221c95e8b8cb09ef2fe83ff5c37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd56b221c95e8b8cb09ef2fe83ff5c37">&#9670;&#160;</a></span>Chi2Histortam() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Chi2Histortam::Chi2Histortam </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_distribution.html">Distribution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sample</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_distribution.html">Distribution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sample_d</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates and stores theoretical and sample frequencies from different distributions. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td>Theoretical distribution </td></tr>
+    <tr><td class="paramname">sample</td><td>Sample </td></tr>
+    <tr><td class="paramname">d_sample</td><td><a class="el" href="class_distribution.html" title="Poisson distribution class. Calculates the theoretical distribution and stores it in itself.">Distribution</a> for the sample </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abbe59151d4610e1e5c222f43d1a5ac40" name="abbe59151d4610e1e5c222f43d1a5ac40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbe59151d4610e1e5c222f43d1a5ac40">&#9670;&#160;</a></span>~Chi2Histortam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Chi2Histortam::~Chi2Histortam </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="ad13463baabc3adbeef394aa9d18c8528" name="ad13463baabc3adbeef394aa9d18c8528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad13463baabc3adbeef394aa9d18c8528">&#9670;&#160;</a></span>calc_chi_parametres()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Chi2Histortam::calc_chi_parametres </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the criterion, p-value, and degrees of freedom for the sample. </p>
+
+</div>
+</div>
+<a id="ae7edc738ec9ac4f60a5ce1d18418d3da" name="ae7edc738ec9ac4f60a5ce1d18418d3da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7edc738ec9ac4f60a5ce1d18418d3da">&#9670;&#160;</a></span>get_chi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Chi2Histortam::get_chi </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec4e6e53c341ab3981a815dd1b83ffff" name="aec4e6e53c341ab3981a815dd1b83ffff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec4e6e53c341ab3981a815dd1b83ffff">&#9670;&#160;</a></span>get_df()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Chi2Histortam::get_df </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e442bdfc869d24b51c5209228823a57" name="a1e442bdfc869d24b51c5209228823a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e442bdfc869d24b51c5209228823a57">&#9670;&#160;</a></span>get_distr_len()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Chi2Histortam::get_distr_len </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b7c48a69d69c3273e65967f69b7f202" name="a6b7c48a69d69c3273e65967f69b7f202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b7c48a69d69c3273e65967f69b7f202">&#9670;&#160;</a></span>get_p()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Chi2Histortam::get_p </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3fbf4d62ff092526177dfd8d2411b217" name="a3fbf4d62ff092526177dfd8d2411b217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fbf4d62ff092526177dfd8d2411b217">&#9670;&#160;</a></span>get_sample_freq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double *&amp; Chi2Histortam::get_sample_freq </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5600971c2ab0b51c7d185336c5eaa6f0" name="a5600971c2ab0b51c7d185336c5eaa6f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5600971c2ab0b51c7d185336c5eaa6f0">&#9670;&#160;</a></span>get_th_freq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double *&amp; Chi2Histortam::get_th_freq </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0db9a5c4d39b96c3faf639e15e406dcc" name="a0db9a5c4d39b96c3faf639e15e406dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0db9a5c4d39b96c3faf639e15e406dcc">&#9670;&#160;</a></span>set_data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Chi2Histortam::set_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_distribution.html">Distribution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sample</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates and stores theoretical and sample frequencies from a single distribution. <br  />
+ </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td><a class="el" href="class_distribution.html" title="Poisson distribution class. Calculates the theoretical distribution and stores it in itself.">Distribution</a> </td></tr>
+    <tr><td class="paramname">sample</td><td>Sample </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5009892e1ccfaf0546a8a77119120ef4" name="a5009892e1ccfaf0546a8a77119120ef4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5009892e1ccfaf0546a8a77119120ef4">&#9670;&#160;</a></span>set_data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Chi2Histortam::set_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_distribution.html">Distribution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_poisson_sample.html">PoissonSample</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sample</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_distribution.html">Distribution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>d_sample</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates and stores theoretical and sample frequencies from different distributions. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td>Theoretical distribution </td></tr>
+    <tr><td class="paramname">sample</td><td>Sample </td></tr>
+    <tr><td class="paramname">d_sample</td><td><a class="el" href="class_distribution.html" title="Poisson distribution class. Calculates the theoretical distribution and stores it in itself.">Distribution</a> for the sample </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li><a class="el" href="_chi_8h_source.html">Chi.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,99 @@
+\doxysection{Класс Poisson\+Sample\+Inverse\+Table}
+\hypertarget{class_poisson_sample_inverse_table}{}\label{class_poisson_sample_inverse_table}\index{PoissonSampleInverseTable@{PoissonSampleInverseTable}}
+
+
+Class of sample generation from Poisson distribution by tabular inverse function method.  
+
+
+
+
+{\ttfamily \#include $<$Poisson\+Sample.\+h$>$}
+
+Граф наследования\+:Poisson\+Sample\+Inverse\+Table\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_poisson_sample_inverse_table}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_poisson_sample_inverse_table_af043146177e717344d61a641fb7a5bbf}{Poisson\+Sample\+Inverse\+Table}} (mt19937 \&\+\_\+gen, \mbox{\hyperlink{class_distribution}{Distribution}} \&d, int \+\_\+\+N\+\_\+samples=100)
+\item 
+\mbox{\hyperlink{class_poisson_sample_inverse_table_ac63c06e0984be288c525451ea8d24666}{\texorpdfstring{$\sim$}{\string~}\+Poisson\+Sample\+Inverse\+Table}} () override=default
+\item 
+int \mbox{\hyperlink{class_poisson_sample_inverse_table_ad279a2bf7979c183a9aea929650da4c0}{simulate}} (\mbox{\hyperlink{class_distribution}{Distribution}} \&d) const override
+\begin{DoxyCompactList}\small\item\em Generate one sample item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены унаследованные от \mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_poisson_sample_a50f8dac16be66f7b526801d6af0208f2}{Poisson\+Sample}} ()=default
+\item 
+\mbox{\hyperlink{class_poisson_sample_a0e88e5b106d102b21f85da0958bad036}{Poisson\+Sample}} (mt19937 \&\+\_\+gen, \mbox{\hyperlink{class_distribution}{Distribution}} \&d, int \+\_\+\+N\+\_\+samples=100)
+\begin{DoxyCompactList}\small\item\em Initialization of the Poisson distribution. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_poisson_sample_ab1d23ea8f4e6f429f86ec88985de6a6d}{\texorpdfstring{$\sim$}{\string~}\+Poisson\+Sample}} ()=default
+\item 
+virtual double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\+\_\+sample}} (\mbox{\hyperlink{class_distribution}{Distribution}} \&d, int \&len\+\_\+sample, int init\+\_\+len\+\_\+sample=-\/1)
+\begin{DoxyCompactList}\small\item\em Generates a whole sample. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\+\_\+N}} ()
+\item 
+void \mbox{\hyperlink{class_poisson_sample_af1a60d68213b26ed8304b86a1ffbe2cd}{set\+\_\+N}} (int \+\_\+N)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Дополнительные унаследованные члены}
+\doxysubsection*{Защищенные данные унаследованные от \mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}}}
+\begin{DoxyCompactItemize}
+\item 
+mt19937 \& \mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}}
+\begin{DoxyCompactList}\small\item\em Random number generator. \end{DoxyCompactList}\item 
+uniform\+\_\+real\+\_\+distribution$<$ double $>$ \mbox{\hyperlink{class_poisson_sample_a2cd791663a264a87c041d9cc7992fa37}{uniform\+\_\+rand}} = uniform\+\_\+real\+\_\+distribution$<$double$>$(0.\+0, 1.\+0)
+\item 
+int \mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\+\_\+samples}}
+\begin{DoxyCompactList}\small\item\em Number of elements in the sample. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Class of sample generation from Poisson distribution by tabular inverse function method. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_poisson_sample_inverse_table_af043146177e717344d61a641fb7a5bbf}\index{PoissonSampleInverseTable@{PoissonSampleInverseTable}!PoissonSampleInverseTable@{PoissonSampleInverseTable}}
+\index{PoissonSampleInverseTable@{PoissonSampleInverseTable}!PoissonSampleInverseTable@{PoissonSampleInverseTable}}
+\doxysubsubsection{\texorpdfstring{PoissonSampleInverseTable()}{PoissonSampleInverseTable()}}
+{\footnotesize\ttfamily \label{class_poisson_sample_inverse_table_af043146177e717344d61a641fb7a5bbf} 
+Poisson\+Sample\+Inverse\+Table\+::\+Poisson\+Sample\+Inverse\+Table (\begin{DoxyParamCaption}\item[{mt19937 \&}]{\+\_\+gen}{, }\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d}{, }\item[{int}]{\+\_\+\+N\+\_\+samples}{ = {\ttfamily 100}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_poisson_sample_inverse_table_ac63c06e0984be288c525451ea8d24666}\index{PoissonSampleInverseTable@{PoissonSampleInverseTable}!````~PoissonSampleInverseTable@{\texorpdfstring{$\sim$}{\string~}PoissonSampleInverseTable}}
+\index{````~PoissonSampleInverseTable@{\texorpdfstring{$\sim$}{\string~}PoissonSampleInverseTable}!PoissonSampleInverseTable@{PoissonSampleInverseTable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PoissonSampleInverseTable()}{\string~PoissonSampleInverseTable()}}
+{\footnotesize\ttfamily \label{class_poisson_sample_inverse_table_ac63c06e0984be288c525451ea8d24666} 
+Poisson\+Sample\+Inverse\+Table\+::\texorpdfstring{$\sim$}{\string~}\+Poisson\+Sample\+Inverse\+Table (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_poisson_sample_inverse_table_ad279a2bf7979c183a9aea929650da4c0}\index{PoissonSampleInverseTable@{PoissonSampleInverseTable}!simulate@{simulate}}
+\index{simulate@{simulate}!PoissonSampleInverseTable@{PoissonSampleInverseTable}}
+\doxysubsubsection{\texorpdfstring{simulate()}{simulate()}}
+{\footnotesize\ttfamily \label{class_poisson_sample_inverse_table_ad279a2bf7979c183a9aea929650da4c0} 
+int Poisson\+Sample\+Inverse\+Table\+::simulate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate one sample item. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em d} & Theoretical distribution\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Sample element
+\end{DoxyReturn}
+
+
+Замещает \mbox{\hyperlink{class_poisson_sample_a2a3f9ac1bb0ed2417fac207cbc8ed67e}{Poisson\+Sample}}.
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_poisson_sample_8h}{Poisson\+Sample.\+h}}\end{DoxyCompactItemize}

@@ -500,7 +500,6 @@ void DrawAlphaPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect r
         L"; Lambda partition = " + std::to_wstring(pDoc->Get_lambda_partition()) +
         L"; Alpha = " + std::to_wstring(pDoc->Get_alpha()) +
         L"; Number of p-values per lambda = " + std::to_wstring(pDoc->Get_N_cycles_by_lambda()) +
-        L"; H0: lambda = " + std::to_wstring(pDoc->GetD0().get_lambda()) +
         L"; Method: " + ((int)pDoc->getMod_meth() == 0 ? L"inverse." :
             ((int)pDoc->getMod_meth() == 1 ? L"random variables." : L"inverse table"));
     CString res(result.c_str());
@@ -529,7 +528,7 @@ void DrawAlphaPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect r
     // Восстанавливаем предыдущую кисть
     pDC->SelectObject(pOldBrush);
     // Выводим текст
-    CString text = L"Rejections";
+    CString text = L"p";
     pDC->TextOutW(rectX + 20, rectY - 5, text);
 
 
@@ -558,7 +557,7 @@ void DrawAlphaPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect r
 
     // Подписи осей
     pDC->TextOutW(rect.left + x_axis_length / 2, rect.top + y_axis_length + 80, L"Lambda");
-    pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Rejections");
+    pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Value");
 }
 
 
@@ -636,7 +635,7 @@ void CPoissonDistributionApplicationView::OnGeneratesample()
 	PoissonSample* ps = pDoc->GetPs();
 	Chi2Histortam& chi = pDoc->getChi();
 	chi.set_data(d0, *ps);
-	chi.calc_chi_parametres();
+	chi.apply_chi_criterion();
 	Invalidate();
 }
 
@@ -663,7 +662,7 @@ void CPoissonDistributionApplicationView::OnP()
     double p = 0;
     for (int i = 0; i < pDoc->Get_N_p_values(); i++) {
         chi.set_data(d, *ps);
-        chi.calc_chi_parametres();
+        chi.apply_chi_criterion();
         p = chi.get_p();
         for (int j = pDoc->Get_p_partition() - 1; j >= int(p * pDoc->Get_p_partition()); --j) {
             ++p_array[j];
@@ -699,7 +698,7 @@ void CPoissonDistributionApplicationView::OnPowerdistribution()
     double p = 0;
     for (int i = 0; i < pDoc->Get_N_p_values(); i++) {
         chi.set_data(pDoc->GetD0(), *ps, d);
-        chi.calc_chi_parametres();
+        chi.apply_chi_criterion();
         p = chi.get_p();
         for (int j = pDoc->Get_p_partition() - 1; j >= int(p * pDoc->Get_p_partition()); --j) {
             ++p_array[j];
@@ -730,40 +729,29 @@ void CPoissonDistributionApplicationView::OnP32775()
     double*& p_array = pDoc->Get_p_array();
     delete[] p_array;
     
-    p_array = new double[pDoc->Get_lambda_partition() + 1];
+    p_array = new double[(long)pDoc->Get_lambda_partition() + 1];
     for (int i = 0; i <= pDoc->Get_lambda_partition(); i++) // инициализация массива частот
     {
         p_array[i] = 0;
     }
 
     double alpha = pDoc->Get_alpha();
-    /*int j = 0;
-    double step = (pDoc->Get_lambda_max() - pDoc->Get_lambda_min()) / (double) pDoc->Get_lambda_partition();
-    for (double curr_lambda = pDoc->Get_lambda_min(); curr_lambda <= pDoc->Get_lambda_max(); curr_lambda += step) {
-        Distribution d_lambda(curr_lambda);
-        for (int i = 0; i < pDoc->Get_N_cycles_by_lambda(); ++i) {
-            chi.set_data(pDoc->GetD0(), *ps, d_lambda);
-            chi.calc_chi_parametres();
-            if (chi.get_p() < alpha)
-                ++p_array[j];
-        }
-        ++j;
-    }*/
     
     double step = (pDoc->Get_lambda_max() - pDoc->Get_lambda_min()) / (double)pDoc->Get_lambda_partition();
+    Distribution d_lambda;
     for (int i = 0; i <= pDoc->Get_lambda_partition(); ++i) {
         double curr_lambda = pDoc->Get_lambda_min() + step * i;
-        Distribution d_lambda(curr_lambda);
+        d_lambda.set_lambda(curr_lambda);
         for (int j = 0; j < pDoc->Get_N_cycles_by_lambda(); ++j) {
-            chi.set_data(pDoc->GetD0(), *ps, d_lambda);
-            chi.calc_chi_parametres();
+            chi.set_data(d_lambda, *ps);
+            chi.apply_chi_criterion();
             if (chi.get_p() < alpha)
                 ++p_array[i];
         }
-
-
-        double safdsdf = p_array[i];
-        int agggsa = 1;
     }
+    for (int i = 0; i <= pDoc->Get_lambda_partition(); ++i) {
+        p_array[i] /= (double) pDoc->Get_N_cycles_by_lambda();
+    }
+
     Invalidate();
 }

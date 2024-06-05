@@ -5,15 +5,30 @@
 
 using namespace std;
 
-
+/// <summary>
+/// Poisson distribution class. Calculates the theoretical distribution and stores it in itself
+/// </summary>
 class Distribution
 {
 private:
+    /// <summary>
+    /// Parameter lambda of the Poisson distribution
+    /// </summary>
     double lambda;
+    /// <summary>
+    /// Name of distribution
+    /// </summary>
     const string distr_name = "Poisson distribution";
+    /// <summary>
+    /// An array of theoretical probabilities. Updated as needed
+    /// </summary>
     Vector th_prob;
 
-    void resize_th_prob(int n) {
+    /// <summary>
+    /// Changing the size of theoretical probabilities
+    /// </summary>
+    /// <param name="n">To what number do you have to count to</param>
+    void resize_th_prob(const int n) {
         if (th_prob.getSize() < n) {
             double p_cum = 1 - th_prob[th_prob.getSize() - 1];
             // обновление последнего элемента, так как он равен 1 - сумма всех начальных
@@ -27,7 +42,11 @@ private:
     }
 
 public:
-    Distribution(double _lambda = 5) : lambda(_lambda), th_prob( max((int) (lambda+2*lambda), 10) ){
+    /// <summary>
+    /// Creates an initial Poisson distribution
+    /// </summary>
+    /// <param name="_lambda">Distribution parameter</param>
+    Distribution(const double _lambda = 5) : lambda(_lambda), th_prob( max((int) (lambda+2*lambda), 10) ){
         // инициализация начального распределения
         th_prob.push(exp(-lambda));
         double p_cum = th_prob[0];
@@ -43,7 +62,11 @@ public:
     
 
 
-
+    /// <summary>
+    /// Returns double* an array of the first n theoretical values. 
+    /// </summary>
+    /// <param name="n">Number of values</param>
+    /// <returns>Array of theoretical values</returns>
     double* get_th_prob_array(int n) {
         resize_th_prob(n);
         double* res = new double[n];
@@ -56,13 +79,21 @@ public:
         return res;
     }
 
+    /// <summary>
+    /// Returns the element of the theoretical value
+    /// </summary>
+    /// <param name="index">Item number</param>
+    /// <returns>Value</returns>
     double get_th_prob_element(int index) {
         resize_th_prob(index+1);
         return th_prob[index];
     }
 
-
-    // Setter lambda. Обновляет массив теоретического распределения
+    
+    /// <summary>
+    /// Setter lambda. Updates the array of theoretical distribution
+    /// </summary>
+    /// <param name="_lambda">Distribution parameter</param>
     void set_lambda(double _lambda) {
         lambda = _lambda;
         th_prob.clear();

@@ -1,0 +1,127 @@
+\doxysection{Poisson\+Sample.\+h}
+\hypertarget{_poisson_sample_8h_source}{}\label{_poisson_sample_8h_source}\mbox{\hyperlink{_poisson_sample_8h}{См. документацию.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector_8h}{Vector.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_distribution_8h}{Distribution.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_poisson_sample}{PoissonSample}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00019\ \ \ \ \ mt19937\&\ \mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}};}
+\DoxyCodeLine{00020\ \ \ \ \ uniform\_real\_distribution<double>\ \mbox{\hyperlink{class_poisson_sample_a2cd791663a264a87c041d9cc7992fa37}{uniform\_rand}}\ =\ uniform\_real\_distribution<double>(0.0,\ 1.0);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\_samples}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_a50f8dac16be66f7b526801d6af0208f2}{PoissonSample}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_a0e88e5b106d102b21f85da0958bad036}{PoissonSample}}(mt19937\&\ \_gen,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \textcolor{keywordtype}{int}\ \_N\_samples\ =\ 100)\ :\ \mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}}(\_gen),\ \mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\_samples}}(\_N\_samples)\{\}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_poisson_sample_ab1d23ea8f4e6f429f86ec88985de6a6d}{\string~PoissonSample}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_poisson_sample_a2a3f9ac1bb0ed2417fac207cbc8ed67e}{simulate}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00044\ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \textcolor{keywordtype}{int}\&\ len\_sample,\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ init\_len\_sample\ =\ -\/1\ \textcolor{comment}{//\ если\ нужно\ заранее\ задать\ размер,\ все\ элементы\ будут\ нулевые}}
+\DoxyCodeLine{00055\ \ \ \ \ )\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\_samples}}\ <\ 50)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Sample\ size\ should\ be\ more\ 50"{}}\ <<\ endl;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}\ sample;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (init\_len\_sample\ >\ 0)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ sample.\mbox{\hyperlink{class_vector_ab07d4540bec3d3bdfea8adc928ac1f27}{resize}}(init\_len\_sample);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lambda\ =\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}();}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0,\ curr\_elem\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\_samples}};\ ++i)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ curr\_elem\ =\ \mbox{\hyperlink{class_poisson_sample_a2a3f9ac1bb0ed2417fac207cbc8ed67e}{simulate}}(d);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (curr\_elem\ +\ 1\ >\ sample.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}())\ \{\ \textcolor{comment}{//\ увеличиваем\ объём\ массива\ частот,\ если\ не\ влезает}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ prev\_end\ =\ sample.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample.\mbox{\hyperlink{class_vector_ab07d4540bec3d3bdfea8adc928ac1f27}{resize}}(curr\_elem\ +\ 1);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ ++sample[curr\_elem];}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ len\_sample\ =\ sample.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sample.\mbox{\hyperlink{class_vector_ae48eea0ee9ffc44220384950e6162f77}{getDataCopy}}();}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ }
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\_samples}};\ \};}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_poisson_sample_af1a60d68213b26ed8304b86a1ffbe2cd}{set\_N}}(\textcolor{keywordtype}{int}\ \_N)\ \{\ \mbox{\hyperlink{class_poisson_sample_a4e029c177318e3602267b525b4d63f40}{N\_samples}}\ =\ \_N;\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_poisson_sample_inverse}{PoissonSampleInverse}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}}
+\DoxyCodeLine{00094\ \{}
+\DoxyCodeLine{00095\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_inverse_acf3deb13a1ad0ed9d4f73943ab3fded6}{PoissonSampleInverse}}(mt19937\&\ \_gen,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \textcolor{keywordtype}{int}\ \_N\_samples\ =\ 100)\ :\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}(\_gen,\ d,\ \_N\_samples)\ \{\}}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_inverse_a871e388ee413905f35e3600bb374a49b}{\string~PoissonSampleInverse}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_poisson_sample_inverse_a43219c988ae07f1ff34de480121af606}{simulate}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lambda\ =\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}();}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ alpha\ =\ \mbox{\hyperlink{class_poisson_sample_a2cd791663a264a87c041d9cc7992fa37}{uniform\_rand}}(\mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}}),\ p\_cum,\ p;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k\ =\ 0;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ p\_cum\ =\ p\ =\ exp(-\/lambda);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (alpha\ >\ p\_cum)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ ++k;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ p\ *=\ lambda\ /\ k;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ p;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ k;}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_poisson_sample_inverse_table}{PoissonSampleInverseTable}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}}
+\DoxyCodeLine{00118\ \{}
+\DoxyCodeLine{00119\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_inverse_table_af043146177e717344d61a641fb7a5bbf}{PoissonSampleInverseTable}}(mt19937\&\ \_gen,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \textcolor{keywordtype}{int}\ \_N\_samples\ =\ 100)\ :\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}(\_gen,\ d,\ \_N\_samples)\ \{\}}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_inverse_table_ac63c06e0984be288c525451ea8d24666}{\string~PoissonSampleInverseTable}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00122\ \ \ \ \ }
+\DoxyCodeLine{00123\ \ \ \ \ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_poisson_sample_inverse_table_ad279a2bf7979c183a9aea929650da4c0}{simulate}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ alpha\ =\ \mbox{\hyperlink{class_poisson_sample_a2cd791663a264a87c041d9cc7992fa37}{uniform\_rand}}(\mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k\ =\ 0;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\_cum\ =\ d.\mbox{\hyperlink{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}{get\_th\_prob\_element}}(0);}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (alpha\ >\ p\_cum)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ ++k;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ d.\mbox{\hyperlink{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}{get\_th\_prob\_element}}(k);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ k;}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_poisson_sample_random_variables}{PoissonSampleRandomVariables}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}}
+\DoxyCodeLine{00143\ \{}
+\DoxyCodeLine{00144\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_random_variables_ab9639280ad39ac2d8194e27dd38c2ad8}{PoissonSampleRandomVariables}}(mt19937\&\ \_gen,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \textcolor{keywordtype}{int}\ \_N\_samples\ =\ 100)\ :\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}(\_gen,\ d,\ \_N\_samples)\ \{\}}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{class_poisson_sample_random_variables_a99e6cbea064c6d4dad025138132083b7}{\string~PoissonSampleRandomVariables}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_poisson_sample_random_variables_a831b23ea9784621f98e125ef7413d1bd}{simulate}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lambda\ =\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}();}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k\ =\ 0;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\ =\ exp(-\/lambda),\ alpha\ =\ \mbox{\hyperlink{class_poisson_sample_a2cd791663a264a87c041d9cc7992fa37}{uniform\_rand}}(\mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}}),\ q\ =\ alpha;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (q\ >\ p)\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ alpha\ =\ \mbox{\hyperlink{class_poisson_sample_a2cd791663a264a87c041d9cc7992fa37}{uniform\_rand}}(\mbox{\hyperlink{class_poisson_sample_ab87a934a86d2cba9a541a565a84f4fb2}{gen}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ q\ *=\ alpha;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ ++k;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ k;}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \};}
+
+\end{DoxyCode}

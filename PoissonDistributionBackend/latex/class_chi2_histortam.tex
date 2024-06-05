@@ -1,0 +1,188 @@
+\doxysection{Класс Chi2\+Histortam}
+\hypertarget{class_chi2_histortam}{}\label{class_chi2_histortam}\index{Chi2Histortam@{Chi2Histortam}}
+
+
+Chi-\/square class for calculating the chi-\/square criterion. Can group the sample for applicability of the criterion. Stores sample and theoretical values as well as criterion values, p-\/value, degrees of freedom.  
+
+
+
+
+{\ttfamily \#include $<$Chi.\+h$>$}
+
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_chi2_histortam_a494aa91766a9b8fc6e924e4b7d63c7ee}{Chi2\+Histortam}} ()=default
+\item 
+\mbox{\hyperlink{class_chi2_histortam_ad416d4cee23c7e7be7edd685529f3e84}{Chi2\+Histortam}} (\mbox{\hyperlink{class_distribution}{Distribution}} \&d, \mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&sample)
+\begin{DoxyCompactList}\small\item\em Creates and stores theoretical and sample frequencies from a single distribution ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_chi2_histortam_abd56b221c95e8b8cb09ef2fe83ff5c37}{Chi2\+Histortam}} (\mbox{\hyperlink{class_distribution}{Distribution}} \&d, \mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&sample, \mbox{\hyperlink{class_distribution}{Distribution}} \&sample\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Creates and stores theoretical and sample frequencies from different distributions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_chi2_histortam_abbe59151d4610e1e5c222f43d1a5ac40}{\texorpdfstring{$\sim$}{\string~}\+Chi2\+Histortam}} ()
+\item 
+void \mbox{\hyperlink{class_chi2_histortam_a0db9a5c4d39b96c3faf639e15e406dcc}{set\+\_\+data}} (\mbox{\hyperlink{class_distribution}{Distribution}} \&d, \mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&sample)
+\begin{DoxyCompactList}\small\item\em Creates and stores theoretical and sample frequencies from a single distribution. ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_chi2_histortam_a5009892e1ccfaf0546a8a77119120ef4}{set\+\_\+data}} (\mbox{\hyperlink{class_distribution}{Distribution}} \&d, \mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&sample, \mbox{\hyperlink{class_distribution}{Distribution}} \&d\+\_\+sample)
+\begin{DoxyCompactList}\small\item\em Creates and stores theoretical and sample frequencies from different distributions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_chi2_histortam_ad13463baabc3adbeef394aa9d18c8528}{calc\+\_\+chi\+\_\+parametres}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the criterion, p-\/value, and degrees of freedom for the sample. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_chi2_histortam_a6b7c48a69d69c3273e65967f69b7f202}{get\+\_\+p}} ()
+\item 
+double \mbox{\hyperlink{class_chi2_histortam_ae7edc738ec9ac4f60a5ce1d18418d3da}{get\+\_\+chi}} ()
+\item 
+int \mbox{\hyperlink{class_chi2_histortam_aec4e6e53c341ab3981a815dd1b83ffff}{get\+\_\+df}} ()
+\item 
+int \mbox{\hyperlink{class_chi2_histortam_a1e442bdfc869d24b51c5209228823a57}{get\+\_\+distr\+\_\+len}} ()
+\item 
+double \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{class_chi2_histortam_a3fbf4d62ff092526177dfd8d2411b217}{get\+\_\+sample\+\_\+freq}} ()
+\item 
+double \texorpdfstring{$\ast$}{*}\& \mbox{\hyperlink{class_chi2_histortam_a5600971c2ab0b51c7d185336c5eaa6f0}{get\+\_\+th\+\_\+freq}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Chi-\/square class for calculating the chi-\/square criterion. Can group the sample for applicability of the criterion. Stores sample and theoretical values as well as criterion values, p-\/value, degrees of freedom. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_chi2_histortam_a494aa91766a9b8fc6e924e4b7d63c7ee}\index{Chi2Histortam@{Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\index{Chi2Histortam@{Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{Chi2Histortam()}{Chi2Histortam()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a494aa91766a9b8fc6e924e4b7d63c7ee} 
+Chi2\+Histortam\+::\+Chi2\+Histortam (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_chi2_histortam_ad416d4cee23c7e7be7edd685529f3e84}\index{Chi2Histortam@{Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\index{Chi2Histortam@{Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{Chi2Histortam()}{Chi2Histortam()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_ad416d4cee23c7e7be7edd685529f3e84} 
+Chi2\+Histortam\+::\+Chi2\+Histortam (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d}{, }\item[{\mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&}]{sample}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates and stores theoretical and sample frequencies from a single distribution ~\newline
+ 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em d} & \doxylink{class_distribution}{Distribution} \\
+\hline
+{\em sample} & Sample \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_chi2_histortam_abd56b221c95e8b8cb09ef2fe83ff5c37}\index{Chi2Histortam@{Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\index{Chi2Histortam@{Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{Chi2Histortam()}{Chi2Histortam()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_abd56b221c95e8b8cb09ef2fe83ff5c37} 
+Chi2\+Histortam\+::\+Chi2\+Histortam (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d}{, }\item[{\mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&}]{sample}{, }\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{sample\+\_\+d}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates and stores theoretical and sample frequencies from different distributions. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em d} & Theoretical distribution \\
+\hline
+{\em sample} & Sample \\
+\hline
+{\em d\+\_\+sample} & \doxylink{class_distribution}{Distribution} for the sample \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_chi2_histortam_abbe59151d4610e1e5c222f43d1a5ac40}\index{Chi2Histortam@{Chi2Histortam}!````~Chi2Histortam@{\texorpdfstring{$\sim$}{\string~}Chi2Histortam}}
+\index{````~Chi2Histortam@{\texorpdfstring{$\sim$}{\string~}Chi2Histortam}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Chi2Histortam()}{\string~Chi2Histortam()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_abbe59151d4610e1e5c222f43d1a5ac40} 
+Chi2\+Histortam\+::\texorpdfstring{$\sim$}{\string~}\+Chi2\+Histortam (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_chi2_histortam_ad13463baabc3adbeef394aa9d18c8528}\index{Chi2Histortam@{Chi2Histortam}!calc\_chi\_parametres@{calc\_chi\_parametres}}
+\index{calc\_chi\_parametres@{calc\_chi\_parametres}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{calc\_chi\_parametres()}{calc\_chi\_parametres()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_ad13463baabc3adbeef394aa9d18c8528} 
+void Chi2\+Histortam\+::calc\+\_\+chi\+\_\+parametres (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates the criterion, p-\/value, and degrees of freedom for the sample. 
+
+\Hypertarget{class_chi2_histortam_ae7edc738ec9ac4f60a5ce1d18418d3da}\index{Chi2Histortam@{Chi2Histortam}!get\_chi@{get\_chi}}
+\index{get\_chi@{get\_chi}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{get\_chi()}{get\_chi()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_ae7edc738ec9ac4f60a5ce1d18418d3da} 
+double Chi2\+Histortam\+::get\+\_\+chi (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_chi2_histortam_aec4e6e53c341ab3981a815dd1b83ffff}\index{Chi2Histortam@{Chi2Histortam}!get\_df@{get\_df}}
+\index{get\_df@{get\_df}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{get\_df()}{get\_df()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_aec4e6e53c341ab3981a815dd1b83ffff} 
+int Chi2\+Histortam\+::get\+\_\+df (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_chi2_histortam_a1e442bdfc869d24b51c5209228823a57}\index{Chi2Histortam@{Chi2Histortam}!get\_distr\_len@{get\_distr\_len}}
+\index{get\_distr\_len@{get\_distr\_len}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{get\_distr\_len()}{get\_distr\_len()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a1e442bdfc869d24b51c5209228823a57} 
+int Chi2\+Histortam\+::get\+\_\+distr\+\_\+len (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_chi2_histortam_a6b7c48a69d69c3273e65967f69b7f202}\index{Chi2Histortam@{Chi2Histortam}!get\_p@{get\_p}}
+\index{get\_p@{get\_p}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{get\_p()}{get\_p()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a6b7c48a69d69c3273e65967f69b7f202} 
+double Chi2\+Histortam\+::get\+\_\+p (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_chi2_histortam_a3fbf4d62ff092526177dfd8d2411b217}\index{Chi2Histortam@{Chi2Histortam}!get\_sample\_freq@{get\_sample\_freq}}
+\index{get\_sample\_freq@{get\_sample\_freq}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{get\_sample\_freq()}{get\_sample\_freq()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a3fbf4d62ff092526177dfd8d2411b217} 
+double \texorpdfstring{$\ast$}{*}\& Chi2\+Histortam\+::get\+\_\+sample\+\_\+freq (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_chi2_histortam_a5600971c2ab0b51c7d185336c5eaa6f0}\index{Chi2Histortam@{Chi2Histortam}!get\_th\_freq@{get\_th\_freq}}
+\index{get\_th\_freq@{get\_th\_freq}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{get\_th\_freq()}{get\_th\_freq()}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a5600971c2ab0b51c7d185336c5eaa6f0} 
+double \texorpdfstring{$\ast$}{*}\& Chi2\+Histortam\+::get\+\_\+th\+\_\+freq (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_chi2_histortam_a0db9a5c4d39b96c3faf639e15e406dcc}\index{Chi2Histortam@{Chi2Histortam}!set\_data@{set\_data}}
+\index{set\_data@{set\_data}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a0db9a5c4d39b96c3faf639e15e406dcc} 
+void Chi2\+Histortam\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d}{, }\item[{\mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&}]{sample}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates and stores theoretical and sample frequencies from a single distribution. ~\newline
+ 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em d} & \doxylink{class_distribution}{Distribution} \\
+\hline
+{\em sample} & Sample \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_chi2_histortam_a5009892e1ccfaf0546a8a77119120ef4}\index{Chi2Histortam@{Chi2Histortam}!set\_data@{set\_data}}
+\index{set\_data@{set\_data}!Chi2Histortam@{Chi2Histortam}}
+\doxysubsubsection{\texorpdfstring{set\_data()}{set\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_chi2_histortam_a5009892e1ccfaf0546a8a77119120ef4} 
+void Chi2\+Histortam\+::set\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d}{, }\item[{\mbox{\hyperlink{class_poisson_sample}{Poisson\+Sample}} \&}]{sample}{, }\item[{\mbox{\hyperlink{class_distribution}{Distribution}} \&}]{d\+\_\+sample}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates and stores theoretical and sample frequencies from different distributions. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em d} & Theoretical distribution \\
+\hline
+{\em sample} & Sample \\
+\hline
+{\em d\+\_\+sample} & \doxylink{class_distribution}{Distribution} for the sample \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_chi_8h}{Chi.\+h}}\end{DoxyCompactItemize}

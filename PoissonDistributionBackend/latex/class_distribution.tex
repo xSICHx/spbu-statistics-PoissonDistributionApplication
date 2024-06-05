@@ -1,0 +1,126 @@
+\doxysection{Класс Distribution}
+\hypertarget{class_distribution}{}\label{class_distribution}\index{Distribution@{Distribution}}
+
+
+Poisson distribution class. Calculates the theoretical distribution and stores it in itself.  
+
+
+
+
+{\ttfamily \#include $<$Distribution.\+h$>$}
+
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_distribution_a97c8decea5dedf9f81fca76890b361b7}{Distribution}} (const double \+\_\+lambda=5)
+\begin{DoxyCompactList}\small\item\em Creates an initial Poisson distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_distribution_a8436b77c244c768837c7dec8da5eb885}{\texorpdfstring{$\sim$}{\string~}\+Distribution}} ()=default
+\item 
+double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\+\_\+th\+\_\+prob\+\_\+array}} (int n)
+\begin{DoxyCompactList}\small\item\em Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}{get\+\_\+th\+\_\+prob\+\_\+element}} (int index)
+\begin{DoxyCompactList}\small\item\em Returns the element of the theoretical value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_distribution_a115a01e72956bdfd28d6731737b01faa}{set\+\_\+lambda}} (double \+\_\+lambda)
+\begin{DoxyCompactList}\small\item\em Setter lambda. Updates the array of theoretical distribution. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_distribution_a99eab816261f89fcfb7892a3a9f6583f}{get\+\_\+name}} ()
+\item 
+double \mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\+\_\+lambda}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Poisson distribution class. Calculates the theoretical distribution and stores it in itself. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_distribution_a97c8decea5dedf9f81fca76890b361b7}\index{Distribution@{Distribution}!Distribution@{Distribution}}
+\index{Distribution@{Distribution}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{Distribution()}{Distribution()}}
+{\footnotesize\ttfamily \label{class_distribution_a97c8decea5dedf9f81fca76890b361b7} 
+Distribution\+::\+Distribution (\begin{DoxyParamCaption}\item[{const double}]{\+\_\+lambda}{ = {\ttfamily 5}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an initial Poisson distribution. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em \+\_\+lambda} & \doxylink{class_distribution}{Distribution} parameter\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_distribution_a8436b77c244c768837c7dec8da5eb885}\index{Distribution@{Distribution}!````~Distribution@{\texorpdfstring{$\sim$}{\string~}Distribution}}
+\index{````~Distribution@{\texorpdfstring{$\sim$}{\string~}Distribution}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Distribution()}{\string~Distribution()}}
+{\footnotesize\ttfamily \label{class_distribution_a8436b77c244c768837c7dec8da5eb885} 
+Distribution\+::\texorpdfstring{$\sim$}{\string~}\+Distribution (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_distribution_a0860134568484957da1814bb73cd4356}\index{Distribution@{Distribution}!get\_lambda@{get\_lambda}}
+\index{get\_lambda@{get\_lambda}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{get\_lambda()}{get\_lambda()}}
+{\footnotesize\ttfamily \label{class_distribution_a0860134568484957da1814bb73cd4356} 
+double Distribution\+::get\+\_\+lambda (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_distribution_a99eab816261f89fcfb7892a3a9f6583f}\index{Distribution@{Distribution}!get\_name@{get\_name}}
+\index{get\_name@{get\_name}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{get\_name()}{get\_name()}}
+{\footnotesize\ttfamily \label{class_distribution_a99eab816261f89fcfb7892a3a9f6583f} 
+string Distribution\+::get\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_distribution_a7bb34d802196525c5603df1a90784c99}\index{Distribution@{Distribution}!get\_th\_prob\_array@{get\_th\_prob\_array}}
+\index{get\_th\_prob\_array@{get\_th\_prob\_array}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{get\_th\_prob\_array()}{get\_th\_prob\_array()}}
+{\footnotesize\ttfamily \label{class_distribution_a7bb34d802196525c5603df1a90784c99} 
+double \texorpdfstring{$\ast$}{*} Distribution\+::get\+\_\+th\+\_\+prob\+\_\+array (\begin{DoxyParamCaption}\item[{int}]{n}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em n} & Number of values\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Array of theoretical values
+\end{DoxyReturn}
+\Hypertarget{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}\index{Distribution@{Distribution}!get\_th\_prob\_element@{get\_th\_prob\_element}}
+\index{get\_th\_prob\_element@{get\_th\_prob\_element}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{get\_th\_prob\_element()}{get\_th\_prob\_element()}}
+{\footnotesize\ttfamily \label{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48} 
+double Distribution\+::get\+\_\+th\+\_\+prob\+\_\+element (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the element of the theoretical value. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em index} & Item number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Value
+\end{DoxyReturn}
+\Hypertarget{class_distribution_a115a01e72956bdfd28d6731737b01faa}\index{Distribution@{Distribution}!set\_lambda@{set\_lambda}}
+\index{set\_lambda@{set\_lambda}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{set\_lambda()}{set\_lambda()}}
+{\footnotesize\ttfamily \label{class_distribution_a115a01e72956bdfd28d6731737b01faa} 
+void Distribution\+::set\+\_\+lambda (\begin{DoxyParamCaption}\item[{double}]{\+\_\+lambda}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter lambda. Updates the array of theoretical distribution. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em \+\_\+lambda} & \doxylink{class_distribution}{Distribution} parameter\\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_distribution_8h}{Distribution.\+h}}\end{DoxyCompactItemize}
