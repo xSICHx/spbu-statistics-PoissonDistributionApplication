@@ -81,7 +81,7 @@ void SettingsDialog::DoDataExchange(CDataExchange* pDX)
 	DDV_MinMaxDouble(pDX, m_alpha, 0, 1);
 
 	DDX_Text(pDX, IDC_EDIT10, m_N_p_value_lambda);
-	DDV_MinMaxInt(pDX, m_N_p_value_lambda, 1000, 100000);
+	DDV_MinMaxInt(pDX, m_N_p_value_lambda, 1000, 10000);
 }
 
 

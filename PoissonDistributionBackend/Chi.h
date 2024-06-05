@@ -160,39 +160,7 @@ public:
     double*& get_th_freq() { return th_freq; }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// функции из PROBDIST.H. Временно находятся тут.
 private:
 	const double Eps = 1e-15;
 

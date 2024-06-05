@@ -151,7 +151,11 @@ void DrawHistogram(CDC* pDC, double* th_values, double* sample_values, double* i
 void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len, CRect rect) {
     // Определим границы для осей x и y
     double min_y = 0.0;
-    double max_y = max(findMax(th_values, distr_len), findMax(sample_values, distr_len));
+    double max_y;
+    if (th_values != nullptr)
+        max_y = max(findMax(th_values, distr_len), findMax(sample_values, distr_len));
+    else
+        max_y = findMax(sample_values, distr_len);
     //double max_y = 1;
 
 
@@ -179,37 +183,40 @@ void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len
 
 
 
-    // Отрисовка столбцов для th_values
+    // Отрисовка столбцов для th_values, если есть теоретические значения
     double full_bar_width = (x_axis_length) / distr_len;
     double bar_width = full_bar_width * 0.8;
     double shift = full_bar_width * 0.2;
     int left_bottom_prev = 0;
-    for (size_t i = 0; i < distr_len; ++i)
-    {
-        int bar_height_prev;
-        if (i == 0)
-            bar_height_prev = 0;
-        else
-            bar_height_prev = static_cast<int>((th_values[i - 1] - min_y) / (max_y - min_y) * y_axis_length);
-        int bar_height = static_cast<int>((th_values[i] - min_y) / (max_y - min_y) * y_axis_length);
+    if (th_values != nullptr) {
+        for (size_t i = 0; i < distr_len; ++i)
+        {
+            int bar_height_prev;
+            if (i == 0)
+                bar_height_prev = 0;
+            else
+                bar_height_prev = static_cast<int>((th_values[i - 1] - min_y) / (max_y - min_y) * y_axis_length);
+            int bar_height = static_cast<int>((th_values[i] - min_y) / (max_y - min_y) * y_axis_length);
 
-        CPen pen(PS_SOLID, 2, RGB(255, 192, 203));
-        CPen* pOldPen = pDC->SelectObject(&pen);
+            CPen pen(PS_SOLID, 2, RGB(255, 192, 203));
+            CPen* pOldPen = pDC->SelectObject(&pen);
 
-        pDC->MoveTo(rect.left + 50 + left_bottom_prev, rect.top + y_axis_length + 50 - bar_height_prev);
-        pDC->LineTo(rect.left + 50 + static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height);
+            pDC->MoveTo(rect.left + 50 + left_bottom_prev, rect.top + y_axis_length + 50 - bar_height_prev);
+            pDC->LineTo(rect.left + 50 + static_cast<int>((i + 1) * bar_width) +
+                static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height);
 
-        left_bottom_prev = ((int) ((i + 1) * bar_width)) + ((int) (i * shift));
-        pDC->SelectObject(pOldPen);
-        //CRect bar_rect(rect.left + 50 + static_cast<int>(i * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height,
-        //    rect.left + 50 + static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50);
-        //pDC->FillSolidRect(&bar_rect, RGB(255, 192, 203)); // Розовый цвет для th_values
+            left_bottom_prev = ((int)((i + 1) * bar_width)) + ((int)(i * shift));
+            pDC->SelectObject(pOldPen);
+            //CRect bar_rect(rect.left + 50 + static_cast<int>(i * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50 - bar_height,
+            //    rect.left + 50 + static_cast<int>((i + 1) * bar_width) + static_cast<int>(i * shift), rect.top + y_axis_length + 50);
+            //pDC->FillSolidRect(&bar_rect, RGB(255, 192, 203)); // Розовый цвет для th_values
+        }
     }
 
 
     left_bottom_prev = 0;
     // Отрисовка столбцов для sample_values
-    for (size_t i = 0; i < distr_len; ++i)
+    for (size_t i = th_values == nullptr; i < distr_len; ++i)
     {
         int bar_height = static_cast<int>((sample_values[i] - min_y) / (max_y - min_y) * y_axis_length);
 
@@ -236,18 +243,17 @@ void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len
 
     // Отрисовка значений на оси x
 
-    CString index_str;
-
-    index_str.Format(L"%.0f", 1.0);
-    pDC->TextOutW(rect.left + 50 + static_cast<int>(distr_len * bar_width) + static_cast<int>(distr_len * shift) +
-        static_cast<int>(shift * 0.25),
-        rect.top + y_axis_length + 60, index_str);
-
+    //CString index_str;
+    //index_str.Format(L"%.0f", 1.0);
+    //pDC->TextOutW(rect.left + 50 + static_cast<int>(distr_len * bar_width) + static_cast<int>(distr_len * shift) +
+    //    static_cast<int>(shift * 0.25),
+    //    rect.top + y_axis_length + 60, index_str);
 
 
-    // Подписи осей
-    pDC->TextOutW(rect.left + x_axis_length / 2, rect.top + y_axis_length + 80, L"Index");
-    pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Value");
+
+    //// Подписи осей
+    //pDC->TextOutW(rect.left + x_axis_length / 2, rect.top + y_axis_length + 80, L"Index");
+    //pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Value");
 }
 
 
@@ -319,14 +325,14 @@ void DrawSampleHist(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect re
 
 // Отрисовка графика распределения p-levels
 void DrawPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect rect) {
-    double* indexes = new double[pDoc->Get_p_partition()];
+    double* uniform = new double[pDoc->Get_p_partition()];
     Chi2Histortam& chi = pDoc->getChi();
     PoissonSample* ps = pDoc->GetPs();
     for (size_t i = 1; i <= pDoc->Get_p_partition(); i++)
     {
-        indexes[i - 1] = (double)i / pDoc->Get_p_partition();
+        uniform[i - 1] = (double)i / pDoc->Get_p_partition();
     }
-    DrawLines(pDC, indexes, pDoc->Get_p_array(), pDoc->Get_p_partition(), rect);
+    DrawLines(pDC, uniform, pDoc->Get_p_array(), pDoc->Get_p_partition(), rect);
 
 
     int x_axis_length = rect.Width() - 200; // Длина оси x
@@ -378,19 +384,35 @@ void DrawPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect rect) 
     text = L"p-level";
     pDC->TextOutW(rectX + 20, rectY - 5, text);
 
-    delete[] indexes;
+    // Отрисовка значений на оси x
+    int bar_width = x_axis_length * 0.8;
+    int shift = x_axis_length * 0.2;
+
+    CString index_str;
+    index_str.Format(L"%.0f", 1.0);
+    pDC->TextOutW(rect.left + 30 + bar_width + static_cast<int>(shift),
+        rect.top + y_axis_length + 60, index_str);
+
+
+
+    // Подписи осей
+    pDC->TextOutW(rect.left + x_axis_length / 2, rect.top + y_axis_length + 80, L"Index");
+    pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Value");
+
+
+    delete[] uniform;
 }
 
 // Отрисовка графика мощности
 void DrawBetaLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect rect) {
-    double* indexes = new double[pDoc->Get_p_partition()];
+    double* uniform = new double[pDoc->Get_p_partition()];
     Chi2Histortam& chi = pDoc->getChi();
     PoissonSample*& ps = pDoc->GetPs();
     for (size_t i = 1; i <= pDoc->Get_p_partition(); i++)
     {
-        indexes[i - 1] = (double)i / pDoc->Get_p_partition();
+        uniform[i - 1] = (double)i / pDoc->Get_p_partition();
     }
-    DrawLines(pDC, indexes, pDoc->Get_p_array(), pDoc->Get_p_partition(), rect);
+    DrawLines(pDC, uniform, pDoc->Get_p_array(), pDoc->Get_p_partition(), rect);
 
 
     int x_axis_length = rect.Width() - 200; // Длина оси x
@@ -443,33 +465,46 @@ void DrawBetaLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect rec
     text = L"power";
     pDC->TextOutW(rectX + 20, rectY - 5, text);
 
-    delete[] indexes;
+
+    // Отрисовка значений на оси x
+    int bar_width = x_axis_length * 0.8;
+    int shift = x_axis_length * 0.2;
+
+    CString index_str;
+    index_str.Format(L"%.0f", 1.0);
+    pDC->TextOutW(rect.left + 30 + bar_width + static_cast<int>(shift),
+        rect.top + y_axis_length + 60, index_str);
+
+
+
+    // Подписи осей
+    pDC->TextOutW(rect.left + x_axis_length / 2, rect.top + y_axis_length + 80, L"Index");
+    pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Value");
+
+    delete[] uniform;
 }
 
 // Отрисовка графика зависимости ошибки первого рода от параметра lambda
 void DrawAlphaPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect rect) {
-    double* indexes = new double[pDoc->Get_p_partition()];
     Chi2Histortam& chi = pDoc->getChi();
     PoissonSample*& ps = pDoc->GetPs();
-    for (size_t i = 1; i <= pDoc->Get_p_partition(); i++)
-    {
-        indexes[i - 1] = (double)i / pDoc->Get_p_partition();
-    }
-    DrawLines(pDC, indexes, pDoc->Get_p_array(), pDoc->Get_p_partition(), rect);
+    DrawLines(pDC, nullptr, pDoc->Get_p_array(), pDoc->Get_lambda_partition(), rect);
 
 
     int x_axis_length = rect.Width() - 200; // Длина оси x
     int y_axis_length = rect.Height() - 200; // Длина оси y
 
     std::wstring result =
-        L"Sample count = " + std::to_wstring(pDoc->Get_N_p_values()) +
-        L"; Sample size = " + std::to_wstring(ps->get_N()) +
+        L"Lambda min = " + std::to_wstring(pDoc->Get_lambda_min()) +
+        L"; Lambda max = " + std::to_wstring(pDoc->Get_lambda_max()) +
+        L"; Lambda partition = " + std::to_wstring(pDoc->Get_lambda_partition()) +
+        L"; Alpha = " + std::to_wstring(pDoc->Get_alpha()) +
+        L"; Number of p-values per lambda = " + std::to_wstring(pDoc->Get_N_cycles_by_lambda()) +
         L"; H0: lambda = " + std::to_wstring(pDoc->GetD0().get_lambda()) +
-        L"; H1: lambda = " + std::to_wstring(pDoc->GetD1().get_lambda()) +
         L"; Method: " + ((int)pDoc->getMod_meth() == 0 ? L"inverse." :
             ((int)pDoc->getMod_meth() == 1 ? L"random variables." : L"inverse table"));
     CString res(result.c_str());
-    pDC->TextOutW(rect.left + 20, rect.top + y_axis_length + 120, L"Distribution of p-levels.");
+    pDC->TextOutW(rect.left + 20, rect.top + y_axis_length + 120, L"Number of H0 rejections depending on lambda.");
     pDC->TextOutW(rect.left + 20, rect.top + y_axis_length + 160, res);
 
 
@@ -479,18 +514,7 @@ void DrawAlphaPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect r
     int rectHeight = 10;
     int rectX = rect.Width() - rectWidth - 200; // 10 - отступ от правой границы
     int rectY = 10; // 10 - отступ от верхней границы
-    // Создаем кисть с розовым цветом (RGB(255, 192, 203))
-    CBrush pinkBrush(RGB(255, 192, 203));
-    // Сохраняем текущую кисть
-    CBrush* pOldBrush = pDC->SelectObject(&pinkBrush);
-    // Рисуем розовый прямоугольник
-    pDC->Rectangle(rectX, rectY, rectX + rectWidth, rectY + rectHeight);
-    // Восстанавливаем предыдущую кисть
-    pDC->SelectObject(pOldBrush);
-    // Выводим текст
-    CString text = L"Uniform";
-    pDC->TextOutW(rectX + 20, rectY - 5, text);
-
+    
     // Подписи
     rectWidth = 10;
     rectHeight = 10;
@@ -499,16 +523,42 @@ void DrawAlphaPLines(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect r
     // Создаем кисть с розовым цветом (RGB(255, 192, 203))
     CBrush greenBrush(RGB(0, 100, 0));
     // Сохраняем текущую кисть
-    pOldBrush = pDC->SelectObject(&greenBrush);
+    CBrush* pOldBrush = pDC->SelectObject(&greenBrush);
     // Рисуем розовый прямоугольник
     pDC->Rectangle(rectX, rectY, rectX + rectWidth, rectY + rectHeight);
     // Восстанавливаем предыдущую кисть
     pDC->SelectObject(pOldBrush);
     // Выводим текст
-    text = L"power";
+    CString text = L"Rejections";
     pDC->TextOutW(rectX + 20, rectY - 5, text);
 
-    delete[] indexes;
+
+    // Отрисовка значений на оси x
+    int bar_width = x_axis_length * 0.8;
+    int shift = x_axis_length * 0.2;
+
+    // наибольшее значение lambda
+    CString index_str;
+    index_str.Format(L"%.2f", pDoc->Get_lambda_max());
+    pDC->TextOutW(rect.left + 30 + bar_width + static_cast<int>(shift),
+        rect.top + y_axis_length + 60, index_str);
+    // наименьшее значение lambda
+    index_str.Format(L"%.2f", pDoc->Get_lambda_min());
+    pDC->TextOutW(rect.left + 30,
+        rect.top + y_axis_length + 60, index_str);
+    // значение lambda H0
+    /*if (pDoc->Get_lambda_min() < pDoc->GetD0().get_lambda() && pDoc->GetD0().get_lambda() < pDoc->Get_lambda_max()) {
+        double range = pDoc->Get_lambda_max() - pDoc->Get_lambda_min();
+        double lambda_h0 = pDoc->GetD0().get_lambda();
+        index_str.Format(L"%.2f", lambda_h0);
+        pDC->TextOutW(rect.left + 30 + x_axis_length * ((lambda_h0 - pDoc->Get_lambda_min()) / range),
+            rect.top + y_axis_length + 60, index_str);
+    }*/
+
+
+    // Подписи осей
+    pDC->TextOutW(rect.left + x_axis_length / 2, rect.top + y_axis_length + 80, L"Lambda");
+    pDC->TextOutW(rect.left + 10, rect.top + 30 - 20, L"Rejections");
 }
 
 
@@ -576,7 +626,6 @@ CPoissonDistributionApplicationDoc* CPoissonDistributionApplicationView::GetDocu
 
 void CPoissonDistributionApplicationView::OnGeneratesample()
 {
-	// TODO: Add your command handler code here
 	draw_state = DrawState::sample_distribution;
 	CPoissonDistributionApplicationDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -681,15 +730,16 @@ void CPoissonDistributionApplicationView::OnP32775()
     double*& p_array = pDoc->Get_p_array();
     delete[] p_array;
     
-    p_array = new double[(int) pDoc->Get_lambda_partition() + 1];
-    for (int i = 0; i < pDoc->Get_p_partition(); i++) // инициализация массива частот
+    p_array = new double[pDoc->Get_lambda_partition() + 1];
+    for (int i = 0; i <= pDoc->Get_lambda_partition(); i++) // инициализация массива частот
     {
         p_array[i] = 0;
     }
 
     double alpha = pDoc->Get_alpha();
-    int j = 0;
-    for (double curr_lambda = pDoc->Get_lambda_min(); curr_lambda <= pDoc->Get_lambda_max(); curr_lambda += pDoc->Get_lambda_partition()) {
+    /*int j = 0;
+    double step = (pDoc->Get_lambda_max() - pDoc->Get_lambda_min()) / (double) pDoc->Get_lambda_partition();
+    for (double curr_lambda = pDoc->Get_lambda_min(); curr_lambda <= pDoc->Get_lambda_max(); curr_lambda += step) {
         Distribution d_lambda(curr_lambda);
         for (int i = 0; i < pDoc->Get_N_cycles_by_lambda(); ++i) {
             chi.set_data(pDoc->GetD0(), *ps, d_lambda);
@@ -698,6 +748,22 @@ void CPoissonDistributionApplicationView::OnP32775()
                 ++p_array[j];
         }
         ++j;
-    }
+    }*/
+    
+    double step = (pDoc->Get_lambda_max() - pDoc->Get_lambda_min()) / (double)pDoc->Get_lambda_partition();
+    for (int i = 0; i <= pDoc->Get_lambda_partition(); ++i) {
+        double curr_lambda = pDoc->Get_lambda_min() + step * i;
+        Distribution d_lambda(curr_lambda);
+        for (int j = 0; j < pDoc->Get_N_cycles_by_lambda(); ++j) {
+            chi.set_data(pDoc->GetD0(), *ps, d_lambda);
+            chi.calc_chi_parametres();
+            if (chi.get_p() < alpha)
+                ++p_array[i];
+        }
 
+
+        double safdsdf = p_array[i];
+        int agggsa = 1;
+    }
+    Invalidate();
 }
