@@ -151,6 +151,44 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclass_chi2_histortam_html"><div class="ttname"><a href="class_chi2_histortam.html">Chi2Histortam</a></div><div class="ttdoc">Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of ...</div><div class="ttdef"><b>Definition</b> Chi.h:10</div></div>
 <div class="ttc" id="aclass_distribution_html"><div class="ttname"><a href="class_distribution.html">Distribution</a></div><div class="ttdoc">Poisson distribution class. Calculates the theoretical distribution and stores it in itself.</div><div class="ttdef"><b>Definition</b> Distribution.h:12</div></div>
 <div class="ttc" id="aclass_poisson_sample_inverse_html"><div class="ttname"><a href="class_poisson_sample_inverse.html">PoissonSampleInverse</a></div><div class="ttdoc">Class of sample generation from Poisson distribution by inverse function method.</div><div class="ttdef"><b>Definition</b> PoissonSample.h:94</div></div>
+</div><!-- fragment --><p>Example of using <a class="el" href="class_distribution.html" title="Poisson distribution class. Calculates the theoretical distribution and stores it in itself.">Distribution</a> class </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_distribution.html">Distribution</a> d(5); <span class="comment">// Poisson distribution with lambda = 5</span></div>
+<div class="line"><span class="keywordtype">double</span>* th_prob = d.get_th_prob_array(20); <span class="comment">// Obtaining the vector of theoretical probabilities</span></div>
+<div class="line">d.set_lambda(10); <span class="comment">// Substitution of lambda in the theoretical distribution</span></div>
+<div class="line"><span class="keywordtype">double</span> th_20 = d.get_th_prob_element(20); <span class="comment">// Get 20-th element of theoretical distribution</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">delete</span>[] th_prob;</div>
+</div><!-- fragment --><p>Example of using <a class="el" href="class_poisson_sample.html" title="Poisson distribution sample generation class.">PoissonSample</a> classes </p><div class="fragment"><div class="line">mt19937 mt(100); <span class="comment">// Random number generator</span></div>
+<div class="line"><a class="code hl_class" href="class_distribution.html">Distribution</a> d(5); <span class="comment">// Poisson distribution with lambda = 5</span></div>
+<div class="line"><span class="keywordtype">int</span> n_samples = 100;</div>
+<div class="line"><a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>* ps = <span class="keyword">new</span> <a class="code hl_class" href="class_poisson_sample_inverse.html">PoissonSampleInverse</a>(mt, d, n_samples); <span class="comment">// Pointer on sample generator by inverse function method</span></div>
+<div class="line">ps-&gt;<a class="code hl_function" href="class_poisson_sample.html#a2a3f9ac1bb0ed2417fac207cbc8ed67e">simulate</a>(d); <span class="comment">// Generate one element from Poisson distribution</span></div>
+<div class="line"><span class="keywordtype">int</span> distr_len; <span class="comment">// The length of the distribution, will be calculated when the sample is generated</span></div>
+<div class="line"><span class="comment">// Distribution generation and calculation of the length of grouped frequencies</span></div>
+<div class="line"><span class="keywordtype">double</span>* sample_vec = ps-&gt;<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d, distr_len);</div>
+<div class="line"><span class="keyword">delete</span>[] sample_vec;</div>
+<div class="line"><span class="keyword">delete</span> ps;</div>
+<div class="line"> </div>
+<div class="line">ps = <span class="keyword">new</span> <a class="code hl_class" href="class_poisson_sample_inverse_table.html">PoissonSampleInverseTable</a>(mt, d, n_samples); <span class="comment">// Pointer on sample generator by table inverse function method</span></div>
+<div class="line"><span class="keyword">delete</span> ps;</div>
+<div class="ttc" id="aclass_poisson_sample_html"><div class="ttname"><a href="class_poisson_sample.html">PoissonSample</a></div><div class="ttdoc">Poisson distribution sample generation class.</div><div class="ttdef"><b>Definition</b> PoissonSample.h:14</div></div>
+<div class="ttc" id="aclass_poisson_sample_html_a2a3f9ac1bb0ed2417fac207cbc8ed67e"><div class="ttname"><a href="class_poisson_sample.html#a2a3f9ac1bb0ed2417fac207cbc8ed67e">PoissonSample::simulate</a></div><div class="ttdeci">virtual int simulate(Distribution &amp;d) const =0</div><div class="ttdoc">Generate one sample item.</div></div>
+<div class="ttc" id="aclass_poisson_sample_html_aaffe117cc83cf7e576d6a05a274d06de"><div class="ttname"><a href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">PoissonSample::generate_sample</a></div><div class="ttdeci">virtual double * generate_sample(Distribution &amp;d, int &amp;len_sample, int init_len_sample=-1)</div><div class="ttdoc">Generates a whole sample.</div><div class="ttdef"><b>Definition</b> PoissonSample.h:53</div></div>
+<div class="ttc" id="aclass_poisson_sample_inverse_table_html"><div class="ttname"><a href="class_poisson_sample_inverse_table.html">PoissonSampleInverseTable</a></div><div class="ttdoc">Class of sample generation from Poisson distribution by tabular inverse function method.</div><div class="ttdef"><b>Definition</b> PoissonSample.h:118</div></div>
+</div><!-- fragment --><p>Example of using <a class="el" href="class_chi2_histortam.html" title="Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of ...">Chi2Histortam</a> class </p><div class="fragment"><div class="line">mt19937 mt(100); <span class="comment">// Random number generator</span></div>
+<div class="line"><a class="code hl_class" href="class_distribution.html">Distribution</a> d(5); <span class="comment">// Poisson distribution with lambda = 5</span></div>
+<div class="line"><a class="code hl_class" href="class_poisson_sample_random_variables.html">PoissonSampleRandomVariables</a> ps(mt, d, 100);</div>
+<div class="line"><a class="code hl_class" href="class_chi2_histortam.html">Chi2Histortam</a> chi(d, ps); <span class="comment">// Initialization of the class for Chi^2 criterion calculation</span></div>
+<div class="line"><span class="comment">// Criterion Application. Groups the sample under the conditions of criterion applicability,</span></div>
+<div class="line"><span class="comment">// counts degrees of freedom, criterion value, p-level</span></div>
+<div class="line">chi.apply_chi_criterion();</div>
+<div class="line"> </div>
+<div class="line">cout &lt;&lt; <span class="stringliteral">&quot;p-level = &quot;</span> &lt;&lt; chi.get_p() &lt;&lt; endl;</div>
+<div class="line"><span class="keywordtype">int</span> distr_len = chi.get_distr_len(); <span class="comment">// Obtaining the length of the distribution for which the criterion was applied</span></div>
+<div class="line"><span class="keywordtype">double</span>* sample_freq = chi.get_sample_freq(); <span class="comment">// Obtaining a sample for which the criterion was applied</span></div>
+<div class="line"><span class="keywordtype">double</span>* th_freq = chi.get_th_freq(); <span class="comment">// Obtaining the frequencies for which the criterion was applied</span></div>
+<div class="line"><a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(sample_freq, distr_len); <span class="comment">// Sample output</span></div>
+<div class="line"><a class="code hl_function" href="_poisson_distribution_backend_8cpp.html#aec8982f42dc7ec005ca4b6d76fc6d9e9">print_vec</a>(th_freq, distr_len); <span class="comment">// Derivation of theoretical values</span></div>
+<div class="ttc" id="aclass_poisson_sample_random_variables_html"><div class="ttname"><a href="class_poisson_sample_random_variables.html">PoissonSampleRandomVariables</a></div><div class="ttdoc">Class of sample generation of Poisson distribution modeling through random variables.</div><div class="ttdef"><b>Definition</b> PoissonSample.h:143</div></div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"/>
 </div><!-- contents -->

@@ -60,4 +60,55 @@ Example of using Poisson\+Distribution
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
+
+
+Example of using \doxylink{class_distribution}{Distribution} class 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}*\ th\_prob\ =\ d.get\_th\_prob\_array(20);\ \textcolor{comment}{//\ Obtaining\ the\ vector\ of\ theoretical\ probabilities}}
+\DoxyCodeLine{d.set\_lambda(10);\ \textcolor{comment}{//\ Substitution\ of\ lambda\ in\ the\ theoretical\ distribution}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ th\_20\ =\ d.get\_th\_prob\_element(20);\ \textcolor{comment}{//\ Get\ 20-\/th\ element\ of\ theoretical\ distribution}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{delete}[]\ th\_prob;}
+
+\end{DoxyCode}
+
+
+Example of using \doxylink{class_poisson_sample}{Poisson\+Sample} classes 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mt19937\ mt(100);\ \textcolor{comment}{//\ Random\ number\ generator}}
+\DoxyCodeLine{\mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ n\_samples\ =\ 100;}
+\DoxyCodeLine{\mbox{\hyperlink{class_poisson_sample}{PoissonSample}}*\ ps\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_poisson_sample_inverse}{PoissonSampleInverse}}(mt,\ d,\ n\_samples);\ \textcolor{comment}{//\ Pointer\ on\ sample\ generator\ by\ inverse\ function\ method}}
+\DoxyCodeLine{ps-\/>\mbox{\hyperlink{class_poisson_sample_a2a3f9ac1bb0ed2417fac207cbc8ed67e}{simulate}}(d);\ \textcolor{comment}{//\ Generate\ one\ element\ from\ Poisson\ distribution}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ distr\_len;\ \textcolor{comment}{//\ The\ length\ of\ the\ distribution,\ will\ be\ calculated\ when\ the\ sample\ is\ generated}}
+\DoxyCodeLine{\textcolor{comment}{//\ Distribution\ generation\ and\ calculation\ of\ the\ length\ of\ grouped\ frequencies}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}*\ sample\_vec\ =\ ps-\/>\mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(d,\ distr\_len);}
+\DoxyCodeLine{\textcolor{keyword}{delete}[]\ sample\_vec;}
+\DoxyCodeLine{\textcolor{keyword}{delete}\ ps;}
+\DoxyCodeLine{}
+\DoxyCodeLine{ps\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_poisson_sample_inverse_table}{PoissonSampleInverseTable}}(mt,\ d,\ n\_samples);\ \textcolor{comment}{//\ Pointer\ on\ sample\ generator\ by\ table\ inverse\ function\ method}}
+\DoxyCodeLine{\textcolor{keyword}{delete}\ ps;}
+
+\end{DoxyCode}
+
+
+Example of using \doxylink{class_chi2_histortam}{Chi2\+Histortam} class 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mt19937\ mt(100);\ \textcolor{comment}{//\ Random\ number\ generator}}
+\DoxyCodeLine{\mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
+\DoxyCodeLine{\mbox{\hyperlink{class_poisson_sample_random_variables}{PoissonSampleRandomVariables}}\ ps(mt,\ d,\ 100);}
+\DoxyCodeLine{\mbox{\hyperlink{class_chi2_histortam}{Chi2Histortam}}\ chi(d,\ ps);\ \textcolor{comment}{//\ Initialization\ of\ the\ class\ for\ Chi\string^2\ criterion\ calculation}}
+\DoxyCodeLine{\textcolor{comment}{//\ Criterion\ Application.\ Groups\ the\ sample\ under\ the\ conditions\ of\ criterion\ applicability,}}
+\DoxyCodeLine{\textcolor{comment}{//\ counts\ degrees\ of\ freedom,\ criterion\ value,\ p-\/level}}
+\DoxyCodeLine{chi.apply\_chi\_criterion();}
+\DoxyCodeLine{}
+\DoxyCodeLine{cout\ <<\ \textcolor{stringliteral}{"{}p-\/level\ =\ "{}}\ <<\ chi.get\_p()\ <<\ endl;}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ distr\_len\ =\ chi.get\_distr\_len();\ \textcolor{comment}{//\ Obtaining\ the\ length\ of\ the\ distribution\ for\ which\ the\ criterion\ was\ applied}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}*\ sample\_freq\ =\ chi.get\_sample\_freq();\ \textcolor{comment}{//\ Obtaining\ a\ sample\ for\ which\ the\ criterion\ was\ applied}}
+\DoxyCodeLine{\textcolor{keywordtype}{double}*\ th\_freq\ =\ chi.get\_th\_freq();\ \textcolor{comment}{//\ Obtaining\ the\ frequencies\ for\ which\ the\ criterion\ was\ applied}}
+\DoxyCodeLine{\mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(sample\_freq,\ distr\_len);\ \textcolor{comment}{//\ Sample\ output}}
+\DoxyCodeLine{\mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(th\_freq,\ distr\_len);\ \textcolor{comment}{//\ Derivation\ of\ theoretical\ values}}
+
+\end{DoxyCode}
  
