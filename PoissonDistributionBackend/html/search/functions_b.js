@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['xchi_0',['xChi',['../_p_r_o_b_d_i_s_t_8_c_p_p.html#a0709e4e541f2ef03ce952c7ba273e1e0',1,'xChi(double prob, int n):&#160;PROBDIST.CPP'],['../_p_r_o_b_d_i_s_t_8_h.html#a0709e4e541f2ef03ce952c7ba273e1e0',1,'xChi(double prob, int n):&#160;PROBDIST.CPP']]],
-  ['xnormal_1',['xNormal',['../_p_r_o_b_d_i_s_t_8_c_p_p.html#a7936282c176d94a35a5b48cee3344697',1,'xNormal(double prob):&#160;PROBDIST.CPP'],['../_p_r_o_b_d_i_s_t_8_h.html#a7936282c176d94a35a5b48cee3344697',1,'xNormal(double prob):&#160;PROBDIST.CPP']]]
+  ['vector_0',['Vector',['../class_vector.html#ae377827eddf5e50fe97f1bd3be103a88',1,'Vector::Vector(int initialCapacity=initCapacity)'],['../class_vector.html#a4ec1206fa568aa953588ef663ff511be',1,'Vector::Vector(const Vector &amp;other)'],['../class_vector.html#aa7c42bfffdd4a600fa98ebbb6cdded5e',1,'Vector::Vector(Vector &amp;&amp;other) noexcept']]]
 ];

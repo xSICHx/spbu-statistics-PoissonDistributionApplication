@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.11.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PoissonDistribution: Файл PROBDIST.CPP</title>
+<title>PoissonDistribution: Файл probdist.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,41 +85,31 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#func-members">Функции</a> &#124;
-<a href="#var-members">Переменные</a>  </div>
-  <div class="headertitle"><div class="title">Файл PROBDIST.CPP</div></div>
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл probdist.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;math.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="probdist_8h_source.html">PROBDIST.H</a>&quot;</code><br />
-</div><table class="memberdecls">
+
+<p><a href="probdist_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:aee71680af97b738b1d3229fc456dbe46" id="r_aee71680af97b738b1d3229fc456dbe46"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee71680af97b738b1d3229fc456dbe46">fequal</a> (double a, double b)</td></tr>
-<tr class="separator:aee71680af97b738b1d3229fc456dbe46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8" id="r_ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8">fcompare</a> (double a, double b)</td></tr>
-<tr class="separator:ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a057182f4550235a515069a2ca156b3b2" id="r_a057182f4550235a515069a2ca156b3b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a057182f4550235a515069a2ca156b3b2">NORMAL</a> (int IFLAG, double &amp;X, double &amp;PROB)</td></tr>
-<tr class="separator:a057182f4550235a515069a2ca156b3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceaf53eea21af918a20cf38038539207" id="r_aceaf53eea21af918a20cf38038539207"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aceaf53eea21af918a20cf38038539207">NORMAL</a> (int type, double &amp;x, double &amp;p)</td></tr>
+<tr class="separator:aceaf53eea21af918a20cf38038539207"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a785295db8ec8dd64dc6d183369f279ed" id="r_a785295db8ec8dd64dc6d183369f279ed"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a785295db8ec8dd64dc6d183369f279ed">pNormal</a> (double x)</td></tr>
 <tr class="separator:a785295db8ec8dd64dc6d183369f279ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7936282c176d94a35a5b48cee3344697" id="r_a7936282c176d94a35a5b48cee3344697"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7936282c176d94a35a5b48cee3344697">xNormal</a> (double prob)</td></tr>
 <tr class="separator:a7936282c176d94a35a5b48cee3344697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8da0a1147414633b15071e4a4ff26f4c" id="r_a8da0a1147414633b15071e4a4ff26f4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8da0a1147414633b15071e4a4ff26f4c">CHI</a> (int IFLAG, double N, double &amp;X, double &amp;PROB)</td></tr>
-<tr class="separator:a8da0a1147414633b15071e4a4ff26f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49e6c2a769a79799c328b845b6246232" id="r_a49e6c2a769a79799c328b845b6246232"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49e6c2a769a79799c328b845b6246232">CHI</a> (int type, double n, double &amp;x, double &amp;p)</td></tr>
+<tr class="separator:a49e6c2a769a79799c328b845b6246232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48b05eca7cfb69e6c3d04fe207ccc181" id="r_a48b05eca7cfb69e6c3d04fe207ccc181"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48b05eca7cfb69e6c3d04fe207ccc181">pChiSq</a> (double x, int n)</td></tr>
 <tr class="separator:a48b05eca7cfb69e6c3d04fe207ccc181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0709e4e541f2ef03ce952c7ba273e1e0" id="r_a0709e4e541f2ef03ce952c7ba273e1e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0709e4e541f2ef03ce952c7ba273e1e0">xChi</a> (double prob, int n)</td></tr>
 <tr class="separator:a0709e4e541f2ef03ce952c7ba273e1e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Переменные</h2></td></tr>
-<tr class="memitem:a1cd15547aa7a518489d755671d9e3b6f" id="r_a1cd15547aa7a518489d755671d9e3b6f"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1cd15547aa7a518489d755671d9e3b6f">Eps</a> = 1e-15</td></tr>
-<tr class="separator:a1cd15547aa7a518489d755671d9e3b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Функции</h2>
-<a id="a8da0a1147414633b15071e4a4ff26f4c" name="a8da0a1147414633b15071e4a4ff26f4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8da0a1147414633b15071e4a4ff26f4c">&#9670;&#160;</a></span>CHI()</h2>
+<a id="a49e6c2a769a79799c328b845b6246232" name="a49e6c2a769a79799c328b845b6246232"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49e6c2a769a79799c328b845b6246232">&#9670;&#160;</a></span>CHI()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -127,72 +117,30 @@ $(function(){ initResizable(false); });
         <tr>
           <td class="memname">void CHI </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>IFLAG</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>N</em></span>, </td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>X</em></span>, </td>
+          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>PROB</em></span>&#160;)</td>
+          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8" name="ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1764f1a4fbf2f4d6dcdd7aa9e0fb1e8">&#9670;&#160;</a></span>fcompare()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int fcompare </td>
-          <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aee71680af97b738b1d3229fc456dbe46" name="aee71680af97b738b1d3229fc456dbe46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee71680af97b738b1d3229fc456dbe46">&#9670;&#160;</a></span>fequal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int fequal </td>
-          <td>(</td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a057182f4550235a515069a2ca156b3b2" name="a057182f4550235a515069a2ca156b3b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a057182f4550235a515069a2ca156b3b2">&#9670;&#160;</a></span>NORMAL()</h2>
+<a id="aceaf53eea21af918a20cf38038539207" name="aceaf53eea21af918a20cf38038539207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceaf53eea21af918a20cf38038539207">&#9670;&#160;</a></span>NORMAL()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,17 +148,17 @@ $(function(){ initResizable(false); });
         <tr>
           <td class="memname">void NORMAL </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>IFLAG</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>X</em></span>, </td>
+          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>PROB</em></span>&#160;)</td>
+          <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -287,21 +235,6 @@ $(function(){ initResizable(false); });
           <td>(</td>
           <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>prob</em></span></td><td>)</td>
           <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Переменные</h2>
-<a id="a1cd15547aa7a518489d755671d9e3b6f" name="a1cd15547aa7a518489d755671d9e3b6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cd15547aa7a518489d755671d9e3b6f">&#9670;&#160;</a></span>Eps</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double Eps = 1e-15</td>
         </tr>
       </table>
 </div><div class="memdoc">

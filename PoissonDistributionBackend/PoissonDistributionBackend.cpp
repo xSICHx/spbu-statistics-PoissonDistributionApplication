@@ -1,11 +1,12 @@
+#pragma once
 #include <iostream>
 #include "Distribution.h"
 #include "PoissonSample.h"
-#include "Vector.h"
 #include "Chi.h"
 
 using namespace std;
 
+// Function for output double*
 void print_vec(double* arr, int n) {
 	for (size_t i = 0; i < n; i++)
 	{
@@ -17,45 +18,55 @@ void print_vec(double* arr, int n) {
 
 int main()
 {
-	int n_samples = 13333;
-	mt19937 mt(100);
+	mt19937 mt(100); // Random number generator
 	
-	Distribution d;
-	int N;
-	PoissonSampleInverse ps(mt, d, n_samples);
+	Distribution d(5); // Poisson distribution with lambda = 5
+	int n_samples = 10000; // Number of samples
+	PoissonSampleInverse ps(mt, d, n_samples); // Inverse function sampling generator
 	
-	double* sample_vec = ps.generate_sample(d, N);
-	double* th_vec = d.get_th_prob_array(N);
-	for (size_t i = 0; i < N; i++)
+	int distr_len; // The length of the distribution, will be calculated when the sample is generated
+	// Distribution generation and calculation of the length of grouped frequencies
+	double* sample_vec = ps.generate_sample(d, distr_len); 
+	double* th_vec = d.get_th_prob_array(distr_len); // Obtaining the vector of theoretical probabilities
+	for (size_t i = 0; i < distr_len; i++) // Taking sample to probabilities
 	{
 		sample_vec[i] /= n_samples;
 	}
-	print_vec(sample_vec, N);
-
+	print_vec(sample_vec, distr_len); // Displaying sample values on the screen
 	
-	print_vec(th_vec, N);
+	print_vec(th_vec, distr_len); // Displaying theoretical values on the screen 
 
 	delete[] th_vec;
 	delete[] sample_vec;
 
 	cout << "------" << endl;
 
-	d.set_lambda(10);
-	Chi2Histortam chi(d, ps);
-	chi.calc_chi_parametres();
+	d.set_lambda(10); // Substitution of lambda in the theoretical distribution
+	Chi2Histortam chi(d, ps); // Initialization of the class for Chi^2 criterion calculation
+	// Criterion Application. Groups the sample under the conditions of criterion applicability, 
+	// counts degrees of freedom, criterion value, p-level
+	chi.apply_chi_criterion(); 
+
 	cout << "p-level = " << chi.get_p() << endl;
-	int distr_len = chi.get_distr_len();
-	double* sample_freq = chi.get_sample_freq();
-	double* th_freq = chi.get_th_freq();
-	print_vec(sample_freq, distr_len);
-	print_vec(th_freq, distr_len);
-
-
-
+	distr_len = chi.get_distr_len(); // Obtaining the length of the distribution for which the criterion was applied
+	double* sample_freq = chi.get_sample_freq(); // Obtaining a sample for which the criterion was applied
+	double* th_freq = chi.get_th_freq(); // Obtaining the frequencies for which the criterion was applied
+	print_vec(sample_freq, distr_len); // Sample output
+	print_vec(th_freq, distr_len); // Derivation of theoretical values
 }
 
 /*! \mainpage Classes for generating the Poisson distribution and calculating the chi square criterion for hypothesis testing
+* Example of using PoissonDistribution 
 * @code
+#pragma once
+#include <iostream>
+#include "Distribution.h"
+#include "PoissonSample.h"
+#include "Chi.h"
+
+using namespace std;
+
+// Function for output double*
 void print_vec(double* arr, int n) {
 	for (size_t i = 0; i < n; i++)
 	{
@@ -64,43 +75,44 @@ void print_vec(double* arr, int n) {
 	cout << endl;
 }
 
+
 int main()
 {
-	int n_samples = 13333;
-	mt19937 mt(100);
+	mt19937 mt(100); // Random number generator
 
-	Distribution d;
-	int N;
-	PoissonSampleInverse ps(mt, d, n_samples);
+	Distribution d(5); // Poisson distribution with lambda = 5
+	int n_samples = 10000; // Number of samples
+	PoissonSampleInverse ps(mt, d, n_samples); // Inverse function sampling generator
 
-	double* sample_vec = ps.generate_sample(d, N);
-	double* th_vec = d.get_th_prob_array(N);
-	for (size_t i = 0; i < N; i++)
+	int distr_len; // The length of the distribution, will be calculated when the sample is generated
+	// Distribution generation and calculation of the length of grouped frequencies
+	double* sample_vec = ps.generate_sample(d, distr_len);
+	double* th_vec = d.get_th_prob_array(distr_len); // Obtaining the vector of theoretical probabilities
+	for (size_t i = 0; i < distr_len; i++) // Taking sample to probabilities
 	{
 		sample_vec[i] /= n_samples;
 	}
-	print_vec(sample_vec, N);
+	print_vec(sample_vec, distr_len); // Displaying sample values on the screen
 
-
-	print_vec(th_vec, N);
+	print_vec(th_vec, distr_len); // Displaying theoretical values on the screen
 
 	delete[] th_vec;
 	delete[] sample_vec;
 
 	cout << "------" << endl;
 
-	d.set_lambda(10);
-	Chi2Histortam chi(d, ps);
-	chi.calc_chi_parametres();
+	d.set_lambda(10); // Substitution of lambda in the theoretical distribution
+	Chi2Histortam chi(d, ps); // Initialization of the class for Chi^2 criterion calculation
+	// Criterion Application. Groups the sample under the conditions of criterion applicability,
+	// counts degrees of freedom, criterion value, p-level
+	chi.apply_chi_criterion();
+
 	cout << "p-level = " << chi.get_p() << endl;
-	int distr_len = chi.get_distr_len();
-	double* sample_freq = chi.get_sample_freq();
-	double* th_freq = chi.get_th_freq();
-	print_vec(sample_freq, distr_len);
-	print_vec(th_freq, distr_len);
-
-
-
+	distr_len = chi.get_distr_len(); // Obtaining the length of the distribution for which the criterion was applied
+	double* sample_freq = chi.get_sample_freq(); // Obtaining a sample for which the criterion was applied
+	double* th_freq = chi.get_th_freq(); // Obtaining the frequencies for which the criterion was applied
+	print_vec(sample_freq, distr_len); // Sample output
+	print_vec(th_freq, distr_len); // Derivation of theoretical values
 }
 * @endcode
 */

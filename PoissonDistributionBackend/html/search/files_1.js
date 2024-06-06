@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['distribution_2eh_0',['Distribution.h',['../_distribution_8h.html',1,'']]]
+  ['distribution_2ecpp_0',['Distribution.cpp',['../_distribution_8cpp.html',1,'']]],
+  ['distribution_2eh_1',['Distribution.h',['../_distribution_8h.html',1,'']]]
 ];

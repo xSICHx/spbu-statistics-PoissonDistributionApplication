@@ -106,375 +106,390 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> create_chied_values(<span class="keywordtype">double</span>*&amp; th_chied, <span class="keywordtype">double</span>*&amp; sample_chied, <span class="keywordtype">int</span>&amp; chied_len)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="comment">// собираем строки в начале</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">double</span> tmp_th = 0, tmp_sample = 0;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">while</span> (i &lt; distr_len &amp;&amp; (tmp_th &lt; 5 || th_freq[i] &lt; 5)) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            tmp_th += th_freq[i];</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            tmp_sample += sample_freq[i];</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            ++i;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="comment">/*th_chied_values.push_back(tmp_th);</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">        sample_chied_values.push_back(tmp_sample);*/</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="comment">// собираем строки с конца</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">double</span> tmp_th2 = 0, tmp_sample2 = 0;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">int</span> j = distr_len - 1;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">while</span> (j &gt;= 0 &amp;&amp; (tmp_th2 &lt; 5 || th_freq[j] &lt; 5)) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            tmp_th2 += th_freq[j];</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            tmp_sample2 += sample_freq[j];</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            --j;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        }</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="comment">// выделение памяти под массивы</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        chied_len = (j - i + 1) + (1) + (1);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        th_chied = <span class="keyword">new</span> <span class="keywordtype">double</span>[chied_len];</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        sample_chied = <span class="keyword">new</span> <span class="keywordtype">double</span>[chied_len];</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="comment">// собираем строки с середины</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = i; k &lt;= j; ++k) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            th_chied[k - i + 1] = th_freq[k];</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            sample_chied[k - i + 1] = sample_freq[k];</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="comment">// собираем строки в начале</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">double</span> tmp_th = 0, tmp_sample = 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">while</span> (i &lt; distr_len &amp;&amp; (tmp_th &lt; 5 || th_freq[i] &lt; 5)) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            tmp_th += th_freq[i];</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            tmp_sample += sample_freq[i];</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            ++i;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="comment">/*th_chied_values.push_back(tmp_th);</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">        sample_chied_values.push_back(tmp_sample);*/</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="comment">// собираем строки с конца</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">double</span> tmp_th2 = 0, tmp_sample2 = 0;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">int</span> j = distr_len - 1;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">while</span> (j &gt;= 0 &amp;&amp; (tmp_th2 &lt; 5 || th_freq[j] &lt; 5)) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            tmp_th2 += th_freq[j];</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            tmp_sample2 += sample_freq[j];</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            --j;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">if</span> (j == -1) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            chied_len = 1;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            th_chied = <span class="keyword">new</span> <span class="keywordtype">double</span>[chied_len];</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            sample_chied = <span class="keyword">new</span> <span class="keywordtype">double</span>[chied_len];</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            th_chied[0] = tmp_th2;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            sample_chied[0] = tmp_sample2;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">// выделение памяти под массивы</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        chied_len = (j - i + 1) + (1) + (1); </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        th_chied = <span class="keyword">new</span> <span class="keywordtype">double</span>[chied_len];</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        sample_chied = <span class="keyword">new</span> <span class="keywordtype">double</span>[chied_len];</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="comment">// добавляем строку в конец</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        th_chied[chied_len - 1] = tmp_th2;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        sample_chied[chied_len - 1] = tmp_sample2;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="comment">// добавляем строку в начало</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        th_chied[0] = tmp_th;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        sample_chied[0] = tmp_sample;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">double</span> get_chi2_value(<span class="keyword">const</span> <span class="keywordtype">double</span>* th_chied, <span class="keyword">const</span> <span class="keywordtype">double</span>* sample_chied, <span class="keyword">const</span> <span class="keywordtype">int</span> chied_len )<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">double</span> res = 0, diff;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="comment">// собираем строки с середины</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = i; k &lt;= j; ++k) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            th_chied[k - i + 1] = th_freq[k];</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            sample_chied[k - i + 1] = sample_freq[k];</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        }</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="comment">// добавляем строку в конец</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        th_chied[chied_len - 1] = tmp_th2;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        sample_chied[chied_len - 1] = tmp_sample2;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="comment">// добавляем строку в начало</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        th_chied[0] = tmp_th;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        sample_chied[0] = tmp_sample;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; chied_len; ++i) {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            diff = sample_chied[i] - th_chied[i];</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            res += diff * diff / (th_chied[i]);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordtype">double</span> sfdaad = th_chied[i];</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordtype">int</span> afsdaf = 0;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> res;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a494aa91766a9b8fc6e924e4b7d63c7ee">   91</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#a494aa91766a9b8fc6e924e4b7d63c7ee">Chi2Histortam</a>() = <span class="keywordflow">default</span>;</div>
-<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#ad416d4cee23c7e7be7edd685529f3e84">   97</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#ad416d4cee23c7e7be7edd685529f3e84">Chi2Histortam</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample) {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d, distr_len);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    };</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">double</span> calc_chi2_value(<span class="keyword">const</span> <span class="keywordtype">double</span>* th_chied, <span class="keyword">const</span> <span class="keywordtype">double</span>* sample_chied, <span class="keyword">const</span> <span class="keywordtype">int</span> chied_len )<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        <span class="keywordtype">double</span> res = 0, diff;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; chied_len; ++i) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            diff = sample_chied[i] - th_chied[i];</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            res += diff * diff / (th_chied[i]);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a494aa91766a9b8fc6e924e4b7d63c7ee">  103</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#a494aa91766a9b8fc6e924e4b7d63c7ee">Chi2Histortam</a>() = <span class="keywordflow">default</span>;</div>
+<div class="foldopen" id="foldopen00109" data-start="{" data-end="}">
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#ad416d4cee23c7e7be7edd685529f3e84">  109</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#ad416d4cee23c7e7be7edd685529f3e84">Chi2Histortam</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample) {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d, distr_len);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    };</div>
 </div>
-<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#abd56b221c95e8b8cb09ef2fe83ff5c37">  110</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#abd56b221c95e8b8cb09ef2fe83ff5c37">Chi2Histortam</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample, <a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; sample_d) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(sample_d, distr_len, (<span class="keywordtype">int</span>) (d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>() + d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>()*2) );</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    };</div>
+<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#abd56b221c95e8b8cb09ef2fe83ff5c37">  122</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#abd56b221c95e8b8cb09ef2fe83ff5c37">Chi2Histortam</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample, <a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; sample_d) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(sample_d, distr_len, (<span class="keywordtype">int</span>) (d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>() + d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>()*2) );</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    };</div>
 </div>
-<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#abbe59151d4610e1e5c222f43d1a5ac40">  117</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#abbe59151d4610e1e5c222f43d1a5ac40">~Chi2Histortam</a>() {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keyword">delete</span>[] sample_freq;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keyword">delete</span>[] th_freq;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    };</div>
+<div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#abbe59151d4610e1e5c222f43d1a5ac40">  129</a></span>    <a class="code hl_function" href="class_chi2_histortam.html#abbe59151d4610e1e5c222f43d1a5ac40">~Chi2Histortam</a>() {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keyword">delete</span>[] sample_freq;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keyword">delete</span>[] th_freq;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    };</div>
 </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="foldopen" id="foldopen00127" data-start="{" data-end="}">
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a0db9a5c4d39b96c3faf639e15e406dcc">  127</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_chi2_histortam.html#a0db9a5c4d39b96c3faf639e15e406dcc">set_data</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keyword">delete</span>[] sample_freq;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keyword">delete</span>[] th_freq;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d, distr_len);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a0db9a5c4d39b96c3faf639e15e406dcc">  139</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_chi2_histortam.html#a0db9a5c4d39b96c3faf639e15e406dcc">set_data</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keyword">delete</span>[] sample_freq;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keyword">delete</span>[] th_freq;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d, distr_len);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
 </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="foldopen" id="foldopen00144" data-start="{" data-end="}">
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a5009892e1ccfaf0546a8a77119120ef4">  144</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_chi2_histortam.html#a5009892e1ccfaf0546a8a77119120ef4">set_data</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample, <a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d_sample) {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keyword">delete</span>[] sample_freq;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keyword">delete</span>[] th_freq;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d_sample, distr_len, (<span class="keywordtype">int</span>)(d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>() + d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>() * 2));</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00156" data-start="{" data-end="}">
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a5009892e1ccfaf0546a8a77119120ef4">  156</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_chi2_histortam.html#a5009892e1ccfaf0546a8a77119120ef4">set_data</a>(<a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d, <a class="code hl_class" href="class_poisson_sample.html">PoissonSample</a>&amp; sample, <a class="code hl_class" href="class_distribution.html">Distribution</a>&amp; d_sample) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keyword">delete</span>[] sample_freq;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keyword">delete</span>[] th_freq;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        sample_freq = sample.<a class="code hl_function" href="class_poisson_sample.html#aaffe117cc83cf7e576d6a05a274d06de">generate_sample</a>(d_sample, distr_len, (<span class="keywordtype">int</span>)(d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>() + d.<a class="code hl_function" href="class_distribution.html#a0860134568484957da1814bb73cd4356">get_lambda</a>() * 2));</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        th_freq = d.<a class="code hl_function" href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a>(distr_len); <span class="comment">// пока что не частоты, а вероятности</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; distr_len; ++i)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            th_freq[i] *= sample.<a class="code hl_function" href="class_poisson_sample.html#a8790c676f40d178faac54fb6dbdc192f">get_N</a>();</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
 </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="foldopen" id="foldopen00160" data-start="{" data-end="}">
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#ad13463baabc3adbeef394aa9d18c8528">  160</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_chi2_histortam.html#ad13463baabc3adbeef394aa9d18c8528">calc_chi_parametres</a>() {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordtype">int</span> chied_len;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordtype">double</span>* th_chied = <span class="keyword">nullptr</span>; <span class="keywordtype">double</span>* sample_chied = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        create_chied_values(th_chied, sample_chied, chied_len);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        chi = get_chi2_value(th_chied, sample_chied, chied_len);</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        df = chied_len - 1;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        p = 1 - pChiSq(chi, df);</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <span class="keyword">delete</span>[] th_chied;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keyword">delete</span>[] sample_chied;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    }</div>
-</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a6b7c48a69d69c3273e65967f69b7f202">  174</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_chi2_histortam.html#a6b7c48a69d69c3273e65967f69b7f202">get_p</a>() { <span class="keywordflow">return</span> p; }</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#ae7edc738ec9ac4f60a5ce1d18418d3da">  175</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_chi2_histortam.html#ae7edc738ec9ac4f60a5ce1d18418d3da">get_chi</a>() { <span class="keywordflow">return</span> chi; }</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#aec4e6e53c341ab3981a815dd1b83ffff">  176</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_chi2_histortam.html#aec4e6e53c341ab3981a815dd1b83ffff">get_df</a>() { <span class="keywordflow">return</span> df; }</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a1e442bdfc869d24b51c5209228823a57">  178</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_chi2_histortam.html#a1e442bdfc869d24b51c5209228823a57">get_distr_len</a>() { <span class="keywordflow">return</span> distr_len; }</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a3fbf4d62ff092526177dfd8d2411b217">  179</a></span>    <span class="keywordtype">double</span>*&amp; <a class="code hl_function" href="class_chi2_histortam.html#a3fbf4d62ff092526177dfd8d2411b217">get_sample_freq</a>() { <span class="keywordflow">return</span> sample_freq; }</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a5600971c2ab0b51c7d185336c5eaa6f0">  180</a></span>    <span class="keywordtype">double</span>*&amp; <a class="code hl_function" href="class_chi2_histortam.html#a5600971c2ab0b51c7d185336c5eaa6f0">get_th_freq</a>() { <span class="keywordflow">return</span> th_freq; }</div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a84cc17cc05a9ca590a7f59dc3d42ea4f">  172</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_chi2_histortam.html#a84cc17cc05a9ca590a7f59dc3d42ea4f">apply_chi_criterion</a>() {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordtype">int</span> chied_len;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordtype">double</span>* th_chied = <span class="keyword">nullptr</span>; <span class="keywordtype">double</span>* sample_chied = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        create_chied_values(th_chied, sample_chied, chied_len);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        chi = calc_chi2_value(th_chied, sample_chied, chied_len);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        df = chied_len - 1;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        p = 1 - pChiSq(chi, df);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="comment">// функции из PROBDIST.H. Временно находятся тут.</span></div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> Eps = 1e-15;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordtype">int</span> fequal(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b)</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordflow">return</span>  (fabs(a - b) &lt; Eps) ? 1 : 0;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordtype">int</span> fcompare(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b)</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    {</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <span class="keywordtype">double</span> d = a - b;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordtype">int</span> res;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keyword">delete</span>[] th_chied;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keyword">delete</span>[] sample_chied;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    }</div>
+</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a6b7c48a69d69c3273e65967f69b7f202">  189</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_chi2_histortam.html#a6b7c48a69d69c3273e65967f69b7f202">get_p</a>() { <span class="keywordflow">return</span> p; }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#ae7edc738ec9ac4f60a5ce1d18418d3da">  190</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_chi2_histortam.html#ae7edc738ec9ac4f60a5ce1d18418d3da">get_chi</a>() { <span class="keywordflow">return</span> chi; }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#aec4e6e53c341ab3981a815dd1b83ffff">  191</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_chi2_histortam.html#aec4e6e53c341ab3981a815dd1b83ffff">get_df</a>() { <span class="keywordflow">return</span> df; }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a1e442bdfc869d24b51c5209228823a57">  193</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_chi2_histortam.html#a1e442bdfc869d24b51c5209228823a57">get_distr_len</a>() { <span class="keywordflow">return</span> distr_len; }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a3fbf4d62ff092526177dfd8d2411b217">  194</a></span>    <span class="keywordtype">double</span>*&amp; <a class="code hl_function" href="class_chi2_histortam.html#a3fbf4d62ff092526177dfd8d2411b217">get_sample_freq</a>() { <span class="keywordflow">return</span> sample_freq; }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="class_chi2_histortam.html#a5600971c2ab0b51c7d185336c5eaa6f0">  195</a></span>    <span class="keywordtype">double</span>*&amp; <a class="code hl_function" href="class_chi2_histortam.html#a5600971c2ab0b51c7d185336c5eaa6f0">get_th_freq</a>() { <span class="keywordflow">return</span> th_freq; }</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">if</span> (fabs(d) &lt; Eps)</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            res = 0;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (d &lt; 0.0)</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            res = -1;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            res = 1;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">return</span> res;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="comment">// Normal distribution</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordtype">void</span> NORMAL(<span class="keywordtype">int</span> IFLAG, <span class="keywordtype">double</span>&amp; X, <span class="keywordtype">double</span>&amp; PROB)</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="comment">/*    &#39; Normal distribution subroutine</span></div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment"></span> </div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment">            &#39; Input</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment"></span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment">            &#39;  IFLAG = type of computation</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">            &#39;      1 = given x, compute probability</span></div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment">            &#39;      2 = given probability, compute x</span></div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment"></span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="comment">            &#39; Output (or input)</span></div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span><span class="comment"></span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">            &#39;  X     = x value</span></div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span><span class="comment">            &#39;  PROB  = probability; 0 &lt; PROB &lt; 1</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><span class="comment">        */</span></div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordtype">double</span> x1;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">switch</span> (IFLAG) {</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="comment">//  N(x)</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            x1 = fabs(X);</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            <span class="keywordflow">if</span> (x1 &gt; 7)</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>                PROB = 0;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>                PROB = 1 + x1 * (0.049867347 + x1 * (0.0211410061 + x1 *</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                    (0.0032776263 + x1 * (0.0000380036 + x1 *</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                        (0.0000488906 + x1 * 0.000005383)))));</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                PROB = 0.5 * pow(PROB, -16);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            }</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            <span class="keywordflow">if</span> (X &lt; 0.0)  PROB = 1.0 - PROB;</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            <span class="comment">// N(p)</span></div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            <span class="keywordflow">if</span> (fequal(PROB, 0.5)) {</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>                X = 0.0;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            }</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            x1 = (PROB &gt; 0.5) ? 1.0 - PROB : PROB;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            <span class="keywordflow">if</span> (fequal(x1, 0.05))</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                X = 1.64485;</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fequal(x1, 0.025))</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                X = 1.95996;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fequal(x1, 0.01))</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                X = 2.32635;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fequal(x1, 0.005))</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                X = 2.57583;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                x1 = -log(4.0 * x1 * (1.0 - x1));</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                X = (-3.231081277E-09 * x1 + 8.360937017E-08) * x1 - 0.00000104527497;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                X = (X * x1 + 0.000005824238515) * x1 + 0.000006841218299;</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                X = ((X * x1 - 0.0002250947176) * x1 - 0.000836435359) * x1 + 0.03706987906;</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                X = X * x1 + 1.570796288;</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                X = sqrt(x1 * X);</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            }</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            <span class="keywordflow">if</span> (PROB &gt; 0.5) X = -X;</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        }</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keywordtype">double</span> pNormal(<span class="keywordtype">double</span> x)</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    {</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordtype">double</span> prob;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        NORMAL(1, x, prob);</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">return</span> 1.0 - prob;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keywordtype">double</span> xNormal(<span class="keywordtype">double</span> prob)</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    {</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordtype">double</span> x, p = 1.0 - prob;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        NORMAL(2, x, p);</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">return</span> x;</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    }</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="comment">//  Chi-2 distribution</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordtype">void</span> CHI(<span class="keywordtype">int</span> IFLAG, <span class="keywordtype">double</span> N, <span class="keywordtype">double</span>&amp; X, <span class="keywordtype">double</span>&amp; PROB)</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    {</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="comment">/*  &#39; Chi-squared distribution subroutine</span></div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="comment"></span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="comment">            &#39; Input</span></div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><span class="comment"></span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment">            &#39;  IFLAG = type of computation</span></div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">            &#39;      1 = given x, compute probability</span></div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="comment">            &#39;      2 = given probability, compute x</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="comment">            &#39;  N     = degrees of freedom; N &gt;= 1</span></div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="comment"></span> </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="comment">            &#39; Output (or input)</span></div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment"></span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">            &#39;  X     = x value; X &gt;=0</span></div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment">            &#39;  PROB  = probability; 0 &lt; PROB &lt;= 1</span></div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment"></span> </div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">            &#39; NOTE: requires subroutine pNORMAL.BAS</span></div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="comment">        */</span></div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keywordtype">int</span> i;</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        <span class="keywordflow">switch</span> (IFLAG) {</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            <span class="comment">//  Chi(x)</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            <span class="keywordtype">double</span> X1, X3;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            <span class="keywordtype">double</span> QF, QP, QX0, QX1, QX2, QX3;</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            <span class="keywordtype">int</span> QPIndex, iN;</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>            <span class="keywordflow">if</span> (fequal(X, 0.0)) {</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>                PROB = 1.0;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            }</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>            <span class="keywordflow">if</span> (N &gt; 40) {</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                X3 = 2.0 / (9.0 * N);</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>                X1 = (pow(X / N, 0.3333333333) - 1.0 + X3) / sqrt(X3);</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                NORMAL(1, X1, PROB);</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>            }</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            iN = N;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            QPIndex = 2 - iN + 2 * (iN / 2);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment">// функции из PROBDIST.H. Временно находятся тут.</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> Eps = 1e-15;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordtype">int</span> fequal(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b)</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">return</span>  (fabs(a - b) &lt; Eps) ? 1 : 0;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    }</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keywordtype">int</span> fcompare(<span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b)</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordtype">double</span> d = a - b;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordtype">int</span> res;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keywordflow">if</span> (fabs(d) &lt; Eps)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            res = 0;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (d &lt; 0.0)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            res = -1;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            res = 1;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">return</span> res;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="comment">// Normal distribution</span></div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordtype">void</span> NORMAL(<span class="keywordtype">int</span> IFLAG, <span class="keywordtype">double</span>&amp; X, <span class="keywordtype">double</span>&amp; PROB)</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="comment">/*    &#39; Normal distribution subroutine</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment"></span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">            &#39; Input</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment"></span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment">            &#39;  IFLAG = type of computation</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment">            &#39;      1 = given x, compute probability</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment">            &#39;      2 = given probability, compute x</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment"></span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment">            &#39; Output (or input)</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment"></span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">            &#39;  X     = x value</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">            &#39;  PROB  = probability; 0 &lt; PROB &lt; 1</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment">        */</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordtype">double</span> x1;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <span class="keywordflow">switch</span> (IFLAG) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            <span class="comment">//  N(x)</span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            x1 = fabs(X);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            <span class="keywordflow">if</span> (x1 &gt; 7)</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                PROB = 0;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                PROB = 1 + x1 * (0.049867347 + x1 * (0.0211410061 + x1 *</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                    (0.0032776263 + x1 * (0.0000380036 + x1 *</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>                        (0.0000488906 + x1 * 0.000005383)))));</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                PROB = 0.5 * pow(PROB, -16);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordflow">if</span> (X &lt; 0.0)  PROB = 1.0 - PROB;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            <span class="comment">// N(p)</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">if</span> (fequal(PROB, 0.5)) {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                X = 0.0;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            }</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            x1 = (PROB &gt; 0.5) ? 1.0 - PROB : PROB;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">if</span> (fequal(x1, 0.05))</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                X = 1.64485;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fequal(x1, 0.025))</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                X = 1.95996;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fequal(x1, 0.01))</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>                X = 2.32635;</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fequal(x1, 0.005))</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                X = 2.57583;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                x1 = -log(4.0 * x1 * (1.0 - x1));</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                X = (-3.231081277E-09 * x1 + 8.360937017E-08) * x1 - 0.00000104527497;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                X = (X * x1 + 0.000005824238515) * x1 + 0.000006841218299;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                X = ((X * x1 - 0.0002250947176) * x1 - 0.000836435359) * x1 + 0.03706987906;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                X = X * x1 + 1.570796288;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                X = sqrt(x1 * X);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            <span class="keywordflow">if</span> (PROB &gt; 0.5) X = -X;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        }</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    }</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordtype">double</span> pNormal(<span class="keywordtype">double</span> x)</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    {</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keywordtype">double</span> prob;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        NORMAL(1, x, prob);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">return</span> 1.0 - prob;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    }</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordtype">double</span> xNormal(<span class="keywordtype">double</span> prob)</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    {</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        <span class="keywordtype">double</span> x, p = 1.0 - prob;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        NORMAL(2, x, p);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">return</span> x;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="comment">//  Chi-2 distribution</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keywordtype">void</span> CHI(<span class="keywordtype">int</span> IFLAG, <span class="keywordtype">double</span> N, <span class="keywordtype">double</span>&amp; X, <span class="keywordtype">double</span>&amp; PROB)</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    {</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <span class="comment">/*  &#39; Chi-squared distribution subroutine</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment"></span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="comment">            &#39; Input</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment"></span> </div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="comment">            &#39;  IFLAG = type of computation</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="comment">            &#39;      1 = given x, compute probability</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="comment">            &#39;      2 = given probability, compute x</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment">            &#39;  N     = degrees of freedom; N &gt;= 1</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment"></span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment">            &#39; Output (or input)</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment"></span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">            &#39;  X     = x value; X &gt;=0</span></div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="comment">            &#39;  PROB  = probability; 0 &lt; PROB &lt;= 1</span></div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="comment"></span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="comment">            &#39; NOTE: requires subroutine pNORMAL.BAS</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="comment">        */</span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keywordtype">int</span> i;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="keywordflow">switch</span> (IFLAG) {</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            <span class="comment">//  Chi(x)</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            <span class="keywordtype">double</span> X1, X3;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            <span class="keywordtype">double</span> QF, QP, QX0, QX1, QX2, QX3;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            <span class="keywordtype">int</span> QPIndex, iN;</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            X3 = sqrt(X);</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            <span class="keywordflow">if</span> (QPIndex != 1) {</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                PROB = exp(-X / 2);</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                QF = PROB / 2;</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            }</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                NORMAL(1, X3, PROB);</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                PROB = 2.0 * PROB;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                QF = 0.3989422804 * exp(-X / 2.0) / X3;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            <span class="keywordflow">if</span> (fequal(X, 0.0)) {</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>                PROB = 1.0;</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            }</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            <span class="keywordflow">if</span> (N &gt; 40) {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>                X3 = 2.0 / (9.0 * N);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                X1 = (pow(X / N, 0.3333333333) - 1.0 + X3) / sqrt(X3);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                NORMAL(1, X1, PROB);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            }</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>            <span class="keywordflow">for</span> (i = QPIndex; i &lt; iN; i += 2) {</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>                QF = QF * X / i;</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>                PROB = PROB + 2.0 * QF;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            }</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            <span class="comment">//  Chi(p)</span></div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            <span class="keywordflow">if</span> (N == 1) {</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>                X1 = PROB;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                X1 = X1 / 2;</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                NORMAL(2, X, X1);</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                X = X * X;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            }</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (N == 2) {</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                X = -2 * log(PROB);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>            iN = N;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>            QPIndex = 2 - iN + 2 * (iN / 2);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            X3 = sqrt(X);</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            <span class="keywordflow">if</span> (QPIndex != 1) {</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>                PROB = exp(-X / 2);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>                QF = PROB / 2;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            }</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>                NORMAL(1, X3, PROB);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>                PROB = 2.0 * PROB;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>                QF = 0.3989422804 * exp(-X / 2.0) / X3;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            }</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            <span class="keywordflow">for</span> (i = QPIndex; i &lt; iN; i += 2) {</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>                QF = QF * X / i;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>                PROB = PROB + 2.0 * QF;</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            }</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>            QX1 = 0;</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            QX2 = 1;</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            QX3 = 0.5;</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>            QP = PROB;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>            <span class="keywordflow">do</span> {</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>                X = 1.0 / QX3 - 1.0;</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                CHI(1, N, X, PROB);</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>                <span class="keywordflow">if</span> (PROB &lt;= QP)</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                    QX1 = QX3;</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                    QX2 = QX3;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            <span class="comment">//  Chi(p)</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>            <span class="keywordflow">if</span> (N == 1) {</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>                X1 = PROB;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>                X1 = X1 / 2;</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>                NORMAL(2, X, X1);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                X = X * X;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>            }</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (N == 2) {</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                X = -2 * log(PROB);</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>            }</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>                QX0 = QX3;</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>                QX3 = (QX1 + QX2) / 2;</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>            } <span class="keywordflow">while</span> (fabs(QX3 - QX0) &gt; (0.00001 * QX3));</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>            X = 1 / QX3 - 1;</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            PROB = QP;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        }</div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    }</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>            QX1 = 0;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>            QX2 = 1;</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>            QX3 = 0.5;</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            QP = PROB;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>                X = 1.0 / QX3 - 1.0;</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>                CHI(1, N, X, PROB);</div>
 <div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keywordtype">double</span> pChiSq(<span class="keywordtype">double</span> x, <span class="keywordtype">int</span> n)</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    {</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <span class="keywordtype">double</span> prob;</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        CHI(1, (<span class="keywordtype">double</span>)n, x, prob);</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        <span class="keywordflow">return</span> 1.0 - prob;</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    }</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span> </div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keywordtype">double</span> xChi(<span class="keywordtype">double</span> prob, <span class="keywordtype">int</span> n)</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>    {</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keywordtype">double</span> x, p = 1.0 - prob;</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        CHI(2, (<span class="keywordtype">double</span>)n, x, p);</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        <span class="keywordflow">return</span> x;</div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    }</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>};</div>
-</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>                <span class="keywordflow">if</span> (PROB &lt;= QP)</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                    QX1 = QX3;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>                    QX2 = QX3;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>                QX0 = QX3;</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                QX3 = (QX1 + QX2) / 2;</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>            } <span class="keywordflow">while</span> (fabs(QX3 - QX0) &gt; (0.00001 * QX3));</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span> </div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>            X = 1 / QX3 - 1;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>            PROB = QP;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        }</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>    }</div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>    <span class="keywordtype">double</span> pChiSq(<span class="keywordtype">double</span> x, <span class="keywordtype">int</span> n)</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>    {</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>        <span class="keywordtype">double</span> prob;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        CHI(1, (<span class="keywordtype">double</span>)n, x, prob);</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <span class="keywordflow">return</span> 1.0 - prob;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    }</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span> </div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <span class="keywordtype">double</span> xChi(<span class="keywordtype">double</span> prob, <span class="keywordtype">int</span> n)</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    {</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        <span class="keywordtype">double</span> x, p = 1.0 - prob;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        CHI(2, (<span class="keywordtype">double</span>)n, x, p);</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>        <span class="keywordflow">return</span> x;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    }</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>};</div>
+</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span> </div>
 <div class="ttc" id="a_poisson_sample_8h_html"><div class="ttname"><a href="_poisson_sample_8h.html">PoissonSample.h</a></div></div>
 <div class="ttc" id="aclass_chi2_histortam_html"><div class="ttname"><a href="class_chi2_histortam.html">Chi2Histortam</a></div><div class="ttdoc">Chi-square class for calculating the chi-square criterion. Can group the sample for applicability of ...</div><div class="ttdef"><b>Definition</b> Chi.h:10</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_a0db9a5c4d39b96c3faf639e15e406dcc"><div class="ttname"><a href="class_chi2_histortam.html#a0db9a5c4d39b96c3faf639e15e406dcc">Chi2Histortam::set_data</a></div><div class="ttdeci">void set_data(Distribution &amp;d, PoissonSample &amp;sample)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from a single distribution.</div><div class="ttdef"><b>Definition</b> Chi.h:127</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_a1e442bdfc869d24b51c5209228823a57"><div class="ttname"><a href="class_chi2_histortam.html#a1e442bdfc869d24b51c5209228823a57">Chi2Histortam::get_distr_len</a></div><div class="ttdeci">int get_distr_len()</div><div class="ttdef"><b>Definition</b> Chi.h:178</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_a3fbf4d62ff092526177dfd8d2411b217"><div class="ttname"><a href="class_chi2_histortam.html#a3fbf4d62ff092526177dfd8d2411b217">Chi2Histortam::get_sample_freq</a></div><div class="ttdeci">double *&amp; get_sample_freq()</div><div class="ttdef"><b>Definition</b> Chi.h:179</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a0db9a5c4d39b96c3faf639e15e406dcc"><div class="ttname"><a href="class_chi2_histortam.html#a0db9a5c4d39b96c3faf639e15e406dcc">Chi2Histortam::set_data</a></div><div class="ttdeci">void set_data(Distribution &amp;d, PoissonSample &amp;sample)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from a single distribution.</div><div class="ttdef"><b>Definition</b> Chi.h:139</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a1e442bdfc869d24b51c5209228823a57"><div class="ttname"><a href="class_chi2_histortam.html#a1e442bdfc869d24b51c5209228823a57">Chi2Histortam::get_distr_len</a></div><div class="ttdeci">int get_distr_len()</div><div class="ttdef"><b>Definition</b> Chi.h:193</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a3fbf4d62ff092526177dfd8d2411b217"><div class="ttname"><a href="class_chi2_histortam.html#a3fbf4d62ff092526177dfd8d2411b217">Chi2Histortam::get_sample_freq</a></div><div class="ttdeci">double *&amp; get_sample_freq()</div><div class="ttdef"><b>Definition</b> Chi.h:194</div></div>
 <div class="ttc" id="aclass_chi2_histortam_html_a494aa91766a9b8fc6e924e4b7d63c7ee"><div class="ttname"><a href="class_chi2_histortam.html#a494aa91766a9b8fc6e924e4b7d63c7ee">Chi2Histortam::Chi2Histortam</a></div><div class="ttdeci">Chi2Histortam()=default</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_a5009892e1ccfaf0546a8a77119120ef4"><div class="ttname"><a href="class_chi2_histortam.html#a5009892e1ccfaf0546a8a77119120ef4">Chi2Histortam::set_data</a></div><div class="ttdeci">void set_data(Distribution &amp;d, PoissonSample &amp;sample, Distribution &amp;d_sample)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from different distributions.</div><div class="ttdef"><b>Definition</b> Chi.h:144</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_a5600971c2ab0b51c7d185336c5eaa6f0"><div class="ttname"><a href="class_chi2_histortam.html#a5600971c2ab0b51c7d185336c5eaa6f0">Chi2Histortam::get_th_freq</a></div><div class="ttdeci">double *&amp; get_th_freq()</div><div class="ttdef"><b>Definition</b> Chi.h:180</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_a6b7c48a69d69c3273e65967f69b7f202"><div class="ttname"><a href="class_chi2_histortam.html#a6b7c48a69d69c3273e65967f69b7f202">Chi2Histortam::get_p</a></div><div class="ttdeci">double get_p()</div><div class="ttdef"><b>Definition</b> Chi.h:174</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_abbe59151d4610e1e5c222f43d1a5ac40"><div class="ttname"><a href="class_chi2_histortam.html#abbe59151d4610e1e5c222f43d1a5ac40">Chi2Histortam::~Chi2Histortam</a></div><div class="ttdeci">~Chi2Histortam()</div><div class="ttdef"><b>Definition</b> Chi.h:117</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_abd56b221c95e8b8cb09ef2fe83ff5c37"><div class="ttname"><a href="class_chi2_histortam.html#abd56b221c95e8b8cb09ef2fe83ff5c37">Chi2Histortam::Chi2Histortam</a></div><div class="ttdeci">Chi2Histortam(Distribution &amp;d, PoissonSample &amp;sample, Distribution &amp;sample_d)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from different distributions.</div><div class="ttdef"><b>Definition</b> Chi.h:110</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_ad13463baabc3adbeef394aa9d18c8528"><div class="ttname"><a href="class_chi2_histortam.html#ad13463baabc3adbeef394aa9d18c8528">Chi2Histortam::calc_chi_parametres</a></div><div class="ttdeci">void calc_chi_parametres()</div><div class="ttdoc">Calculates the criterion, p-value, and degrees of freedom for the sample.</div><div class="ttdef"><b>Definition</b> Chi.h:160</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_ad416d4cee23c7e7be7edd685529f3e84"><div class="ttname"><a href="class_chi2_histortam.html#ad416d4cee23c7e7be7edd685529f3e84">Chi2Histortam::Chi2Histortam</a></div><div class="ttdeci">Chi2Histortam(Distribution &amp;d, PoissonSample &amp;sample)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from a single distribution</div><div class="ttdef"><b>Definition</b> Chi.h:97</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_ae7edc738ec9ac4f60a5ce1d18418d3da"><div class="ttname"><a href="class_chi2_histortam.html#ae7edc738ec9ac4f60a5ce1d18418d3da">Chi2Histortam::get_chi</a></div><div class="ttdeci">double get_chi()</div><div class="ttdef"><b>Definition</b> Chi.h:175</div></div>
-<div class="ttc" id="aclass_chi2_histortam_html_aec4e6e53c341ab3981a815dd1b83ffff"><div class="ttname"><a href="class_chi2_histortam.html#aec4e6e53c341ab3981a815dd1b83ffff">Chi2Histortam::get_df</a></div><div class="ttdeci">int get_df()</div><div class="ttdef"><b>Definition</b> Chi.h:176</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a5009892e1ccfaf0546a8a77119120ef4"><div class="ttname"><a href="class_chi2_histortam.html#a5009892e1ccfaf0546a8a77119120ef4">Chi2Histortam::set_data</a></div><div class="ttdeci">void set_data(Distribution &amp;d, PoissonSample &amp;sample, Distribution &amp;d_sample)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from different distributions.</div><div class="ttdef"><b>Definition</b> Chi.h:156</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a5600971c2ab0b51c7d185336c5eaa6f0"><div class="ttname"><a href="class_chi2_histortam.html#a5600971c2ab0b51c7d185336c5eaa6f0">Chi2Histortam::get_th_freq</a></div><div class="ttdeci">double *&amp; get_th_freq()</div><div class="ttdef"><b>Definition</b> Chi.h:195</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a6b7c48a69d69c3273e65967f69b7f202"><div class="ttname"><a href="class_chi2_histortam.html#a6b7c48a69d69c3273e65967f69b7f202">Chi2Histortam::get_p</a></div><div class="ttdeci">double get_p()</div><div class="ttdef"><b>Definition</b> Chi.h:189</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_a84cc17cc05a9ca590a7f59dc3d42ea4f"><div class="ttname"><a href="class_chi2_histortam.html#a84cc17cc05a9ca590a7f59dc3d42ea4f">Chi2Histortam::apply_chi_criterion</a></div><div class="ttdeci">void apply_chi_criterion()</div><div class="ttdoc">Calculates the criterion, p-value, and degrees of freedom for the sample.</div><div class="ttdef"><b>Definition</b> Chi.h:172</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_abbe59151d4610e1e5c222f43d1a5ac40"><div class="ttname"><a href="class_chi2_histortam.html#abbe59151d4610e1e5c222f43d1a5ac40">Chi2Histortam::~Chi2Histortam</a></div><div class="ttdeci">~Chi2Histortam()</div><div class="ttdef"><b>Definition</b> Chi.h:129</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_abd56b221c95e8b8cb09ef2fe83ff5c37"><div class="ttname"><a href="class_chi2_histortam.html#abd56b221c95e8b8cb09ef2fe83ff5c37">Chi2Histortam::Chi2Histortam</a></div><div class="ttdeci">Chi2Histortam(Distribution &amp;d, PoissonSample &amp;sample, Distribution &amp;sample_d)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from different distributions.</div><div class="ttdef"><b>Definition</b> Chi.h:122</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_ad416d4cee23c7e7be7edd685529f3e84"><div class="ttname"><a href="class_chi2_histortam.html#ad416d4cee23c7e7be7edd685529f3e84">Chi2Histortam::Chi2Histortam</a></div><div class="ttdeci">Chi2Histortam(Distribution &amp;d, PoissonSample &amp;sample)</div><div class="ttdoc">Creates and stores theoretical and sample frequencies from a single distribution</div><div class="ttdef"><b>Definition</b> Chi.h:109</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_ae7edc738ec9ac4f60a5ce1d18418d3da"><div class="ttname"><a href="class_chi2_histortam.html#ae7edc738ec9ac4f60a5ce1d18418d3da">Chi2Histortam::get_chi</a></div><div class="ttdeci">double get_chi()</div><div class="ttdef"><b>Definition</b> Chi.h:190</div></div>
+<div class="ttc" id="aclass_chi2_histortam_html_aec4e6e53c341ab3981a815dd1b83ffff"><div class="ttname"><a href="class_chi2_histortam.html#aec4e6e53c341ab3981a815dd1b83ffff">Chi2Histortam::get_df</a></div><div class="ttdeci">int get_df()</div><div class="ttdef"><b>Definition</b> Chi.h:191</div></div>
 <div class="ttc" id="aclass_distribution_html"><div class="ttname"><a href="class_distribution.html">Distribution</a></div><div class="ttdoc">Poisson distribution class. Calculates the theoretical distribution and stores it in itself.</div><div class="ttdef"><b>Definition</b> Distribution.h:12</div></div>
 <div class="ttc" id="aclass_distribution_html_a0860134568484957da1814bb73cd4356"><div class="ttname"><a href="class_distribution.html#a0860134568484957da1814bb73cd4356">Distribution::get_lambda</a></div><div class="ttdeci">double get_lambda() const</div><div class="ttdef"><b>Definition</b> Distribution.h:115</div></div>
 <div class="ttc" id="aclass_distribution_html_a7bb34d802196525c5603df1a90784c99"><div class="ttname"><a href="class_distribution.html#a7bb34d802196525c5603df1a90784c99">Distribution::get_th_prob_array</a></div><div class="ttdeci">double * get_th_prob_array(int n)</div><div class="ttdoc">Returns double* an array of the first n theoretical values.</div><div class="ttdef"><b>Definition</b> Distribution.h:70</div></div>
