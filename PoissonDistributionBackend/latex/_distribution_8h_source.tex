@@ -13,77 +13,69 @@
 \DoxyCodeLine{00013\ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ lambda;}
 \DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ distr\_name\ =\ \textcolor{stringliteral}{"{}Poisson\ distribution"{}};}
-\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}\ th\_prob;}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ resize\_th\_prob(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n)\ \{}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_prob.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}()\ <\ n)\ \{}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\_cum\ =\ 1\ -\/\ th\_prob[th\_prob.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}()\ -\/\ 1];}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ обновление\ последнего\ элемента,\ так\ как\ он\ равен\ 1\ -\/\ сумма\ всех\ начальных}}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob[th\_prob.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}()\ -\/\ 1]\ =\ th\_prob[th\_prob.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}()\ -\/\ 2]\ *\ (lambda\ /\ ((double)\ th\_prob.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}()\ -\/\ 1));}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ th\_prob.\mbox{\hyperlink{class_vector_afbb7966ec4107c43ec15cccc47fcaef7}{getSize}}();\ i\ <\ n;\ ++i)\ \{\ \textcolor{comment}{//\ заполнение\ оставшихся\ элементов}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(th\_prob[i\ -\/\ 1]\ *\ (lambda\ /\ i));}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ th\_prob[i];}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(1\ -\/\ p\_cum);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//Vector\ th\_prob;}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}*\ th\_probability\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ distr\_len\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ resize\_th\_prob(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ n)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}\ th\_prob;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_ab07d4540bec3d3bdfea8adc928ac1f27}{resize}}(n);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ th\_prob[0]\ =\ (exp(-\/lambda));}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\_cum\ =\ th\_prob[0];}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ n-\/1;\ ++i)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob[i]\ =\ (th\_prob[i\ -\/\ 1]\ *\ (lambda\ /\ i));}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ th\_prob[i];}
 \DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00042\ \ \ \ \ \}}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_distribution_a97c8decea5dedf9f81fca76890b361b7}{Distribution}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_lambda\ =\ 5)\ :\ lambda(\_lambda),\ th\_prob(\ max((int)\ (lambda+2*lambda),\ 10)\ )\{}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ инициализация\ начального\ распределения}}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(exp(-\/lambda));}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\_cum\ =\ th\_prob[0];}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ th\_prob.\mbox{\hyperlink{class_vector_aef2315d94313650c41a2d64940207beb}{getCapacity}}()\ -\/\ 1;\ ++i)\ \{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(th\_prob[i-\/1]\ *\ (lambda\ /\ i));}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ th\_prob[i];}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(1-\/p\_cum);}
-\DoxyCodeLine{00058\ \ \ \ \ \};}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{class_distribution_a8436b77c244c768837c7dec8da5eb885}{\string~Distribution}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ 1)}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob[n\ -\/\ 1]\ =\ 1\ -\/\ p\_cum;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_probability\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_probability;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ th\_probability\ =\ th\_prob.\mbox{\hyperlink{class_vector_ae48eea0ee9ffc44220384950e6162f77}{getDataCopy}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ distr\_len\ =\ n;}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{class_distribution_a97c8decea5dedf9f81fca76890b361b7}{Distribution}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_lambda\ =\ 5)\ :\ lambda(\_lambda)\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ инициализация\ начального\ распределения}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ resize\_th\_prob(max((\textcolor{keywordtype}{int})(lambda\ +\ 2\ *\ lambda),\ 10));}
+\DoxyCodeLine{00060\ \ \ \ \ \};}
 \DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \ \ \ \ }
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(\textcolor{keywordtype}{int}\ n)\ \{}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ resize\_th\_prob(n);}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ res\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[n];}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\_cum\ =\ 0;}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n\ -\/\ 1;\ ++i)\ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ th\_prob[i];}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ res[i]\ =\ th\_prob[i];}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ res[n\ -\/\ 1]\ =\ 1\ -\/\ p\_cum;}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
-\DoxyCodeLine{00080\ \ \ \ \ \}}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}{get\_th\_prob\_element}}(\textcolor{keywordtype}{int}\ index)\ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ resize\_th\_prob(index+1);}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ th\_prob[index];}
-\DoxyCodeLine{00090\ \ \ \ \ \}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ }
-\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_distribution_a115a01e72956bdfd28d6731737b01faa}{set\_lambda}}(\textcolor{keywordtype}{double}\ \_lambda)\ \{}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ lambda\ =\ \_lambda;}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a8dd7bbcace48a9b6e6a000cb80054fbf}{clear}}();}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(exp(-\/lambda));}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_ad3a8a6ab8557a9282ca797590082e0ed}{reserve}}(\ (\textcolor{keywordtype}{int})\ (lambda\ +\ lambda*3)\ );}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\_cum\ =\ th\_prob[0];}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ th\_prob.\mbox{\hyperlink{class_vector_aef2315d94313650c41a2d64940207beb}{getCapacity}}()\ -\/\ 1;\ ++i)\ \{}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(th\_prob[i\ -\/\ 1]\ *\ (lambda\ /\ i));}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ p\_cum\ +=\ th\_prob[i];}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ th\_prob.\mbox{\hyperlink{class_vector_a762d62609d78fc2c59fc01774e806b3a}{push}}(1\ -\/\ p\_cum);}
-\DoxyCodeLine{00108\ \ \ \ \ \}}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Getters}}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_distribution_a99eab816261f89fcfb7892a3a9f6583f}{get\_name}}()\ \{}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ distr\_name;}
-\DoxyCodeLine{00113\ \ \ \ \ \}}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ lambda;\ \};}
-\DoxyCodeLine{00116\ }
-\DoxyCodeLine{00117\ \ \ \ \ }
-\DoxyCodeLine{00118\ \};}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_distribution_a68522687bdcca605cce35adb68afdcac}{\string~Distribution}}()\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_probability\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_probability;}
+\DoxyCodeLine{00065\ \ \ \ \ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(\textcolor{keywordtype}{int}\ n)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ resize\_th\_prob(n);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ th\_probability;}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}{get\_th\_prob\_element}}(\textcolor{keywordtype}{int}\ index)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ distr\_len\ -\/\ 1)}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ resize\_th\_prob((index+10)*2);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ th\_probability[index];}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_distribution_a115a01e72956bdfd28d6731737b01faa}{set\_lambda}}(\textcolor{keywordtype}{double}\ \_lambda)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ lambda\ =\ \_lambda;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ resize\_th\_prob(max((\textcolor{keywordtype}{int})(lambda\ +\ 2\ *\ lambda),\ 10));}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_distribution_a89af7d73a2f0dcabcecd73889b53b0c3}{get\_name}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ distr\_name;}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_distribution_a2291f24ab998666fae31ed6661e563cd}{get\_distr\_len}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ distr\_len;\ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ lambda;\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ }
+\DoxyCodeLine{00110\ \};}
 
 \end{DoxyCode}

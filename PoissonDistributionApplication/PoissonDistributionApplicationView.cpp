@@ -51,7 +51,7 @@ BOOL CPoissonDistributionApplicationView::PreCreateWindow(CREATESTRUCT& cs)
 	return CView::PreCreateWindow(cs);
 }
 
-double findMax(double* arr, size_t n) {
+double findMax(const double* arr, size_t n) {
 
     double maxVal = arr[0];
     for (size_t i = 1; i < n; ++i) {
@@ -64,7 +64,7 @@ double findMax(double* arr, size_t n) {
 }
 
 // Функция для отрисовки гистограммы 
-void DrawHistogram(CDC* pDC, double* th_values, double* sample_values, double* indexes, int distr_len, CRect rect)
+void DrawHistogram(CDC* pDC, const double* th_values, const double* sample_values, double* indexes, int distr_len, CRect rect)
 {
     // Определим границы для осей x и y
     double min_y = 0.0;
@@ -148,7 +148,7 @@ void DrawHistogram(CDC* pDC, double* th_values, double* sample_values, double* i
 }
 
 // Функция для отрисовки графика
-void DrawLines(CDC* pDC, double* th_values, double* sample_values, int distr_len, CRect rect) {
+void DrawLines(CDC* pDC, const double* th_values, const double* sample_values, int distr_len, CRect rect) {
     // Определим границы для осей x и y
     double min_y = 0.0;
     double max_y;
@@ -263,8 +263,8 @@ void DrawSampleHist(CDC* pDC, CPoissonDistributionApplicationDoc* pDoc, CRect re
     Chi2Histortam& chi = pDoc->getChi();
     PoissonSample* ps = pDoc->GetPs();
     int distr_len = chi.get_distr_len();
-    double* th_freq = chi.get_th_freq();
-    double* sample_freq = chi.get_sample_freq();
+    const double* th_freq = chi.get_th_freq();
+    const double* sample_freq = chi.get_sample_freq();
     double* indexes = new double[distr_len];
     for (int i = 0; i < distr_len; i++)
         indexes[i] = i;

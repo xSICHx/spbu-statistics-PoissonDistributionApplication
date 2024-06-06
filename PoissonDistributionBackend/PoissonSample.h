@@ -23,6 +23,13 @@ protected:
     /// </summary>
     int N_samples;
 
+    /// <summary>
+    /// Array of sampling frequencies
+    /// </summary>
+    double* sample_freq = nullptr;
+    int sample_freq_len = 0;
+
+
 
 public:
     PoissonSample() = default;
@@ -33,7 +40,9 @@ public:
     /// <param name="d">Theoretical distribution</param>
     /// <param name="_N_samples">Number of elements in the sample</param>
     PoissonSample(mt19937& _gen, Distribution& d, int _N_samples = 100) : gen(_gen), N_samples(_N_samples){}
-    virtual ~PoissonSample() = default;
+    virtual ~PoissonSample() {
+        delete[] sample_freq;
+    };
 
     /// <summary>
     /// Generate one sample item
@@ -43,25 +52,23 @@ public:
     virtual int simulate(Distribution& d) const = 0;
     
     /// <summary>
-    /// Generates a whole sample
+    /// Generates a whole sample. Must be deleted. 
     /// </summary>
     /// <param name="d">Theoretical distribution</param>
     /// <param name="len_sample">Sample length</param>
-    /// <param name="init_len_sample">Additional parameter.
-    /// If you want a sample whose array consists of at least init_len_sample values.</param>.
+    /// <param name="init_sample_freq_len">Additional parameter.
+    /// If you want a sample whose array consists of at least init_sample_freq_len values.</param>.
     /// <returns>Sampling</returns>
-    virtual double* generate_sample(Distribution& d, int& len_sample, ///< Сколько элементов будет в частотах массива >
-        int init_len_sample = -1 // если нужно заранее задать размер, все элементы будут нулевые
+    virtual void generate_sample(Distribution& d, 
+        int init_sample_freq_len = -1 // если нужно заранее задать размер, все элементы будут нулевые
     ) {
-        if (N_samples < 50) {
-            cerr << "Error: Sample size should be more 50" << endl;
-        }
+        if (sample_freq != nullptr)
+            delete[] sample_freq;
 
         Vector sample;
-        if (init_len_sample > 0) {
-            sample.resize(init_len_sample);
+        if (init_sample_freq_len > 0) {
+            sample.resize(init_sample_freq_len);
         }
-            
             
 
         double lambda = d.get_lambda();
@@ -73,8 +80,8 @@ public:
             }
             ++sample[curr_elem];
         }
-        len_sample = sample.getSize();
-        return sample.getDataCopy();
+        sample_freq_len = sample.getSize();
+        sample_freq = sample.getDataCopy();
     }
 
     
@@ -82,7 +89,10 @@ public:
 
     int get_N() { return N_samples; };
     void set_N(int _N) { N_samples = _N; }
-
+    const double* get_sample_freq() {
+        return sample_freq;
+    }
+    int get_sample_freq_len() { return sample_freq_len; }
 };
 
 

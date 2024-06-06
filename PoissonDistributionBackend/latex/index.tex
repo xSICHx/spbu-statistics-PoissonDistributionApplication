@@ -1,8 +1,7 @@
 \chapter{Classes for generating the Poisson distribution and calculating the chi square criterion for hypothesis testing}
 \hypertarget{index}{}\label{index}\index{Classes for generating the Poisson distribution and calculating the chi square criterion for hypothesis testing@{Classes for generating the Poisson distribution and calculating the chi square criterion for hypothesis testing}}
-Example of using Poisson\+Distribution 
+Example of using Poisson\+Distribution project 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ <iostream>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_distribution_8h}{Distribution.h}}"{}}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_poisson_sample_8h}{PoissonSample.h}}"{}}}
@@ -11,7 +10,7 @@ Example of using Poisson\+Distribution
 \DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//\ Function\ for\ output\ double*}}
-\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(\textcolor{keywordtype}{double}*\ arr,\ \textcolor{keywordtype}{int}\ n)\ \{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(\textcolor{keywordtype}{double}*\ arr,\ \textcolor{keywordtype}{int}\ n)\ \{}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ i++)}
 \DoxyCodeLine{\ \ \ \ \{}
 \DoxyCodeLine{\ \ \ \ \ \ \ \ cout\ <<\ arr[i]\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
@@ -22,6 +21,36 @@ Example of using Poisson\+Distribution
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
 \DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}How\ to\ use\ Distribution\ class:\ "{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_distribution}{Distribution}}\ d1(6);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_prob\ =\ d1.get\_th\_prob\_array(20);\ \textcolor{comment}{//\ Obtaining\ the\ vector\ of\ theoretical\ probabilities}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Theoretical\ probabilities\ with\ lambda\ =\ 6:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(th\_prob,\ 20);}
+\DoxyCodeLine{\ \ \ \ d1.set\_lambda(11);\ \textcolor{comment}{//\ Substitution\ of\ lambda\ in\ the\ theoretical\ distribution}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ th\_15\ =\ d1.get\_th\_prob\_element(15);\ \textcolor{comment}{//\ Get\ 15-\/th\ element\ of\ theoretical\ distribution}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}15-\/th\ element\ of\ theoretical\ distribution\ with\ lambda\ =\ 11"{}}\ <<\ endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nHow\ to\ use\ PoissonSample\ classes:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ mt19937\ mt3(100);\ \textcolor{comment}{//\ Random\ number\ generator}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_distribution}{Distribution}}\ d3(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\_samples3\ =\ 100;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}*\ ps3\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_poisson_sample_inverse}{PoissonSampleInverse}}(mt3,\ d3,\ n\_samples3);\ \textcolor{comment}{//\ Pointer\ on\ sample\ generator\ by\ inverse\ function\ method}}
+\DoxyCodeLine{\ \ \ \ \ \textcolor{comment}{//\ Generate\ one\ element\ from\ Poisson\ distribution}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}One\ element\ from\ Poisson\ distribution\ simulated\ by\ inverse\ function\ method:\ "{}}\ <<\ ps3-\/>\mbox{\hyperlink{class_poisson_sample_a2a3f9ac1bb0ed2417fac207cbc8ed67e}{simulate}}(d3)\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{delete}\ ps3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ps3\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_poisson_sample_random_variables}{PoissonSampleRandomVariables}}(mt3,\ d3,\ n\_samples3);\ \textcolor{comment}{//\ Pointer\ on\ sample\ generator\ by\ table\ inverse\ function\ method}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ distr\_len3;\ \textcolor{comment}{//\ The\ length\ of\ the\ distribution,\ will\ be\ calculated\ when\ the\ sample\ is\ generated}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Distribution\ generation\ and\ calculation\ of\ the\ length\ of\ grouped\ frequencies}}
+\DoxyCodeLine{\ \ \ \ ps3-\/>\mbox{\hyperlink{class_poisson_sample_a849bd2a4822be7eb7853afb3fb1dca5e}{generate\_sample}}(d3);}
+\DoxyCodeLine{\ \ \ \ distr\_len3\ =\ ps3-\/>\mbox{\hyperlink{class_poisson_sample_ad6a9bea2455e992dc022c405e44288e3}{get\_sample\_freq\_len}}();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ sample\_vec3\ =\ ps3-\/>\mbox{\hyperlink{class_poisson_sample_aa4146e589f53ad2c7ba84a741589b0fd}{get\_sample\_freq}}();}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Sample\ frequencies\ with\ lambda\ =\ 5\ generated\ by\ table\ inverse\ function\ method:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(sample\_vec3,\ distr\_len3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{delete}\ ps3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nHow\ to\ use\ Chi2Histogram\ class:"{}}\ <<\ endl;}
 \DoxyCodeLine{\ \ \ \ mt19937\ mt(100);\ \textcolor{comment}{//\ Random\ number\ generator}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
@@ -30,20 +59,14 @@ Example of using Poisson\+Distribution
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ distr\_len;\ \textcolor{comment}{//\ The\ length\ of\ the\ distribution,\ will\ be\ calculated\ when\ the\ sample\ is\ generated}}
 \DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Distribution\ generation\ and\ calculation\ of\ the\ length\ of\ grouped\ frequencies}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}*\ sample\_vec\ =\ ps.generate\_sample(d,\ distr\_len);}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}*\ th\_vec\ =\ d.get\_th\_prob\_array(distr\_len);\ \textcolor{comment}{//\ Obtaining\ the\ vector\ of\ theoretical\ probabilities}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ distr\_len;\ i++)\ \textcolor{comment}{//\ Taking\ sample\ to\ probabilities}}
-\DoxyCodeLine{\ \ \ \ \{}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ sample\_vec[i]\ /=\ n\_samples;}
-\DoxyCodeLine{\ \ \ \ \}}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(sample\_vec,\ distr\_len);\ \textcolor{comment}{//\ Displaying\ sample\ values\ on\ the\ screen}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(th\_vec,\ distr\_len);\ \textcolor{comment}{//\ Displaying\ theoretical\ values\ on\ the\ screen}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{delete}[]\ th\_vec;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{delete}[]\ sample\_vec;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ ps.generate\_sample(d);\ \textcolor{comment}{//\ Generates\ and\ stores\ sample\ grouped\ frequencies}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ sample\_vec\ =\ ps.get\_sample\_freq();\ \textcolor{comment}{//\ Get\ sample\ grouped\ frequencies}}
+\DoxyCodeLine{\ \ \ \ distr\_len\ =\ ps.get\_sample\_freq\_len();\ \textcolor{comment}{//\ Get\ length\ of\ sample\ grouped\ frequencies}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_vec\ =\ d.get\_th\_prob\_array(distr\_len);\ \textcolor{comment}{//\ Obtaining\ the\ vector\ of\ theoretical\ probabilities}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Sample\ frequencies\ with\ lambda\ =\ 5:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(sample\_vec,\ distr\_len);\ \textcolor{comment}{//\ Displaying\ sample\ frequencies\ on\ the\ screen}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Theoretical\ probabilities\ with\ lambda\ =\ 5:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(th\_vec,\ distr\_len);\ \textcolor{comment}{//\ Displaying\ theoretical\ probabilities\ on\ the\ screen\ }}
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ d.set\_lambda(10);\ \textcolor{comment}{//\ Substitution\ of\ lambda\ in\ the\ theoretical\ distribution}}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_chi2_histortam}{Chi2Histortam}}\ chi(d,\ ps);\ \textcolor{comment}{//\ Initialization\ of\ the\ class\ for\ Chi\string^2\ criterion\ calculation}}
@@ -51,64 +74,17 @@ Example of using Poisson\+Distribution
 \DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ counts\ degrees\ of\ freedom,\ criterion\ value,\ p-\/level}}
 \DoxyCodeLine{\ \ \ \ chi.apply\_chi\_criterion();}
 \DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}p-\/level\ =\ "{}}\ <<\ chi.get\_p()\ <<\ endl;}
 \DoxyCodeLine{\ \ \ \ distr\_len\ =\ chi.get\_distr\_len();\ \textcolor{comment}{//\ Obtaining\ the\ length\ of\ the\ distribution\ for\ which\ the\ criterion\ was\ applied}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}*\ sample\_freq\ =\ chi.get\_sample\_freq();\ \textcolor{comment}{//\ Obtaining\ a\ sample\ for\ which\ the\ criterion\ was\ applied}}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}*\ th\_freq\ =\ chi.get\_th\_freq();\ \textcolor{comment}{//\ Obtaining\ the\ frequencies\ for\ which\ the\ criterion\ was\ applied}}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(sample\_freq,\ distr\_len);\ \textcolor{comment}{//\ Sample\ output}}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(th\_freq,\ distr\_len);\ \textcolor{comment}{//\ Derivation\ of\ theoretical\ values}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ sample\_freq\ =\ chi.get\_sample\_freq();\ \textcolor{comment}{//\ Obtaining\ a\ sample\ for\ which\ the\ criterion\ was\ applied}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_freq\ =\ chi.get\_th\_freq();\ \textcolor{comment}{//\ Obtaining\ the\ frequencies\ for\ which\ the\ criterion\ was\ applied}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Sample\ frequencies\ with\ lambda\ =\ 10:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(sample\_freq,\ distr\_len);\ \textcolor{comment}{//\ Sample\ output}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Theoretical\ frequencies\ with\ lambda\ =\ 10:"{}}\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_poisson_distribution_backend_8cpp_a29b513d6ef53968d0957c46e5e4e82ee}{print\_vec}}(th\_freq,\ distr\_len);\ \textcolor{comment}{//\ Derivation\ of\ theoretical\ values}}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}p-\/level\ =\ "{}}\ <<\ chi.get\_p()\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Chi-\/value\ =\ "{}}\ <<\ chi.get\_chi()\ <<\ endl;}
+\DoxyCodeLine{\ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}d.f\ =\ "{}}\ <<\ chi.get\_df()\ <<\ endl;}
 \DoxyCodeLine{\}}
-
-\end{DoxyCode}
-
-
-Example of using \doxylink{class_distribution}{Distribution} class 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
-\DoxyCodeLine{\textcolor{keywordtype}{double}*\ th\_prob\ =\ d.get\_th\_prob\_array(20);\ \textcolor{comment}{//\ Obtaining\ the\ vector\ of\ theoretical\ probabilities}}
-\DoxyCodeLine{d.set\_lambda(10);\ \textcolor{comment}{//\ Substitution\ of\ lambda\ in\ the\ theoretical\ distribution}}
-\DoxyCodeLine{\textcolor{keywordtype}{double}\ th\_20\ =\ d.get\_th\_prob\_element(20);\ \textcolor{comment}{//\ Get\ 20-\/th\ element\ of\ theoretical\ distribution}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{delete}[]\ th\_prob;}
-
-\end{DoxyCode}
-
-
-Example of using \doxylink{class_poisson_sample}{Poisson\+Sample} classes 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{mt19937\ mt(100);\ \textcolor{comment}{//\ Random\ number\ generator}}
-\DoxyCodeLine{\mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
-\DoxyCodeLine{\textcolor{keywordtype}{int}\ n\_samples\ =\ 100;}
-\DoxyCodeLine{\mbox{\hyperlink{class_poisson_sample}{PoissonSample}}*\ ps\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_poisson_sample_inverse}{PoissonSampleInverse}}(mt,\ d,\ n\_samples);\ \textcolor{comment}{//\ Pointer\ on\ sample\ generator\ by\ inverse\ function\ method}}
-\DoxyCodeLine{ps-\/>\mbox{\hyperlink{class_poisson_sample_a2a3f9ac1bb0ed2417fac207cbc8ed67e}{simulate}}(d);\ \textcolor{comment}{//\ Generate\ one\ element\ from\ Poisson\ distribution}}
-\DoxyCodeLine{\textcolor{keywordtype}{int}\ distr\_len;\ \textcolor{comment}{//\ The\ length\ of\ the\ distribution,\ will\ be\ calculated\ when\ the\ sample\ is\ generated}}
-\DoxyCodeLine{\textcolor{comment}{//\ Distribution\ generation\ and\ calculation\ of\ the\ length\ of\ grouped\ frequencies}}
-\DoxyCodeLine{\textcolor{keywordtype}{double}*\ sample\_vec\ =\ ps-\/>\mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(d,\ distr\_len);}
-\DoxyCodeLine{\textcolor{keyword}{delete}[]\ sample\_vec;}
-\DoxyCodeLine{\textcolor{keyword}{delete}\ ps;}
-\DoxyCodeLine{}
-\DoxyCodeLine{ps\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_poisson_sample_inverse_table}{PoissonSampleInverseTable}}(mt,\ d,\ n\_samples);\ \textcolor{comment}{//\ Pointer\ on\ sample\ generator\ by\ table\ inverse\ function\ method}}
-\DoxyCodeLine{\textcolor{keyword}{delete}\ ps;}
-
-\end{DoxyCode}
-
-
-Example of using \doxylink{class_chi2_histortam}{Chi2\+Histortam} class 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{mt19937\ mt(100);\ \textcolor{comment}{//\ Random\ number\ generator}}
-\DoxyCodeLine{\mbox{\hyperlink{class_distribution}{Distribution}}\ d(5);\ \textcolor{comment}{//\ Poisson\ distribution\ with\ lambda\ =\ 5}}
-\DoxyCodeLine{\mbox{\hyperlink{class_poisson_sample_random_variables}{PoissonSampleRandomVariables}}\ ps(mt,\ d,\ 100);}
-\DoxyCodeLine{\mbox{\hyperlink{class_chi2_histortam}{Chi2Histortam}}\ chi(d,\ ps);\ \textcolor{comment}{//\ Initialization\ of\ the\ class\ for\ Chi\string^2\ criterion\ calculation}}
-\DoxyCodeLine{\textcolor{comment}{//\ Criterion\ Application.\ Groups\ the\ sample\ under\ the\ conditions\ of\ criterion\ applicability,}}
-\DoxyCodeLine{\textcolor{comment}{//\ counts\ degrees\ of\ freedom,\ criterion\ value,\ p-\/level}}
-\DoxyCodeLine{chi.apply\_chi\_criterion();}
-\DoxyCodeLine{}
-\DoxyCodeLine{cout\ <<\ \textcolor{stringliteral}{"{}p-\/level\ =\ "{}}\ <<\ chi.get\_p()\ <<\ endl;}
-\DoxyCodeLine{\textcolor{keywordtype}{int}\ distr\_len\ =\ chi.get\_distr\_len();\ \textcolor{comment}{//\ Obtaining\ the\ length\ of\ the\ distribution\ for\ which\ the\ criterion\ was\ applied}}
-\DoxyCodeLine{\textcolor{keywordtype}{double}*\ sample\_freq\ =\ chi.get\_sample\_freq();\ \textcolor{comment}{//\ Obtaining\ a\ sample\ for\ which\ the\ criterion\ was\ applied}}
-\DoxyCodeLine{\textcolor{keywordtype}{double}*\ th\_freq\ =\ chi.get\_th\_freq();\ \textcolor{comment}{//\ Obtaining\ the\ frequencies\ for\ which\ the\ criterion\ was\ applied}}
-\DoxyCodeLine{\mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(sample\_freq,\ distr\_len);\ \textcolor{comment}{//\ Sample\ output}}
-\DoxyCodeLine{\mbox{\hyperlink{_poisson_distribution_backend_8cpp_aec8982f42dc7ec005ca4b6d76fc6d9e9}{print\_vec}}(th\_freq,\ distr\_len);\ \textcolor{comment}{//\ Derivation\ of\ theoretical\ values}}
 
 \end{DoxyCode}
  

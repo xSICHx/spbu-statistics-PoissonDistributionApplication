@@ -14,15 +14,17 @@ Poisson distribution class. Calculates the theoretical distribution and stores i
 \item 
 \mbox{\hyperlink{class_distribution_a97c8decea5dedf9f81fca76890b361b7}{Distribution}} (const double \+\_\+lambda=5)
 \begin{DoxyCompactList}\small\item\em Creates an initial Poisson distribution. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_distribution_a8436b77c244c768837c7dec8da5eb885}{\texorpdfstring{$\sim$}{\string~}\+Distribution}} ()=default
+\mbox{\hyperlink{class_distribution_a68522687bdcca605cce35adb68afdcac}{\texorpdfstring{$\sim$}{\string~}\+Distribution}} ()
 \item 
-double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\+\_\+th\+\_\+prob\+\_\+array}} (int n)
-\begin{DoxyCompactList}\small\item\em Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values. \end{DoxyCompactList}\item 
+const double \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\+\_\+th\+\_\+prob\+\_\+array}} (int n)
+\begin{DoxyCompactList}\small\item\em Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values. Must be deleted. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_distribution_a46a10cb6ccbaecf6b0d078e286434b48}{get\+\_\+th\+\_\+prob\+\_\+element}} (int index)
 \begin{DoxyCompactList}\small\item\em Returns the element of the theoretical value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_distribution_a115a01e72956bdfd28d6731737b01faa}{set\+\_\+lambda}} (double \+\_\+lambda)
 \begin{DoxyCompactList}\small\item\em Setter lambda. Updates the array of theoretical distribution. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{class_distribution_a99eab816261f89fcfb7892a3a9f6583f}{get\+\_\+name}} ()
+string \mbox{\hyperlink{class_distribution_a89af7d73a2f0dcabcecd73889b53b0c3}{get\+\_\+name}} () const
+\item 
+int \mbox{\hyperlink{class_distribution_a2291f24ab998666fae31ed6661e563cd}{get\+\_\+distr\+\_\+len}} () const
 \item 
 double \mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\+\_\+lambda}} () const
 \end{DoxyCompactItemize}
@@ -47,26 +49,32 @@ Creates an initial Poisson distribution.
 {\em \+\_\+lambda} & \doxylink{class_distribution}{Distribution} parameter\\
 \hline
 \end{DoxyParams}
-\Hypertarget{class_distribution_a8436b77c244c768837c7dec8da5eb885}\index{Distribution@{Distribution}!````~Distribution@{\texorpdfstring{$\sim$}{\string~}Distribution}}
+\Hypertarget{class_distribution_a68522687bdcca605cce35adb68afdcac}\index{Distribution@{Distribution}!````~Distribution@{\texorpdfstring{$\sim$}{\string~}Distribution}}
 \index{````~Distribution@{\texorpdfstring{$\sim$}{\string~}Distribution}!Distribution@{Distribution}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Distribution()}{\string~Distribution()}}
-{\footnotesize\ttfamily \label{class_distribution_a8436b77c244c768837c7dec8da5eb885} 
-Distribution\+::\texorpdfstring{$\sim$}{\string~}\+Distribution (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+{\footnotesize\ttfamily \label{class_distribution_a68522687bdcca605cce35adb68afdcac} 
+Distribution\+::\texorpdfstring{$\sim$}{\string~}\+Distribution (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \doxysubsection{Методы}
+\Hypertarget{class_distribution_a2291f24ab998666fae31ed6661e563cd}\index{Distribution@{Distribution}!get\_distr\_len@{get\_distr\_len}}
+\index{get\_distr\_len@{get\_distr\_len}!Distribution@{Distribution}}
+\doxysubsubsection{\texorpdfstring{get\_distr\_len()}{get\_distr\_len()}}
+{\footnotesize\ttfamily \label{class_distribution_a2291f24ab998666fae31ed6661e563cd} 
+int Distribution\+::get\+\_\+distr\+\_\+len (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \Hypertarget{class_distribution_a0860134568484957da1814bb73cd4356}\index{Distribution@{Distribution}!get\_lambda@{get\_lambda}}
 \index{get\_lambda@{get\_lambda}!Distribution@{Distribution}}
 \doxysubsubsection{\texorpdfstring{get\_lambda()}{get\_lambda()}}
 {\footnotesize\ttfamily \label{class_distribution_a0860134568484957da1814bb73cd4356} 
 double Distribution\+::get\+\_\+lambda (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_distribution_a99eab816261f89fcfb7892a3a9f6583f}\index{Distribution@{Distribution}!get\_name@{get\_name}}
+\Hypertarget{class_distribution_a89af7d73a2f0dcabcecd73889b53b0c3}\index{Distribution@{Distribution}!get\_name@{get\_name}}
 \index{get\_name@{get\_name}!Distribution@{Distribution}}
 \doxysubsubsection{\texorpdfstring{get\_name()}{get\_name()}}
-{\footnotesize\ttfamily \label{class_distribution_a99eab816261f89fcfb7892a3a9f6583f} 
-string Distribution\+::get\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \label{class_distribution_a89af7d73a2f0dcabcecd73889b53b0c3} 
+string Distribution\+::get\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_distribution_a7bb34d802196525c5603df1a90784c99}\index{Distribution@{Distribution}!get\_th\_prob\_array@{get\_th\_prob\_array}}
 \index{get\_th\_prob\_array@{get\_th\_prob\_array}!Distribution@{Distribution}}
@@ -76,7 +84,9 @@ double \texorpdfstring{$\ast$}{*} Distribution\+::get\+\_\+th\+\_\+prob\+\_\+arr
 
 
 
-Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values. 
+Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values. Must be deleted. 
+
+Returns double\texorpdfstring{$\ast$}{*} an array of the first n theoretical values.
 
 
 \begin{DoxyParams}{Аргументы}

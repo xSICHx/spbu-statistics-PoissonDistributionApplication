@@ -13,7 +13,7 @@ private:
     /// <summary>
     /// Sample values
     /// </summary>
-    double* sample_freq = nullptr;
+    const double* sample_freq = nullptr;
     /// <summary>
     /// Theoretical values
     /// </summary>
@@ -79,11 +79,6 @@ private:
         // добавляем строку в начало
         th_chied[0] = tmp_th;
         sample_chied[0] = tmp_sample;
-
-		for (int i = 0; i < chied_len; ++i) {
-			double sfdaad = th_chied[i];
-			int afsdaf = 0;
-		}
     }
 
     /// <summary>
@@ -107,12 +102,21 @@ public:
 	/// <param name="d"> Distribution </param>
 	/// <param name="sample"> Sample </param>
 	Chi2Histortam(Distribution& d, PoissonSample& sample) {
-		sample_freq = sample.generate_sample(d, distr_len);
-		th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+		sample.generate_sample(d);
+		sample_freq = sample.get_sample_freq();
+		distr_len = sample.get_sample_freq_len();
+
+		const double* th_prob = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+		double* tmp_th_freq = new double[distr_len];
 		for (int i = 0; i < distr_len; ++i)
-			th_freq[i] *= sample.get_N();
+			tmp_th_freq[i] = th_prob[i] * sample.get_N();
+
+		if (th_freq != nullptr)
+			delete[] th_freq;
+		th_freq = tmp_th_freq;
 
 	};
+
 	/// <summary>
 	/// Creates and stores theoretical and sample frequencies from different distributions.
 	/// </summary>
@@ -120,15 +124,23 @@ public:
 	/// <param name="sample"> Sample </param>
 	/// <param name="d_sample"> Distribution for the sample </param>
     Chi2Histortam(Distribution& d, PoissonSample& sample, Distribution& sample_d) {
-        sample_freq = sample.generate_sample(sample_d, distr_len, (int) (d.get_lambda() + d.get_lambda()*2) );
-        th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
-        for (int i = 0; i < distr_len; ++i)
-            th_freq[i] *= sample.get_N();
+		sample.generate_sample(sample_d, (int)(d.get_lambda() + d.get_lambda() * 2));
+		sample_freq = sample.get_sample_freq();
+		distr_len = sample.get_sample_freq_len();
+        
+		const double* th_prob = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+		double* tmp_th_freq = new double[distr_len];
+		for (int i = 0; i < distr_len; ++i)
+			tmp_th_freq[i] = th_prob[i] * sample.get_N();
 
+		if (th_freq != nullptr)
+			delete[] th_freq;
+		th_freq = tmp_th_freq;
     };
+
     ~Chi2Histortam() {
-        delete[] sample_freq;
-        delete[] th_freq;
+		if (th_freq != nullptr)
+			delete[] th_freq;
     };
 
 	/// <summary>
@@ -137,14 +149,18 @@ public:
 	/// <param name="d"> Distribution </param>
 	/// <param name="sample"> Sample </param>
 	void set_data(Distribution& d, PoissonSample& sample) {
-		delete[] sample_freq;
-		delete[] th_freq;
+		sample.generate_sample(d);
+		distr_len = sample.get_sample_freq_len();
+		sample_freq = sample.get_sample_freq();
 
-		sample_freq = sample.generate_sample(d, distr_len);
-
-		th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+		const double* th_prob = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+		double* tmp_th_freq = new double[distr_len];
 		for (int i = 0; i < distr_len; ++i)
-			th_freq[i] *= sample.get_N();
+			tmp_th_freq[i] = th_prob[i] * sample.get_N();
+
+		if (th_freq != nullptr)
+			delete[] th_freq;
+		th_freq = tmp_th_freq;
 	}
 
 	/// <summary>
@@ -154,16 +170,18 @@ public:
 	/// <param name="sample"> Sample </param>
 	/// <param name="d_sample"> Distribution for the sample </param>
     void set_data(Distribution& d, PoissonSample& sample, Distribution& d_sample) {
-        delete[] sample_freq;
-        delete[] th_freq;
+		sample.generate_sample(d_sample, (int)(d.get_lambda() + d.get_lambda() * 2));
+		sample_freq = sample.get_sample_freq();
+		distr_len = sample.get_sample_freq_len();
 
+		const double* th_prob = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
+		double* tmp_th_freq = new double[distr_len];
+		for (int i = 0; i < distr_len; ++i)
+			tmp_th_freq[i] = th_prob[i] * sample.get_N();
 
-        sample_freq = sample.generate_sample(d_sample, distr_len, (int)(d.get_lambda() + d.get_lambda() * 2));
-
-        th_freq = d.get_th_prob_array(distr_len); // пока что не частоты, а вероятности
-
-        for (int i = 0; i < distr_len; ++i)
-            th_freq[i] *= sample.get_N();
+		if (th_freq != nullptr)
+			delete[] th_freq;
+		th_freq = tmp_th_freq;
     }
 
 	/// <summary>
@@ -179,8 +197,6 @@ public:
         p = 1 - pChiSq(chi, df);
 
 
-
-
         delete[] th_chied;
         delete[] sample_chied;
     }
@@ -191,8 +207,8 @@ public:
     int get_df() { return df; }
 
     int get_distr_len() { return distr_len; }
-    double*& get_sample_freq() { return sample_freq; }
-    double*& get_th_freq() { return th_freq; }
+    const double* get_sample_freq() { return sample_freq; }
+    const double* get_th_freq() { return th_freq; }
 
 
 // функции из PROBDIST.H. Временно находятся тут.

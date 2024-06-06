@@ -9,7 +9,7 @@
 \DoxyCodeLine{00010\ \{}
 \DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ distr\_len\ =\ 0;}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{double}*\ sample\_freq\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ sample\_freq\ =\ \textcolor{keyword}{nullptr};}
 \DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}*\ th\_freq\ =\ \textcolor{keyword}{nullptr};}
 \DoxyCodeLine{00021\ }
 \DoxyCodeLine{00022\ }
@@ -66,314 +66,330 @@
 \DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ добавляем\ строку\ в\ начало}}
 \DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ th\_chied[0]\ =\ tmp\_th;}
 \DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ sample\_chied[0]\ =\ tmp\_sample;}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ chied\_len;\ ++i)\ \{}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sfdaad\ =\ th\_chied[i];}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ afsdaf\ =\ 0;}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00087\ \ \ \ \ \}}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_chi2\_value(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_chied,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ sample\_chied,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ chied\_len\ )\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ res\ =\ 0,\ diff;}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ chied\_len;\ ++i)\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ diff\ =\ sample\_chied[i]\ -\/\ th\_chied[i];}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ res\ +=\ diff\ *\ diff\ /\ (th\_chied[i]);}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
-\DoxyCodeLine{00100\ \ \ \ \ \}}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00102\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_a494aa91766a9b8fc6e924e4b7d63c7ee}{Chi2Histortam}}()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_ad416d4cee23c7e7be7edd685529f3e84}{Chi2Histortam}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample)\ \{}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(d,\ distr\_len);}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ th\_freq\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ th\_freq[i]\ *=\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
-\DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \ \ \ \ \};}
-\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_abd56b221c95e8b8cb09ef2fe83ff5c37}{Chi2Histortam}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ sample\_d)\ \{}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(sample\_d,\ distr\_len,\ (\textcolor{keywordtype}{int})\ (d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ +\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()*2)\ );}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ th\_freq\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ th\_freq[i]\ *=\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00128\ \ \ \ \ \};}
-\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_abbe59151d4610e1e5c222f43d1a5ac40}{\string~Chi2Histortam}}()\ \{}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ sample\_freq;}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
-\DoxyCodeLine{00132\ \ \ \ \ \};}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_chi2_histortam_a0db9a5c4d39b96c3faf639e15e406dcc}{set\_data}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample)\ \{}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ sample\_freq;}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
-\DoxyCodeLine{00142\ }
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(d,\ distr\_len);}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ th\_freq\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ th\_freq[i]\ *=\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
-\DoxyCodeLine{00148\ \ \ \ \ \}}
-\DoxyCodeLine{00149\ }
-\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_chi2_histortam_a5009892e1ccfaf0546a8a77119120ef4}{set\_data}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ d\_sample)\ \{}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ sample\_freq;}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
-\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{double}\ calc\_chi2\_value(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_chied,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ sample\_chied,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ chied\_len\ )\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ res\ =\ 0,\ diff;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ chied\_len;\ ++i)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ diff\ =\ sample\_chied[i]\ -\/\ th\_chied[i];}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ res\ +=\ diff\ *\ diff\ /\ (th\_chied[i]);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_a494aa91766a9b8fc6e924e4b7d63c7ee}{Chi2Histortam}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_ad416d4cee23c7e7be7edd685529f3e84}{Chi2Histortam}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ sample.\mbox{\hyperlink{class_poisson_sample_a849bd2a4822be7eb7853afb3fb1dca5e}{generate\_sample}}(d);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aa4146e589f53ad2c7ba84a741589b0fd}{get\_sample\_freq}}();}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ distr\_len\ =\ sample.\mbox{\hyperlink{class_poisson_sample_ad6a9bea2455e992dc022c405e44288e3}{get\_sample\_freq\_len}}();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_prob\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ tmp\_th\_freq\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[distr\_len];}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_th\_freq[i]\ =\ th\_prob[i]\ *\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_freq\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ th\_freq\ =\ tmp\_th\_freq;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_abd56b221c95e8b8cb09ef2fe83ff5c37}{Chi2Histortam}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ sample\_d)\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ sample.\mbox{\hyperlink{class_poisson_sample_a849bd2a4822be7eb7853afb3fb1dca5e}{generate\_sample}}(sample\_d,\ (\textcolor{keywordtype}{int})(d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ +\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ *\ 2));}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aa4146e589f53ad2c7ba84a741589b0fd}{get\_sample\_freq}}();}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ distr\_len\ =\ sample.\mbox{\hyperlink{class_poisson_sample_ad6a9bea2455e992dc022c405e44288e3}{get\_sample\_freq\_len}}();}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_prob\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ tmp\_th\_freq\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[distr\_len];}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_th\_freq[i]\ =\ th\_prob[i]\ *\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_freq\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ th\_freq\ =\ tmp\_th\_freq;}
+\DoxyCodeLine{00139\ \ \ \ \ \};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{class_chi2_histortam_abbe59151d4610e1e5c222f43d1a5ac40}{\string~Chi2Histortam}}()\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_freq\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
+\DoxyCodeLine{00144\ \ \ \ \ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_chi2_histortam_a0db9a5c4d39b96c3faf639e15e406dcc}{set\_data}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample)\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ sample.\mbox{\hyperlink{class_poisson_sample_a849bd2a4822be7eb7853afb3fb1dca5e}{generate\_sample}}(d);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ distr\_len\ =\ sample.\mbox{\hyperlink{class_poisson_sample_ad6a9bea2455e992dc022c405e44288e3}{get\_sample\_freq\_len}}();}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aa4146e589f53ad2c7ba84a741589b0fd}{get\_sample\_freq}}();}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_prob\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ tmp\_th\_freq\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[distr\_len];}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_th\_freq[i]\ =\ th\_prob[i]\ *\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
 \DoxyCodeLine{00160\ }
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aaffe117cc83cf7e576d6a05a274d06de}{generate\_sample}}(d\_sample,\ distr\_len,\ (\textcolor{keywordtype}{int})(d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ +\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ *\ 2));}
-\DoxyCodeLine{00162\ }
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ th\_freq\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
-\DoxyCodeLine{00164\ }
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ th\_freq[i]\ *=\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
-\DoxyCodeLine{00167\ \ \ \ \ \}}
-\DoxyCodeLine{00168\ }
-\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_chi2_histortam_a84cc17cc05a9ca590a7f59dc3d42ea4f}{apply\_chi\_criterion}}()\ \{}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ chied\_len;}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ th\_chied\ =\ \textcolor{keyword}{nullptr};\ \textcolor{keywordtype}{double}*\ sample\_chied\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00175\ }
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ create\_chied\_values(th\_chied,\ sample\_chied,\ chied\_len);}
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ chi\ =\ calc\_chi2\_value(th\_chied,\ sample\_chied,\ chied\_len);}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ df\ =\ chied\_len\ -\/\ 1;}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ p\ =\ 1\ -\/\ pChiSq(chi,\ df);}
-\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_freq\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ th\_freq\ =\ tmp\_th\_freq;}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_chi2_histortam_a5009892e1ccfaf0546a8a77119120ef4}{set\_data}}(\mbox{\hyperlink{class_distribution}{Distribution}}\&\ d,\ \mbox{\hyperlink{class_poisson_sample}{PoissonSample}}\&\ sample,\ \mbox{\hyperlink{class_distribution}{Distribution}}\&\ d\_sample)\ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ sample.\mbox{\hyperlink{class_poisson_sample_a849bd2a4822be7eb7853afb3fb1dca5e}{generate\_sample}}(d\_sample,\ (\textcolor{keywordtype}{int})(d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ +\ d.\mbox{\hyperlink{class_distribution_a0860134568484957da1814bb73cd4356}{get\_lambda}}()\ *\ 2));}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ sample\_freq\ =\ sample.\mbox{\hyperlink{class_poisson_sample_aa4146e589f53ad2c7ba84a741589b0fd}{get\_sample\_freq}}();}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ distr\_len\ =\ sample.\mbox{\hyperlink{class_poisson_sample_ad6a9bea2455e992dc022c405e44288e3}{get\_sample\_freq\_len}}();}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ th\_prob\ =\ d.\mbox{\hyperlink{class_distribution_a7bb34d802196525c5603df1a90784c99}{get\_th\_prob\_array}}(distr\_len);\ \textcolor{comment}{//\ пока\ что\ не\ частоты,\ а\ вероятности}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ tmp\_th\_freq\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{double}[distr\_len];}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ distr\_len;\ ++i)}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_th\_freq[i]\ =\ th\_prob[i]\ *\ sample.\mbox{\hyperlink{class_poisson_sample_a8790c676f40d178faac54fb6dbdc192f}{get\_N}}();}
 \DoxyCodeLine{00181\ }
-\DoxyCodeLine{00182\ }
-\DoxyCodeLine{00183\ }
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_chied;}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ sample\_chied;}
-\DoxyCodeLine{00186\ \ \ \ \ \}}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00188\ }
-\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_chi2_histortam_a6b7c48a69d69c3273e65967f69b7f202}{get\_p}}()\ \{\ \textcolor{keywordflow}{return}\ p;\ \}}
-\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_chi2_histortam_ae7edc738ec9ac4f60a5ce1d18418d3da}{get\_chi}}()\ \{\ \textcolor{keywordflow}{return}\ chi;\ \}}
-\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_chi2_histortam_aec4e6e53c341ab3981a815dd1b83ffff}{get\_df}}()\ \{\ \textcolor{keywordflow}{return}\ df;\ \}}
-\DoxyCodeLine{00192\ }
-\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_chi2_histortam_a1e442bdfc869d24b51c5209228823a57}{get\_distr\_len}}()\ \{\ \textcolor{keywordflow}{return}\ distr\_len;\ \}}
-\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordtype}{double}*\&\ \mbox{\hyperlink{class_chi2_histortam_a3fbf4d62ff092526177dfd8d2411b217}{get\_sample\_freq}}()\ \{\ \textcolor{keywordflow}{return}\ sample\_freq;\ \}}
-\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{double}*\&\ \mbox{\hyperlink{class_chi2_histortam_a5600971c2ab0b51c7d185336c5eaa6f0}{get\_th\_freq}}()\ \{\ \textcolor{keywordflow}{return}\ th\_freq;\ \}}
-\DoxyCodeLine{00196\ }
-\DoxyCodeLine{00197\ }
-\DoxyCodeLine{00198\ \textcolor{comment}{//\ функции\ из\ PROBDIST.H.\ Временно\ находятся\ тут.}}
-\DoxyCodeLine{00199\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Eps\ =\ 1e-\/15;}
-\DoxyCodeLine{00201\ }
-\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{int}\ fequal(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b)}
-\DoxyCodeLine{00203\ \ \ \ \ \{}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \ (fabs(a\ -\/\ b)\ <\ Eps)\ ?\ 1\ :\ 0;}
-\DoxyCodeLine{00205\ \ \ \ \ \}}
-\DoxyCodeLine{00206\ }
-\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{int}\ fcompare(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b)}
-\DoxyCodeLine{00208\ \ \ \ \ \{}
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ d\ =\ a\ -\/\ b;}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ res;}
-\DoxyCodeLine{00211\ }
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(d)\ <\ Eps)}
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ 0;}
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d\ <\ 0.0)}
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ -\/1;}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ 1;}
-\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
-\DoxyCodeLine{00219\ \ \ \ \ \}}
-\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{//}}
-\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//\ Normal\ distribution}}
-\DoxyCodeLine{00222\ \ \ \ \ \textcolor{comment}{//}}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{void}\ NORMAL(\textcolor{keywordtype}{int}\ IFLAG,\ \textcolor{keywordtype}{double}\&\ X,\ \textcolor{keywordtype}{double}\&\ PROB)}
-\DoxyCodeLine{00225\ \ \ \ \ \{}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ \ \ '\ Normal\ distribution\ subroutine}}
-\DoxyCodeLine{00227\ \textcolor{comment}{}}
-\DoxyCodeLine{00228\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Input}}
-\DoxyCodeLine{00229\ \textcolor{comment}{}}
-\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ IFLAG\ =\ type\ of\ computation}}
-\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 1\ =\ given\ x,\ compute\ probability}}
-\DoxyCodeLine{00232\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 2\ =\ given\ probability,\ compute\ x}}
-\DoxyCodeLine{00233\ \textcolor{comment}{}}
-\DoxyCodeLine{00234\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Output\ (or\ input)}}
-\DoxyCodeLine{00235\ \textcolor{comment}{}}
-\DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ X\ \ \ \ \ =\ x\ value}}
-\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ PROB\ \ =\ probability;\ 0\ <\ PROB\ <\ 1}}
-\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1;}
-\DoxyCodeLine{00240\ }
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (IFLAG)\ \{}
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
-\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ N(x)}}
-\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ x1\ =\ fabs(X);}
-\DoxyCodeLine{00245\ }
-\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x1\ >\ 7)}
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 0;}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 1\ +\ x1\ *\ (0.049867347\ +\ x1\ *\ (0.0211410061\ +\ x1\ *}
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0.0032776263\ +\ x1\ *\ (0.0000380036\ +\ x1\ *}
-\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0.0000488906\ +\ x1\ *\ 0.000005383)))));}
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 0.5\ *\ pow(PROB,\ -\/16);}
-\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00254\ }
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (X\ <\ 0.0)\ \ PROB\ =\ 1.0\ -\/\ PROB;}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ N(p)}}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fequal(PROB,\ 0.5))\ \{}
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 0.0;}
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00263\ }
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ x1\ =\ (PROB\ >\ 0.5)\ ?\ 1.0\ -\/\ PROB\ :\ PROB;}
-\DoxyCodeLine{00265\ }
-\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.05))}
-\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1.64485;}
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.025))}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1.95996;}
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.01))}
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 2.32635;}
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.005))}
-\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 2.57583;}
-\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x1\ =\ -\/log(4.0\ *\ x1\ *\ (1.0\ -\/\ x1));}
-\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ (-\/3.231081277E-\/09\ *\ x1\ +\ 8.360937017E-\/08)\ *\ x1\ -\/\ 0.00000104527497;}
-\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ (X\ *\ x1\ +\ 0.000005824238515)\ *\ x1\ +\ 0.000006841218299;}
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ ((X\ *\ x1\ -\/\ 0.0002250947176)\ *\ x1\ -\/\ 0.000836435359)\ *\ x1\ +\ 0.03706987906;}
-\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ X\ *\ x1\ +\ 1.570796288;}
-\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ sqrt(x1\ *\ X);}
-\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00282\ }
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (PROB\ >\ 0.5)\ X\ =\ -\/X;}
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00285\ }
-\DoxyCodeLine{00286\ \ \ \ \ \}}
-\DoxyCodeLine{00287\ }
-\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordtype}{double}\ pNormal(\textcolor{keywordtype}{double}\ x)}
-\DoxyCodeLine{00289\ \ \ \ \ \{}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ prob;}
-\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ NORMAL(1,\ x,\ prob);}
-\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ -\/\ prob;}
-\DoxyCodeLine{00293\ \ \ \ \ \}}
-\DoxyCodeLine{00294\ }
-\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{double}\ xNormal(\textcolor{keywordtype}{double}\ prob)}
-\DoxyCodeLine{00296\ \ \ \ \ \{}
-\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x,\ p\ =\ 1.0\ -\/\ prob;}
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ NORMAL(2,\ x,\ p);}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
-\DoxyCodeLine{00300\ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (th\_freq\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_freq;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ th\_freq\ =\ tmp\_th\_freq;}
+\DoxyCodeLine{00185\ \ \ \ \ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_chi2_histortam_a84cc17cc05a9ca590a7f59dc3d42ea4f}{apply\_chi\_criterion}}()\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ chied\_len;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}*\ th\_chied\ =\ \textcolor{keyword}{nullptr};\ \textcolor{keywordtype}{double}*\ sample\_chied\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ create\_chied\_values(th\_chied,\ sample\_chied,\ chied\_len);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ chi\ =\ calc\_chi2\_value(th\_chied,\ sample\_chied,\ chied\_len);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ df\ =\ chied\_len\ -\/\ 1;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ p\ =\ 1\ -\/\ pChiSq(chi,\ df);}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ th\_chied;}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ sample\_chied;}
+\DoxyCodeLine{00202\ \ \ \ \ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_chi2_histortam_a6b7c48a69d69c3273e65967f69b7f202}{get\_p}}()\ \{\ \textcolor{keywordflow}{return}\ p;\ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_chi2_histortam_ae7edc738ec9ac4f60a5ce1d18418d3da}{get\_chi}}()\ \{\ \textcolor{keywordflow}{return}\ chi;\ \}}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_chi2_histortam_aec4e6e53c341ab3981a815dd1b83ffff}{get\_df}}()\ \{\ \textcolor{keywordflow}{return}\ df;\ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_chi2_histortam_a1e442bdfc869d24b51c5209228823a57}{get\_distr\_len}}()\ \{\ \textcolor{keywordflow}{return}\ distr\_len;\ \}}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{class_chi2_histortam_ab18d28e937d0e8b26ad509e4d20ad7b4}{get\_sample\_freq}}()\ \{\ \textcolor{keywordflow}{return}\ sample\_freq;\ \}}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}*\ \mbox{\hyperlink{class_chi2_histortam_ac5604be8b5e92fbd2abf54a2de741170}{get\_th\_freq}}()\ \{\ \textcolor{keywordflow}{return}\ th\_freq;\ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{comment}{//\ функции\ из\ PROBDIST.H.\ Временно\ находятся\ тут.}}
+\DoxyCodeLine{00215\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Eps\ =\ 1e-\/15;}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{int}\ fequal(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b)}
+\DoxyCodeLine{00219\ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \ (fabs(a\ -\/\ b)\ <\ Eps)\ ?\ 1\ :\ 0;}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{int}\ fcompare(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b)}
+\DoxyCodeLine{00224\ \ \ \ \ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ d\ =\ a\ -\/\ b;}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ res;}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(d)\ <\ Eps)}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ 0;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (d\ <\ 0.0)}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ -\/1;}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ 1;}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//\ Normal\ distribution}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{void}\ NORMAL(\textcolor{keywordtype}{int}\ IFLAG,\ \textcolor{keywordtype}{double}\&\ X,\ \textcolor{keywordtype}{double}\&\ PROB)}
+\DoxyCodeLine{00241\ \ \ \ \ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ \ \ '\ Normal\ distribution\ subroutine}}
+\DoxyCodeLine{00243\ \textcolor{comment}{}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Input}}
+\DoxyCodeLine{00245\ \textcolor{comment}{}}
+\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ IFLAG\ =\ type\ of\ computation}}
+\DoxyCodeLine{00247\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 1\ =\ given\ x,\ compute\ probability}}
+\DoxyCodeLine{00248\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 2\ =\ given\ probability,\ compute\ x}}
+\DoxyCodeLine{00249\ \textcolor{comment}{}}
+\DoxyCodeLine{00250\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Output\ (or\ input)}}
+\DoxyCodeLine{00251\ \textcolor{comment}{}}
+\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ X\ \ \ \ \ =\ x\ value}}
+\DoxyCodeLine{00253\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ PROB\ \ =\ probability;\ 0\ <\ PROB\ <\ 1}}
+\DoxyCodeLine{00254\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x1;}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (IFLAG)\ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ N(x)}}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ x1\ =\ fabs(X);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x1\ >\ 7)}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 0;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 1\ +\ x1\ *\ (0.049867347\ +\ x1\ *\ (0.0211410061\ +\ x1\ *}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0.0032776263\ +\ x1\ *\ (0.0000380036\ +\ x1\ *}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (0.0000488906\ +\ x1\ *\ 0.000005383)))));}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 0.5\ *\ pow(PROB,\ -\/16);}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (X\ <\ 0.0)\ \ PROB\ =\ 1.0\ -\/\ PROB;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ N(p)}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fequal(PROB,\ 0.5))\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 0.0;}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ x1\ =\ (PROB\ >\ 0.5)\ ?\ 1.0\ -\/\ PROB\ :\ PROB;}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.05))}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1.64485;}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.025))}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1.95996;}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.01))}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 2.32635;}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fequal(x1,\ 0.005))}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 2.57583;}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x1\ =\ -\/log(4.0\ *\ x1\ *\ (1.0\ -\/\ x1));}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ (-\/3.231081277E-\/09\ *\ x1\ +\ 8.360937017E-\/08)\ *\ x1\ -\/\ 0.00000104527497;}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ (X\ *\ x1\ +\ 0.000005824238515)\ *\ x1\ +\ 0.000006841218299;}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ ((X\ *\ x1\ -\/\ 0.0002250947176)\ *\ x1\ -\/\ 0.000836435359)\ *\ x1\ +\ 0.03706987906;}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ X\ *\ x1\ +\ 1.570796288;}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ sqrt(x1\ *\ X);}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (PROB\ >\ 0.5)\ X\ =\ -\/X;}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00301\ }
-\DoxyCodeLine{00302\ \ \ \ \ \textcolor{comment}{//}}
-\DoxyCodeLine{00303\ \ \ \ \ \textcolor{comment}{//\ \ Chi-\/2\ distribution}}
-\DoxyCodeLine{00304\ \ \ \ \ \textcolor{comment}{//}}
-\DoxyCodeLine{00305\ }
-\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordtype}{void}\ CHI(\textcolor{keywordtype}{int}\ IFLAG,\ \textcolor{keywordtype}{double}\ N,\ \textcolor{keywordtype}{double}\&\ X,\ \textcolor{keywordtype}{double}\&\ PROB)}
-\DoxyCodeLine{00307\ \ \ \ \ \{}
-\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ '\ Chi-\/squared\ distribution\ subroutine}}
-\DoxyCodeLine{00309\ \textcolor{comment}{}}
-\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Input}}
-\DoxyCodeLine{00311\ \textcolor{comment}{}}
-\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ IFLAG\ =\ type\ of\ computation}}
-\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 1\ =\ given\ x,\ compute\ probability}}
-\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 2\ =\ given\ probability,\ compute\ x}}
-\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ N\ \ \ \ \ =\ degrees\ of\ freedom;\ N\ >=\ 1}}
-\DoxyCodeLine{00316\ \textcolor{comment}{}}
-\DoxyCodeLine{00317\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Output\ (or\ input)}}
-\DoxyCodeLine{00318\ \textcolor{comment}{}}
-\DoxyCodeLine{00319\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ X\ \ \ \ \ =\ x\ value;\ X\ >=0}}
-\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ PROB\ \ =\ probability;\ 0\ <\ PROB\ <=\ 1}}
-\DoxyCodeLine{00321\ \textcolor{comment}{}}
-\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ NOTE:\ requires\ subroutine\ pNORMAL.BAS}}
-\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
-\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (IFLAG)\ \{}
-\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
-\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Chi(x)}}
-\DoxyCodeLine{00328\ }
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ X1,\ X3;}
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ QF,\ QP,\ QX0,\ QX1,\ QX2,\ QX3;}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ QPIndex,\ iN;}
-\DoxyCodeLine{00332\ }
-\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fequal(X,\ 0.0))\ \{}
-\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 1.0;}
-\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00337\ }
-\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ >\ 40)\ \{}
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X3\ =\ 2.0\ /\ (9.0\ *\ N);}
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X1\ =\ (pow(X\ /\ N,\ 0.3333333333)\ -\/\ 1.0\ +\ X3)\ /\ sqrt(X3);}
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NORMAL(1,\ X1,\ PROB);}
-\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ \ \ \ \ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordtype}{double}\ pNormal(\textcolor{keywordtype}{double}\ x)}
+\DoxyCodeLine{00305\ \ \ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ prob;}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ NORMAL(1,\ x,\ prob);}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ -\/\ prob;}
+\DoxyCodeLine{00309\ \ \ \ \ \}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordtype}{double}\ xNormal(\textcolor{keywordtype}{double}\ prob)}
+\DoxyCodeLine{00312\ \ \ \ \ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x,\ p\ =\ 1.0\ -\/\ prob;}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ NORMAL(2,\ x,\ p);}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00316\ \ \ \ \ \}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{comment}{//\ \ Chi-\/2\ distribution}}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{keywordtype}{void}\ CHI(\textcolor{keywordtype}{int}\ IFLAG,\ \textcolor{keywordtype}{double}\ N,\ \textcolor{keywordtype}{double}\&\ X,\ \textcolor{keywordtype}{double}\&\ PROB)}
+\DoxyCodeLine{00323\ \ \ \ \ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ '\ Chi-\/squared\ distribution\ subroutine}}
+\DoxyCodeLine{00325\ \textcolor{comment}{}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Input}}
+\DoxyCodeLine{00327\ \textcolor{comment}{}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ IFLAG\ =\ type\ of\ computation}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 1\ =\ given\ x,\ compute\ probability}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ \ \ \ \ 2\ =\ given\ probability,\ compute\ x}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ N\ \ \ \ \ =\ degrees\ of\ freedom;\ N\ >=\ 1}}
+\DoxyCodeLine{00332\ \textcolor{comment}{}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ Output\ (or\ input)}}
+\DoxyCodeLine{00334\ \textcolor{comment}{}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ X\ \ \ \ \ =\ x\ value;\ X\ >=0}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ \ PROB\ \ =\ probability;\ 0\ <\ PROB\ <=\ 1}}
+\DoxyCodeLine{00337\ \textcolor{comment}{}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ '\ NOTE:\ requires\ subroutine\ pNORMAL.BAS}}
+\DoxyCodeLine{00339\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (IFLAG)\ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Chi(x)}}
 \DoxyCodeLine{00344\ }
-\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ iN\ =\ N;}
-\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ QPIndex\ =\ 2\ -\/\ iN\ +\ 2\ *\ (iN\ /\ 2);}
-\DoxyCodeLine{00347\ }
-\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ X3\ =\ sqrt(X);}
-\DoxyCodeLine{00349\ }
-\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (QPIndex\ !=\ 1)\ \{}
-\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ exp(-\/X\ /\ 2);}
-\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QF\ =\ PROB\ /\ 2;}
-\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NORMAL(1,\ X3,\ PROB);}
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 2.0\ *\ PROB;}
-\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QF\ =\ 0.3989422804\ *\ exp(-\/X\ /\ 2.0)\ /\ X3;}
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00359\ }
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ QPIndex;\ i\ <\ iN;\ i\ +=\ 2)\ \{}
-\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QF\ =\ QF\ *\ X\ /\ i;}
-\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ PROB\ +\ 2.0\ *\ QF;}
-\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Chi(p)}}
-\DoxyCodeLine{00367\ }
-\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ ==\ 1)\ \{}
-\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X1\ =\ PROB;}
-\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X1\ =\ X1\ /\ 2;}
-\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NORMAL(2,\ X,\ X1);}
-\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ X\ *\ X;}
-\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ X1,\ X3;}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ QF,\ QP,\ QX0,\ QX1,\ QX2,\ QX3;}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ QPIndex,\ iN;}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fequal(X,\ 0.0))\ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 1.0;}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ >\ 40)\ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X3\ =\ 2.0\ /\ (9.0\ *\ N);}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X1\ =\ (pow(X\ /\ N,\ 0.3333333333)\ -\/\ 1.0\ +\ X3)\ /\ sqrt(X3);}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NORMAL(1,\ X1,\ PROB);}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ iN\ =\ N;}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ QPIndex\ =\ 2\ -\/\ iN\ +\ 2\ *\ (iN\ /\ 2);}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ X3\ =\ sqrt(X);}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (QPIndex\ !=\ 1)\ \{}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ exp(-\/X\ /\ 2);}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QF\ =\ PROB\ /\ 2;}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NORMAL(1,\ X3,\ PROB);}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ 2.0\ *\ PROB;}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QF\ =\ 0.3989422804\ *\ exp(-\/X\ /\ 2.0)\ /\ X3;}
 \DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (N\ ==\ 2)\ \{}
-\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ -\/2\ *\ log(PROB);}
-\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00379\ }
-\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ QX1\ =\ 0;}
-\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ QX2\ =\ 1;}
-\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ QX3\ =\ 0.5;}
-\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ QP\ =\ PROB;}
-\DoxyCodeLine{00384\ }
-\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
-\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1.0\ /\ QX3\ -\/\ 1.0;}
-\DoxyCodeLine{00387\ }
-\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CHI(1,\ N,\ X,\ PROB);}
-\DoxyCodeLine{00389\ }
-\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (PROB\ <=\ QP)}
-\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX1\ =\ QX3;}
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX2\ =\ QX3;}
-\DoxyCodeLine{00394\ }
-\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX0\ =\ QX3;}
-\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX3\ =\ (QX1\ +\ QX2)\ /\ 2;}
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (fabs(QX3\ -\/\ QX0)\ >\ (0.00001\ *\ QX3));}
-\DoxyCodeLine{00398\ }
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1\ /\ QX3\ -\/\ 1;}
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ QP;}
-\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00403\ \ \ \ \ \}}
-\DoxyCodeLine{00404\ }
-\DoxyCodeLine{00405\ \ \ \ \ \textcolor{keywordtype}{double}\ pChiSq(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{int}\ n)}
-\DoxyCodeLine{00406\ \ \ \ \ \{}
-\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ prob;}
-\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ CHI(1,\ (\textcolor{keywordtype}{double})n,\ x,\ prob);}
-\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ -\/\ prob;}
-\DoxyCodeLine{00410\ \ \ \ \ \}}
-\DoxyCodeLine{00411\ }
-\DoxyCodeLine{00412\ \ \ \ \ \textcolor{keywordtype}{double}\ xChi(\textcolor{keywordtype}{double}\ prob,\ \textcolor{keywordtype}{int}\ n)}
-\DoxyCodeLine{00413\ \ \ \ \ \{}
-\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x,\ p\ =\ 1.0\ -\/\ prob;}
-\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ CHI(2,\ (\textcolor{keywordtype}{double})n,\ x,\ p);}
-\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
-\DoxyCodeLine{00417\ \ \ \ \ \}}
-\DoxyCodeLine{00418\ \};}
-\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ QPIndex;\ i\ <\ iN;\ i\ +=\ 2)\ \{}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QF\ =\ QF\ *\ X\ /\ i;}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ PROB\ +\ 2.0\ *\ QF;}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Chi(p)}}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ ==\ 1)\ \{}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X1\ =\ PROB;}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X1\ =\ X1\ /\ 2;}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NORMAL(2,\ X,\ X1);}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ X\ *\ X;}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (N\ ==\ 2)\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ -\/2\ *\ log(PROB);}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ QX1\ =\ 0;}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ QX2\ =\ 1;}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ QX3\ =\ 0.5;}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ QP\ =\ PROB;}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1.0\ /\ QX3\ -\/\ 1.0;}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CHI(1,\ N,\ X,\ PROB);}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (PROB\ <=\ QP)}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX1\ =\ QX3;}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX2\ =\ QX3;}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX0\ =\ QX3;}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QX3\ =\ (QX1\ +\ QX2)\ /\ 2;}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (fabs(QX3\ -\/\ QX0)\ >\ (0.00001\ *\ QX3));}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ X\ =\ 1\ /\ QX3\ -\/\ 1;}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ PROB\ =\ QP;}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00419\ \ \ \ \ \}}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keywordtype}{double}\ pChiSq(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{int}\ n)}
+\DoxyCodeLine{00422\ \ \ \ \ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ prob;}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ CHI(1,\ (\textcolor{keywordtype}{double})n,\ x,\ prob);}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ -\/\ prob;}
+\DoxyCodeLine{00426\ \ \ \ \ \}}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordtype}{double}\ xChi(\textcolor{keywordtype}{double}\ prob,\ \textcolor{keywordtype}{int}\ n)}
+\DoxyCodeLine{00429\ \ \ \ \ \{}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x,\ p\ =\ 1.0\ -\/\ prob;}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ CHI(2,\ (\textcolor{keywordtype}{double})n,\ x,\ p);}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00433\ \ \ \ \ \}}
+\DoxyCodeLine{00434\ \};}
+\DoxyCodeLine{00435\ }
 
 \end{DoxyCode}

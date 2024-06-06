@@ -22,23 +22,31 @@ private:
     /// <summary>
     /// An array of theoretical probabilities. Updated as needed
     /// </summary>
-    Vector th_prob;
+    //Vector th_prob;
+    double* th_probability = nullptr;
+    int distr_len = 0;
 
     /// <summary>
     /// Changing the size of theoretical probabilities
     /// </summary>
     /// <param name="n">To what number do you have to count to</param>
     void resize_th_prob(const int n) {
-        if (th_prob.getSize() < n) {
-            double p_cum = 1 - th_prob[th_prob.getSize() - 1];
-            // обновление последнего элемента, так как он равен 1 - сумма всех начальных
-            th_prob[th_prob.getSize() - 1] = th_prob[th_prob.getSize() - 2] * (lambda / ((double) th_prob.getSize() - 1));
-            for (int i = th_prob.getSize(); i < n; ++i) { // заполнение оставшихся элементов
-                th_prob.push(th_prob[i - 1] * (lambda / i));
-                p_cum += th_prob[i];
-            }
-            th_prob.push(1 - p_cum);
+        Vector th_prob;
+        th_prob.resize(n);
+        th_prob[0] = (exp(-lambda));
+        double p_cum = th_prob[0];
+        for (int i = 1; i < n-1; ++i) {
+            th_prob[i] = (th_prob[i - 1] * (lambda / i));
+            p_cum += th_prob[i];
         }
+        if (n != 1)
+            th_prob[n - 1] = 1 - p_cum;
+
+        if (th_probability != nullptr)
+            delete[] th_probability;
+        th_probability = th_prob.getDataCopy();
+
+        distr_len = n;
     }
 
 public:
@@ -46,37 +54,27 @@ public:
     /// Creates an initial Poisson distribution
     /// </summary>
     /// <param name="_lambda">Distribution parameter</param>
-    Distribution(const double _lambda = 5) : lambda(_lambda), th_prob( max((int) (lambda+2*lambda), 10) ){
+    Distribution(const double _lambda = 5) : lambda(_lambda){
         // инициализация начального распределения
-        th_prob.push(exp(-lambda));
-        double p_cum = th_prob[0];
-        for (int i = 1; i < th_prob.getCapacity() - 1; ++i) {
-            th_prob.push(th_prob[i-1] * (lambda / i));
-            p_cum += th_prob[i];
-        }
-        th_prob.push(1-p_cum);
+        resize_th_prob(max((int)(lambda + 2 * lambda), 10));
     };
 
-    ~Distribution() = default;
+    ~Distribution() {
+        if (th_probability != nullptr)
+            delete[] th_probability;
+    };
 
     
 
 
     /// <summary>
-    /// Returns double* an array of the first n theoretical values. 
+    /// Returns double* an array of the first n theoretical values.  Must be deleted.
     /// </summary>
     /// <param name="n">Number of values</param>
     /// <returns>Array of theoretical values</returns>
-    double* get_th_prob_array(int n) {
+    const double* get_th_prob_array(int n) {
         resize_th_prob(n);
-        double* res = new double[n];
-        double p_cum = 0;
-        for (int i = 0; i < n - 1; ++i) {
-            p_cum += th_prob[i];
-            res[i] = th_prob[i];
-        }
-        res[n - 1] = 1 - p_cum;
-        return res;
+        return th_probability;
     }
 
     /// <summary>
@@ -85,8 +83,9 @@ public:
     /// <param name="index">Item number</param>
     /// <returns>Value</returns>
     double get_th_prob_element(int index) {
-        resize_th_prob(index+1);
-        return th_prob[index];
+        if (index >= distr_len - 1)
+            resize_th_prob((index+10)*2);
+        return th_probability[index];
     }
 
     
@@ -96,22 +95,15 @@ public:
     /// <param name="_lambda">Distribution parameter</param>
     void set_lambda(double _lambda) {
         lambda = _lambda;
-        th_prob.clear();
-        th_prob.push(exp(-lambda));
-        th_prob.reserve( (int) (lambda + lambda*3) );
-        double p_cum = th_prob[0];
-        for (int i = 1; i < th_prob.getCapacity() - 1; ++i) {
-            th_prob.push(th_prob[i - 1] * (lambda / i));
-            p_cum += th_prob[i];
-        }
-        th_prob.push(1 - p_cum);
+        resize_th_prob(max((int)(lambda + 2 * lambda), 10));
     }
 
     // Getters
-    string get_name() {
+    string get_name() const {
         return distr_name;
     }
 
+    int get_distr_len() const { return distr_len; }
     double get_lambda() const { return lambda; };
 
     

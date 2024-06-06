@@ -101,10 +101,10 @@ $(function(){ initResizable(false); });
 <tr class="memitem:a97c8decea5dedf9f81fca76890b361b7" id="r_a97c8decea5dedf9f81fca76890b361b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97c8decea5dedf9f81fca76890b361b7">Distribution</a> (const double _lambda=5)</td></tr>
 <tr class="memdesc:a97c8decea5dedf9f81fca76890b361b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an initial Poisson distribution.  <br /></td></tr>
 <tr class="separator:a97c8decea5dedf9f81fca76890b361b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8436b77c244c768837c7dec8da5eb885" id="r_a8436b77c244c768837c7dec8da5eb885"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8436b77c244c768837c7dec8da5eb885">~Distribution</a> ()=default</td></tr>
-<tr class="separator:a8436b77c244c768837c7dec8da5eb885"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bb34d802196525c5603df1a90784c99" id="r_a7bb34d802196525c5603df1a90784c99"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a> (int n)</td></tr>
-<tr class="memdesc:a7bb34d802196525c5603df1a90784c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns double* an array of the first n theoretical values.  <br /></td></tr>
+<tr class="memitem:a68522687bdcca605cce35adb68afdcac" id="r_a68522687bdcca605cce35adb68afdcac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68522687bdcca605cce35adb68afdcac">~Distribution</a> ()</td></tr>
+<tr class="separator:a68522687bdcca605cce35adb68afdcac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bb34d802196525c5603df1a90784c99" id="r_a7bb34d802196525c5603df1a90784c99"><td class="memItemLeft" align="right" valign="top">const double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7bb34d802196525c5603df1a90784c99">get_th_prob_array</a> (int n)</td></tr>
+<tr class="memdesc:a7bb34d802196525c5603df1a90784c99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns double* an array of the first n theoretical values. Must be deleted.  <br /></td></tr>
 <tr class="separator:a7bb34d802196525c5603df1a90784c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46a10cb6ccbaecf6b0d078e286434b48" id="r_a46a10cb6ccbaecf6b0d078e286434b48"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46a10cb6ccbaecf6b0d078e286434b48">get_th_prob_element</a> (int index)</td></tr>
 <tr class="memdesc:a46a10cb6ccbaecf6b0d078e286434b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the element of the theoretical value.  <br /></td></tr>
@@ -112,8 +112,10 @@ $(function(){ initResizable(false); });
 <tr class="memitem:a115a01e72956bdfd28d6731737b01faa" id="r_a115a01e72956bdfd28d6731737b01faa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a115a01e72956bdfd28d6731737b01faa">set_lambda</a> (double _lambda)</td></tr>
 <tr class="memdesc:a115a01e72956bdfd28d6731737b01faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter lambda. Updates the array of theoretical distribution.  <br /></td></tr>
 <tr class="separator:a115a01e72956bdfd28d6731737b01faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99eab816261f89fcfb7892a3a9f6583f" id="r_a99eab816261f89fcfb7892a3a9f6583f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99eab816261f89fcfb7892a3a9f6583f">get_name</a> ()</td></tr>
-<tr class="separator:a99eab816261f89fcfb7892a3a9f6583f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89af7d73a2f0dcabcecd73889b53b0c3" id="r_a89af7d73a2f0dcabcecd73889b53b0c3"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89af7d73a2f0dcabcecd73889b53b0c3">get_name</a> () const</td></tr>
+<tr class="separator:a89af7d73a2f0dcabcecd73889b53b0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2291f24ab998666fae31ed6661e563cd" id="r_a2291f24ab998666fae31ed6661e563cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2291f24ab998666fae31ed6661e563cd">get_distr_len</a> () const</td></tr>
+<tr class="separator:a2291f24ab998666fae31ed6661e563cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0860134568484957da1814bb73cd4356" id="r_a0860134568484957da1814bb73cd4356"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0860134568484957da1814bb73cd4356">get_lambda</a> () const</td></tr>
 <tr class="separator:a0860134568484957da1814bb73cd4356"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -153,8 +155,8 @@ $(function(){ initResizable(false); });
 
 </div>
 </div>
-<a id="a8436b77c244c768837c7dec8da5eb885" name="a8436b77c244c768837c7dec8da5eb885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8436b77c244c768837c7dec8da5eb885">&#9670;&#160;</a></span>~Distribution()</h2>
+<a id="a68522687bdcca605cce35adb68afdcac" name="a68522687bdcca605cce35adb68afdcac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68522687bdcca605cce35adb68afdcac">&#9670;&#160;</a></span>~Distribution()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +173,7 @@ $(function(){ initResizable(false); });
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -179,6 +181,31 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 <h2 class="groupheader">Методы</h2>
+<a id="a2291f24ab998666fae31ed6661e563cd" name="a2291f24ab998666fae31ed6661e563cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2291f24ab998666fae31ed6661e563cd">&#9670;&#160;</a></span>get_distr_len()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Distribution::get_distr_len </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0860134568484957da1814bb73cd4356" name="a0860134568484957da1814bb73cd4356"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0860134568484957da1814bb73cd4356">&#9670;&#160;</a></span>get_lambda()</h2>
 
@@ -204,8 +231,8 @@ $(function(){ initResizable(false); });
 
 </div>
 </div>
-<a id="a99eab816261f89fcfb7892a3a9f6583f" name="a99eab816261f89fcfb7892a3a9f6583f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99eab816261f89fcfb7892a3a9f6583f">&#9670;&#160;</a></span>get_name()</h2>
+<a id="a89af7d73a2f0dcabcecd73889b53b0c3" name="a89af7d73a2f0dcabcecd73889b53b0c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89af7d73a2f0dcabcecd73889b53b0c3">&#9670;&#160;</a></span>get_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,7 +244,7 @@ $(function(){ initResizable(false); });
           <td class="memname">string Distribution::get_name </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -252,7 +279,8 @@ $(function(){ initResizable(false); });
 </table>
 </div><div class="memdoc">
 
-<p>Returns double* an array of the first n theoretical values. </p>
+<p>Returns double* an array of the first n theoretical values. Must be deleted. </p>
+<p>Returns double* an array of the first n theoretical values.</p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>Number of values</td></tr>
