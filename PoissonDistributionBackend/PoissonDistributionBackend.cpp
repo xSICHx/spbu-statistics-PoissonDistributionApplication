@@ -19,7 +19,7 @@ int main()
 {
 	int n_samples = 13333;
 	mt19937 mt(100);
-
+	
 	Distribution d;
 	int N;
 	PoissonSampleInverse ps(mt, d, n_samples);
@@ -42,7 +42,7 @@ int main()
 
 	d.set_lambda(10);
 	Chi2Histortam chi(d, ps);
-	chi.apply_chi_criterion();
+	chi.calc_chi_parametres();
 	cout << "p-level = " << chi.get_p() << endl;
 	int distr_len = chi.get_distr_len();
 	double* sample_freq = chi.get_sample_freq();
@@ -91,7 +91,7 @@ int main()
 
 	d.set_lambda(10);
 	Chi2Histortam chi(d, ps);
-	chi.apply_chi_criterion();
+	chi.calc_chi_parametres();
 	cout << "p-level = " << chi.get_p() << endl;
 	int distr_len = chi.get_distr_len();
 	double* sample_freq = chi.get_sample_freq();

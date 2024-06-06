@@ -197,4 +197,7 @@ void CPoissonDistributionApplicationDoc::OnSettings()
 		}
 		UpdateAllViews(nullptr);
 	}
+	else {
+		int a = 0;
+	}
 }
